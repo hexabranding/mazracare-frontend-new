@@ -1,0 +1,99 @@
+<div class="container mb-5">
+  <h2 class="mb-4">{{isEditMode ? 'Update Service' : 'Add Service' }}</h2>
+
+  <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <!-- Service Name -->
+    <div class="mb-4 row">
+      <label for="name" class="col-sm-2 col-form-label">Service Name *</label>
+      <div class="col-sm-10">
+        <input type="text" id="name" class="form-control" formControlName="name" />
+        <div class="text-danger" *ngIf="f['name'].touched && f['name'].invalid">Service name is required</div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-4 row">
+      <label for="description" class="col-sm-2 col-form-label">Description *</label>
+      <div class="col-sm-10">
+        <textarea id="description" class="form-control" rows="3" formControlName="description"></textarea>
+        <div class="text-danger" *ngIf="f['description'].touched && f['description'].invalid">Description is required</div>
+      </div>
+    </div>
+
+        <div class="mb-4 row">
+      <label for="subhead" class="col-sm-2 col-form-label">Sub Heading *</label>
+      <div class="col-sm-10">
+        <input type="text" id="subhead" class="form-control" formControlName="subhead" />
+        <div class="text-danger" *ngIf="f['subhead'].touched && f['subhead'].invalid">Sub Heading name is required</div>
+      </div>
+    </div>
+
+    <div class="mb-4 row">
+      <label for="subdescription" class="col-sm-2 col-form-label">Sub Description *</label>
+      <div class="col-sm-10">
+        <textarea id="subdescription" class="form-control" rows="3" formControlName="subdescription"></textarea>
+        <div class="text-danger" *ngIf="f['subdescription'].touched && f['subdescription'].invalid">Sub description is required</div>
+      </div>
+    </div>
+
+    <!-- Category Selection
+    <div class="mb-4 row">
+      <label for="category" class="col-sm-2 col-form-label">Category *</label>
+      <div class="col-sm-10">
+        <select class="form-control" formControlName="category" id="category">
+          @for (item of categoryOptions; track $index) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+        <div class="text-danger" *ngIf="f['category'].touched && f['category'].invalid">Category is required</div>
+      </div>
+    </div> -->
+
+    <!-- Image Upload -->
+    <div class="mb-4 row">
+      <label class="col-sm-2 col-form-label">Service Image</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control" (change)="onFileChange($event)" multiple accept="image/*" />
+        <div class="form-text">Upload up to 5 images</div>
+        <div class="text-danger" *ngIf="imageLimitExceeded">You can upload a maximum of 5 images.</div>
+        <div class="mt-3 d-flex flex-wrap gap-2">
+          <div *ngFor="let img of previewImages; let i = index" class="position-relative">
+            <img [src]="img?.url ? img?.url : img " class="img-thumbnail" width="100" />
+
+            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage(i)">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Upload -->
+    <div class="mb-4 row">
+      <label class="col-sm-2 col-form-label">Service Video</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control" (change)="onVideoChange($event)" multiple accept="video/*" />
+        <div class="form-text">Upload up to 5 videos</div>
+        <div class="text-danger" *ngIf="videoLimitExceeded">You can upload a maximum of 5 videos.</div>
+        <div class="mt-3 d-flex flex-wrap gap-2">
+          <div *ngFor="let video of previewVideos; let i = index" class="position-relative">
+            <video [src]="video?.url ? video?.url : video " controls width="250"></video>
+
+            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeVideo(i)">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="row">
+      <div class="offset-sm-2 col-sm-10 text-end">
+        <button type="submit" class="btn btn-primary" [disabled]="serviceForm.invalid">
+          {{ isEditMode ? 'Update' : 'Create' }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
+  <div class="sidebar-header">
+    <img class="sidebar-logo" src="../../../../assets/images/logo-dark.png" alt="mazra" width="147">
+  </div>
+  <div class="sidebar-menu">
+    <ul>
+      @for (item of menuItems;let i=$index; track i) {
+          <li class="sidebar-menu-item">
+            <a
+              [routerLink]="item.route"
+              [routerLinkActive]="['menu-item-active']"
+              [routerLinkActiveOptions]="{ exact: false }"
+              class="sidebar-item"
+              [ngClass]="{
+                'has-children': item.children,
+                'menu-item-active': item.isOpen
+              }"
+              (click)="toggleMenuItem(i)"
+            >
+              <i [class]="item.icon"></i>
+              <span class="sidebar-item-text">{{ item.label }}</span>
+              @if (item.children && !isSidebarCollapsed) {
+                <i
+                  class="fas fa-chevron-down sidebar-item-arrow"
+                  [ngClass]="{ rotated: item.isOpen }"
+                ></i>
+              }
+            </a>
+            <!-- @if(item.children && !isSidebarCollapsed && item.isOpen) {
+              <ul
+                class="sidebar-submenu"
+              >
+              @for (child of item.children;let j=$index; track j) {}
+                <li>
+                  <a href="#" class="sidebar-item sidebar-subitem">
+                    <i [class]="child.icon"></i>
+                    <span class="sidebar-item-text">{{ child.label }}</span>
+                  </a>
+                </li>
+              </ul>
+            } -->
+          </li>
+      }
+    </ul>
+  </div>
+</div>

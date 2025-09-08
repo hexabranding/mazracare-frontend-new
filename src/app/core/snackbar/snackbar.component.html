@@ -1,0 +1,11 @@
+<div class="snack-container {{data.status}}-toast p-3">
+    <div class="snack-container-message d-flex">
+        <mat-icon *ngIf="data.status == 'success'" class="my-auto icon-size " style="color: #4EBA0C;">check_circle
+        </mat-icon>
+        <mat-icon *ngIf="data.status == 'error'" class="my-auto icon-size " style="color: #B01D1F;">error</mat-icon>
+        <div class="ml-3">
+            <div class="fw-600 font-sm ">{{data.type}} !</div>
+            <div class="font-xs ">{{data.message}}</div>
+        </div>
+    </div>
+</div>

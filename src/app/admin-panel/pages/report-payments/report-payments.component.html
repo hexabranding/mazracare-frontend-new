@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Reports & Payments: Payment History & Downloadable Reports</h2>
+    <button class="btn btn-success" (click)="downloadAllReports()">Download All Reports</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Payment ID</th>
+          <th>Customer</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Download</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.customer }}</td>
+          <td>{{ payment.amount | currency }}</td>
+          <td>{{ payment.date }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="downloadReport(payment.id)">Download PDF</button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="editPayment(payment)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deletePayment(payment.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

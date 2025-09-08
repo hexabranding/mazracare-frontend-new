@@ -1,0 +1,64 @@
+::ng-deep.main-slider-one .owl-nav {
+    opacity: 0 !important;
+}
+
+.testimonials-two__carousel-thumb .item {
+    cursor: pointer;
+    opacity: 0.6;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.slick-current {
+        opacity: 1;
+    }
+}
+
+
+.project-two__carousel {
+  margin: 0 auto;
+
+  .item {
+    padding: 0 15px;
+  }
+
+  .project-two__item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-two__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.blog-one__carousel {
+  margin: 0 auto;
+  display: flex;
+  .item {
+    // width: calc(100% / 3);
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 575.98px) { 
+  .blog-one__carousel {
+  .item {
+    // width: 100%;
+  }
+}
+}
+
+
+.slick-dots {
+  display: block;
+}
+
+.slick-slide {
+  cursor: grab;
+}

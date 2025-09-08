@@ -1,0 +1,57 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Dashboard Overview</h2>
+
+  <!-- Metrics Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3 col-sm-6" *ngFor="let metric of metrics">
+      <div class="card text-center shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ metric.title }}</h5>
+          <h3>{{ metric.value }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sales Chart -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Sales Summary</h5>
+      <apx-chart 
+        [series]="chartSeries"
+        [chart]="chartOptions"
+        [xaxis]="xaxis"
+        [colors]="chartColors"
+      ></apx-chart>
+    </div>
+  </div>
+
+  <!-- Recent Orders Table -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title mb-3">Recent Orders</h5>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of recentOrders; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ order.id }}</td>
+              <td>{{ order.customer }}</td>
+              <td>{{ order.amount | currency }}</td>
+              <td>{{ order.date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<section class="page-header">
+  <div class="page-header__shape-left"></div>
+  <div class="page-header__shape-right"></div>
+  <div class="page-header__bg"></div>
+  <!-- /.page-header__bg -->
+  <div class="container">
+    <h2 class="page-header__title bw-split-in-down">Forget Page</h2>
+    <ul class="alefox-breadcrumb list-unstyled">
+      <li><a routerLink="/home">Home</a></li>
+      <li><span>Forget Page</span></li> <br>
+    </ul><!-- /.thm-breadcrumb list-unstyled -->
+    <br>
+
+  </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<!-- Login Start -->
+<section class="login-page">
+  <div class="container">
+    <div class="login-page__wrap">
+      <h3 class="login-page__wrap__title">Forget Page </h3>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-page__form">
+        <div class="login-page__form-input-box">
+          <input type="email" placeholder="Username or email address *" formControlName="email">
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email.</small>
+          </div>
+        </div>
+
+
+          <div class="d-flex justify-content-between align-items-center">
+              <button type="submit" class="alefox-btn">
+                <span class="alefox-btn__item"></span>
+                <span class="alefox-btn__item"></span>
+                <span class="alefox-btn__item"></span>
+                <span class="alefox-btn__item"></span>
+                Submit
+              </button>
+
+                <!-- <div class="login-page__form-forgot-password">
+                <a class="text-hash pb-3 pt-3" [routerLink]="['/reset-password']">Reset password</a>
+              </div> -->
+          </div>
+
+      </form>
+    </div><!-- login-form -->
+  </div>
+</section>
+<!-- Login End -->

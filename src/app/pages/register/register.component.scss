@@ -1,0 +1,28 @@
+  .phone-input-box {
+    height: 58px;
+    width: 100%;
+    border: 1px solid var(--alefox-border-color, #dddddd);
+    background-color: var(--alefox-white, #fff);
+    padding-left: 30px;
+    padding-right: 30px;
+    outline: none;
+    font-size: 16px;
+    color: var(--alefox-text, #636363);
+    display: block;
+    font-weight: 400;
+    border-radius: 5px;
+    transition: all 400ms ease;
+
+    // Remove spinner arrows (just in case someone tries type="number")
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    // Optional: smoother focus UI
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+    }
+  }

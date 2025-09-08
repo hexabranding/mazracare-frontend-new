@@ -1,0 +1,100 @@
+    <section class="page-header">
+        <div class="page-header__shape-left"></div>
+        <div class="page-header__shape-right"></div>
+        <div class="page-header__bg"></div>
+        <!-- /.page-header__bg -->
+        <div class="container">
+            <h2 class="page-header__title bw-split-in-down">Register</h2>
+            <ul class="alefox-breadcrumb list-unstyled">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>Register</span></li> <br>
+            </ul><!-- /.thm-breadcrumb list-unstyled -->
+            <br>
+
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
+
+     <!-- Register Start -->
+        <section class="register-page">
+            <div class="container">
+                <div class="register-page__wrap">
+                    <h3 class="register-page__wrap__title">Register your Account:</h3>
+                    <form class="register-page__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="register-page__form-input-box">
+                                    <input type="text" placeholder="First Name *" formControlName="username">
+                                    <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+                                        <small class="text-danger" *ngIf="registerForm.get('username')?.errors?.['required']">First Name is required.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('username')?.errors?.['minlength']">First Name must be at least 3 characters.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('username')?.errors?.['maxlength']">First Name cannot exceed 30 characters.</small>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="register-page__form-input-box">
+                                    <input type="text" placeholder="Last Name *" formControlName="lastname">
+                                    <div *ngIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched">
+                                        <small class="text-danger" *ngIf="registerForm.get('lastname')?.errors?.['required']">Last Name is required.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('lastname')?.errors?.['minlength']">Last Name must be at least 3 characters.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('lastname')?.errors?.['maxlength']">Last Name cannot exceed 20 characters.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="register-page__form-input-box">
+                                    <input type="email" placeholder="Email *" formControlName="email">
+                                    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                                        <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['pattern']">Enter a valid email.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <div class="register-page__form-input-box ">
+                                    <input type="number" class="phone-input-box" placeholder="Phone Number *" formControlName="phone">
+                                    <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
+                                        <small class="text-danger" *ngIf="registerForm.get('phone')?.errors?.['required']">Phone Number is required.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('phone')?.errors?.['pattern']">Enter a valid phone number (10 digits).</small>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="register-page__form-input-box">
+                                    <input type="password" placeholder="Password *" formControlName="password">
+                                    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                                        <small class="text-danger" *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('password')?.errors?.['maxlength']">Password cannot exceed 15 characters.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="register-page__form-input-box">
+                                    <input type="password" placeholder="Confirm Password *" formControlName="confirmPassword">
+                                    <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+                                        <small class="text-danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['minlength']">Confirm Password must be at least 8 characters.</small>
+                                        <small class="text-danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['maxlength']">Confirm Password cannot exceed 15 characters.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="submit" class="alefox-btn">
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                Register Now
+                            </button>
+                             <a class="pt-3" class="hash-text cursor-pointer" routerLink="/login">Login</a>
+                        </div>
+
+                      </form>
+                      </div><!-- form -->
+            </div>
+        </section>
+        <!-- Register End -->
+

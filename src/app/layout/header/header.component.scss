@@ -1,0 +1,186 @@
+.active {
+  color: #44a05b !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.profile-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0;
+}
+
+.profile-trigger {
+  mat-icon {
+    font-size: 40px; // Increase size
+    color: #28a745; // Green color (Bootstrap green)
+    height: 40px;
+    width: 40px;
+  }
+}
+
+::ng-deep .mat-mdc-menu-panel.profile-menu {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  width: 100% !important;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  color: #000000;
+  font-size: 14px;
+}
+
+::ng-deep .mat-mdc-menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+::ng-deep .mat-mdc-divider {
+  margin: 4px 0;
+  border-top-color: #44a05b !important;
+  color: #44a05b !important;
+}
+
+.profile-trigger {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: large;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.header {
+  background: #333;
+  padding: 10px;
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: black;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 120px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+#google_translate_element {
+  display: inline-block;
+  margin-left: auto;
+  font-size: 14px;
+  z-index: 9999;
+
+  select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+  }
+
+  .goog-te-gadget {
+    color: transparent;
+    /* Hide default "Powered by" text */
+  }
+
+  .goog-te-gadget span {
+    display: none;
+    /* Hide original text label */
+  }
+}
+
+
+
+.main-header__right .head-icons {
+  margin-right: 1.5rem;
+}
+
+// @media (min-width: 768px) {
+//     .main-header__right .head-icons{
+//         margin-top: 1.5rem;
+//         margin-left: 2.5rem;
+//     }
+
+// }
+.full-time {
+  margin-left: 30px;
+  width: 55px;
+}
+
+.login-text {
+  display: block;
+}
+
+.main-logo {
+  width: 147px;
+}
+
+@media (max-width: 575.98px) {
+  .main-logo {
+    width: 137px;
+  }
+
+  .head-icons i {
+    font-size: 18px;
+  }
+
+  .login-text {
+
+    display: none;
+  }
+
+  .main-header__cart,
+  .main-header__search {
+    margin-left: 12px;
+  }
+
+  .main-header__right .head-icons {
+    margin-right: 0;
+  }
+
+  .full-time {
+    margin-left: 0;
+    width: 35px;
+  }
+  .main-header__nav {
+    margin-left: 0;
+  }
+}

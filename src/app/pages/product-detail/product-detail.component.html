@@ -1,0 +1,255 @@
+<section class="page-header">
+    <div class="page-header__shape-left"></div>
+    <div class="page-header__shape-right"></div>
+    <div class="page-header__bg"></div>
+    <!-- /.page-header__bg -->
+    <div class="container">
+        <h2 class="page-header__title bw-split-in-down">Products</h2>
+        <ul class="alefox-breadcrumb list-unstyled">
+            <li><a routerLink="/home">Home</a></li>
+            <li><span>Products Details</span></li> <br>
+        </ul><!-- /.thm-breadcrumb list-unstyled -->
+        <br>
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<section class="product-details">
+    <div class="container">
+        <!-- /.product-details -->
+        <div class="row">
+            <div class="col-lg-6 col-xl-6 wow fadeInLeft" data-wow-delay="200ms">
+                <div class="product-details__gallery">
+                    <!-- <div class="product-details__gallery__flash">
+                        <span class="product-details__gallery__flash__off">{{product?.discountPercent}}% Off</span>
+                    </div> -->
+                    <!-- <div class="product-details__carousel alefox-slick__carousel" data-slick-options='{
+						"slidesToShow": 1,
+						"slidesToScroll": 1,
+						"asNavFor": ".product-details__carousel-thumb",
+						"autoplay": true,
+						"infinite": true,
+						"dots": false,
+						"centerPadding": 0,
+						"arrows": false,
+						"nextArrow": "<button class=\"next\"><i class=\"icon-right-arrow-two1\"></i></button>",
+						"prevArrow": "<button class=\"prev\"><i class=\"icon-right-arrow-two\"></i></button>"
+						}'>
+                        <div class="item" *ngFor="let item of product?.images">
+                            <div class="product-details__gallery__image">
+                                <img [src]='item.url' alt="mazra products">
+                                <a class="img-popup" [href]="product.url"><span
+                                        class="icon-magnifying-glass"></span></a>
+
+                            </div>
+                        </div> -->
+                    <!-- item -->
+
+                    <!-- <div class="item">
+                            <div class="product-details__gallery__image">
+                                <img src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products">
+                                <a class="img-popup" href="assets/images/products/mazra-bag-4.jpeg"><span
+                                        class="icon-magnifying-glass"></span></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="product-details__gallery__image">
+                                <img src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products">
+                                <a class="img-popup" href="assets/images/products/mazra-bag-4.jpeg"><span
+                                        class="icon-magnifying-glass"></span></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="product-details__gallery__image">
+                                <img src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products">
+                                <a class="img-popup" href="assets/images/products/mazra-bag-4.jpeg"><span
+                                        class="icon-magnifying-glass"></span></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="product-details__gallery__image">
+                                <img src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products">
+                                <a class="img-popup" href="assets/images/products/mazra-bag-4.jpeg"><span
+                                        class="icon-magnifying-glass"></span></a>
+                            </div>
+                        </div> -->
+                    <!-- </div> -->
+
+                    <div class="product-details__carousel alefox-slick__carousel" #mainCarousel>
+                        <div class="item" *ngFor="let item of product?.images">
+                            <div class="product-details__gallery__image">
+                                <img [src]="item.url" alt="mazra products" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--
+                    <ul class="product-details__carousel-thumb alefox-slick__carousel" data-slick-options='{
+						"slidesToShow": 3,
+						"slidesToScroll": 1,
+						"autoplay": true,
+						"infinite": true,
+						"centerMode": true,
+						"asNavFor": ".product-details__carousel",
+						"focusOnSelect": true,
+						"dots": false,
+						"centerPadding": 0,
+						"arrows": false
+						}'>
+                        <li role="presentation" *ngFor="let item of product?.images">
+                            <div class="item">
+                                <span class="product-details__meta-thumb"> <img [src]='item.url' alt="mazra products"></span>
+                            </div>
+                        </li>
+
+                        <li role="presentation">
+                            <div class="item">
+                                <span class="product-details__meta-thumb"><img
+                                        src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products"></span>
+                            </div>
+                        </li>
+                        <li role="presentation">
+                            <div class="item">
+                                <span class="product-details__meta-thumb"><img
+                                        src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products"></span>
+                            </div>
+                        </li>
+                        <li role="presentation">
+                            <div class="item">
+                                <span class="product-details__meta-thumb"><img
+                                        src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products"></span>
+                            </div>
+                        </li>
+                        <li role="presentation">
+                            <div class="item">
+                                <span class="product-details__meta-thumb"><img
+                                        src="assets/images/products/mazra-bag-4.jpeg" alt="mazra products"></span>
+                            </div>
+                        </li>
+                    </ul> -->
+
+                    <!-- <ul class="product-details__carousel-thumb alefox-slick__carousel" #thumbCarousel>
+                        <li role="presentation" *ngFor="let item of product?.images">
+                            <div class="item">
+                                <span class="product-details__meta-thumb">
+                                    <img [src]="item.url" alt="mazra products">
+                                </span>
+                            </div>
+                        </li>
+                    </ul> -->
+                </div>
+            </div><!-- /.column -->
+
+            <div class="col-lg-6 col-xl-6 wow fadeInRight" data-wow-delay="300ms">
+                <div class="product-details__content">
+                    <h3 class="product-details__title">{{product?.name}}</h3><!-- /.product-title -->
+                    <div class="product-details__price">
+                        <span class="product-details__price__regular">${{product?.discountedPrice}}</span>
+                        <span class="product-details__price__offer">${{product?.price}}</span>
+                        <span class="product-details__price__stock" *ngIf="product?.stock >= 1; else outOfStock"> In
+                            stock</span>
+                        <ng-template #outOfStock>
+                            <span class="product-details__price__outofstock"> Out of stock</span>
+                        </ng-template>
+
+                    </div>
+                    <!-- /.product-price -->
+                    <!-- <div class="product-details__review">
+                        <span class="icofont-star"></span>
+                        <span class="icofont-star"></span>
+                        <span class="icofont-star"></span>
+                        <span class="icofont-star"></span>
+                        <span class="icofont-star"></span>
+                        <a href="product-details.html">( 5 Customer Review )</a>
+                    </div> -->
+                    <div class="product-details__excerpt">{{product?.description}}</div><!-- /.excerp-text -->
+                    <ul class="product-details__feature">
+                        <li *ngFor="let feature of product.usp">
+                            <span class="product-details_feature_icon">
+                                <i class="icofont-check-alt"></i>
+                            </span>
+                            {{ feature }}
+                        </li>
+
+                        <!-- <li><span class="product-details__feature__icon"><i class="icofont-check-alt"></i></span>Lorem ipsum available, but the majority have suffered.</li> -->
+                    </ul>
+                    <div class="product-details__qty">
+                        <div class="product-details__quantity">
+                            <h3 class="product-details__quantity__title">Quantity</h3>
+                            <div class="quantity-box">
+                                <button type="button" class="sub" (click)="decrease()"><i
+                                        class="icofont-thin-down"></i></button>
+                                <input type="number" [value]="quantity" (input)="onInputChange($event)"
+                                    class="custom-input" min="1" max="99" />
+                                <button type="button" class="add" (click)="increase()"><i
+                                        class="icofont-thin-up"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-details__buttons">
+                            <a (click)="addTocart(product)" class="alefox-btn">
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                Add to Cart
+                            </a>
+                            <a (click)="buyNow(product)" class="alefox-btn">
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                Buy Now
+                            </a>
+                            <!-- <a href="wishlist.html" class="product-details__buttons__wishlist"><i
+                                    class="far fa-heart"></i></a> -->
+                        </div><!-- /.qty-btn -->
+
+
+                    </div>
+
+                    <div>
+                        <a (click)="customization()" class="alefox-btn">
+                            <span class="alefox-btn__item"></span>
+                            <span class="alefox-btn__item"></span>
+                            <span class="alefox-btn__item"></span>
+                            <span class="alefox-btn__item"></span>
+                            Customization Project
+                        </a>
+                    </div>
+
+                    <!-- <ul class="product-details__info">
+                        <li><span class="product-details__info__icon"><i
+                                    class="icofont-check-alt"></i></span><strong>Estimated Delivery:</strong> 60-60 days
+                            Ships to Bangladesh</li>
+                        <li><span class="product-details__info__icon"><i
+                                    class="icofont-check-alt"></i></span><strong>Free Shipping:</strong> From China to
+                            Bangladesh via Super Economy Global</li>
+                    </ul> -->
+                    <!-- <div class="product-details__socials">
+                        <h4 class="product-details__socials__title">Share:</h4>
+
+                        <a href="https://facebook.com">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        <a href="https://pinterest.com">
+                            <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+                            <span class="sr-only">Pinterest</span>
+                        </a>
+                        <a href="https://twitter.com">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                        <a href="https://instagram.com">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                    </div>/.social-share -->
+                </div>
+            </div>
+        </div>
+        <!-- /.product-details -->
+
+    </div>
+</section>
+<!-- Products End -->

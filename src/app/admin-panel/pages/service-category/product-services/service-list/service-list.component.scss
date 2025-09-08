@@ -1,0 +1,46 @@
+// ::ng-deep .styled-tab-group {
+//   background-color: #f9f9f9;
+//   border-radius: 10px;
+//   padding: 0;
+
+//   .mat-tab-header {
+//     background-color: #ffffff;
+//     border-bottom: 2px solid #e0e0e0;
+//     display: flex;
+//     justify-content: start;
+
+//     .mat-tab-label {
+//       padding: 10px 20px;
+//       margin-right: 8px;
+//       font-weight: 500;
+//       color: #555;
+//       cursor: pointer;
+//       border-radius: 8px 8px 0 0;
+//       transition: all 0.3s ease;
+
+//       &:hover {
+//         background-color: #f0f0f0;
+//       }
+
+//       &.mat-tab-label-active {
+//         background-color: #ffffff;
+//         color: #1976d2;
+//         font-weight: 600;
+//         border-bottom: 2px solid #1976d2;
+//       }
+//     }
+
+//     .mat-ink-bar {
+//       height: 3px;
+//       background-color: #1976d2;
+//       border-radius: 2px;
+//     }
+//   }
+
+//   .mat-tab-body-wrapper {
+//     padding: 20px;
+//     background-color: #ffffff;
+//     border-radius: 0 0 10px 10px;
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+//   }
+// }

@@ -1,0 +1,207 @@
+<section class="page-header">
+    <div class="page-header__shape-left"></div>
+    <div class="page-header__shape-right"></div>
+    <div class="page-header__bg"></div>
+    <!-- /.page-header__bg -->
+    <div class="container">
+        <h2 class="page-header__title bw-split-in-down">Checkout </h2>
+        <ul class="alefox-breadcrumb list-unstyled">
+            <li><a routerLink="/checkout">Home</a></li>
+            <li><span>Checkout</span></li> <br>
+        </ul><!-- /.thm-breadcrumb list-unstyled -->
+        <br>
+
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<!-- Checkout Start -->
+<section class="checkout-page">
+  <div class="container">
+    <div class="checkout-page__notice">
+      Returning Customer? <a routerLink="/login">Click here to Login</a>
+    </div>
+
+    <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
+      <div class="row">
+        <!-- Billing Details -->
+        <div class="col-xl-6 col-lg-6">
+          <div class="checkout-page__billing-address">
+            <h2 class="checkout-page__billing-address__title">Billing details</h2>
+            <div class="checkout-page__form">
+
+
+
+              <div class="row bs-gutter-x-20">
+                <div class="col-xl-6">
+                  <div class="checkout-page__input-box mb-3">
+                    <input type="text" formControlName="firstName" placeholder="First name" />
+                    <div *ngIf="hasError('firstName', 'required')" class="text-danger small">First name is required</div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="checkout-page__input-box mb-3">
+                    <input type="text" formControlName="lastName" placeholder="Last name" />
+                    <div *ngIf="hasError('lastName', 'required')" class="text-danger small">Last name is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="checkout-page__input-box mb-3">
+                <input type="text" formControlName="company" placeholder="Company" />
+              </div>
+              <div class="checkout-page__input-box mb-3">
+                <input type="text" formControlName="address" placeholder="Address" />
+                <div *ngIf="hasError('address', 'required')" class="text-danger small">Address is required</div>
+              </div>
+              <div class="checkout-page__input-box mb-3">
+                <input type="text" formControlName="apartment" placeholder="Apartment, unit, etc. (optional)" />
+              </div>
+              <div class="checkout-page__input-box mb-3">
+                <input type="text" formControlName="city" placeholder="Town / City" />
+                <div *ngIf="hasError('city', 'required')" class="text-danger small">City is required</div>
+              </div>
+              <div class="checkout-page__input-box mb-3">
+                <input type="text" formControlName="country" placeholder="Country" />
+                <div *ngIf="hasError('country', 'required')" class="text-danger small">Country is required</div>
+              </div>
+
+              <div class="row bs-gutter-x-20">
+                <div class="col-xl-6">
+                  <div class="checkout-page__input-box mb-3">
+                    <input type="text" formControlName="state" placeholder="State" />
+                    <div *ngIf="hasError('state', 'required')" class="text-danger small">State is required</div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="checkout-page__input-box mb-3">
+                    <input type="text" formControlName="zip" placeholder="Zip code" />
+                    <div *ngIf="hasError('zip', 'required')" class="text-danger small">Zip is required</div>
+                    <div *ngIf="hasError('zip', 'pattern')" class="text-danger small">Zip must be numeric</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row bs-gutter-x-20">
+                <div class="col-xl-6">
+                  <div class="checkout-page__input-box mb-3">
+                    <input type="email" formControlName="email" placeholder="Email address" />
+                    <div *ngIf="hasError('email', 'required')" class="text-danger small">Email is required</div>
+                    <div *ngIf="hasError('email', 'email')" class="text-danger small">Enter a valid email</div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="checkout-page__input-box mb-3">
+                    <input type="tel" formControlName="phone" placeholder="Phone" />
+                    <div *ngIf="hasError('phone', 'required')" class="text-danger small">Phone is required</div>
+                    <div *ngIf="hasError('phone', 'pattern')" class="text-danger small">Phone must be 10 digits</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="checkout-page__check-box mb-3">
+                <input type="checkbox" formControlName="createAccount" id="createAccount" />
+                <label for="createAccount">Create an Account?<span></span></label>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="col-xl-6 col-lg-6">
+          <div class="checkout-page__your-order">
+            <h2 class="checkout-page__your-order__title">Your order</h2>
+
+            <table class="checkout-page__order-table mb-4">
+              <thead class="order_table_head">
+                <tr>
+                  <th>Product</th>
+                  <th class="right">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="pro__title">Product Name</td>
+                  <td class="pro__price">$10.99 USD</td>
+                </tr>
+                <tr>
+                  <td class="pro__title">Subtotal</td>
+                  <td class="pro__price">$10.99 USD</td>
+                </tr>
+                <tr>
+                  <td class="pro__title">Shipping</td>
+                  <td class="pro__price">$0.00 USD</td>
+                </tr>
+                <tr>
+                  <td class="pro__title">Total</td>
+                  <td class="pro__price">$20.98 USD</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="checkout-page__payment__item checkout-page__payment__item--active">
+              <h3 class="checkout-page__payment__title">
+                <input type="radio" checked /> Credit Card
+              </h3>
+              <p class="checkout-page__payment__desc">
+                Make your payment directly into our bank account. Your order will not be shipped until the funds have cleared in our account.
+              </p>
+
+              <div class="checkout-page__form">
+                <div class="checkout-page__input-box mb-3">
+                  <input type="text" formControlName="nameOnCard" class="form-control" placeholder="Name On Card*" />
+                  <div *ngIf="hasError('nameOnCard', 'required')" class="text-danger small">Name on card is required</div>
+                </div>
+
+                <div class="checkout-page__input-box mb-3 d-flex align-items-center">
+                  <input type="text" formControlName="cardNumber" class="form-control me-2" placeholder="Card Numbers*" />
+                  <div class="d-flex">
+                    <img src="assets/images/others/img-7.png" class="me-2" style="height:24px;" />
+                    <img src="assets/images/others/img-8.png" class="me-2" style="height:24px;" />
+                    <img src="assets/images/others/img-9.png" class="me-2" style="height:24px;" />
+                    <img src="assets/images/others/img-10.png" class="me-2" style="height:24px;" />
+                  </div>
+                </div>
+                <div *ngIf="hasError('cardNumber', 'required')" class="text-danger small">Card number is required</div>
+                <div *ngIf="hasError('cardNumber', 'minlength')" class="text-danger small">Card must be at least 16 digits</div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="checkout-page__input-box mb-3">
+                      <input type="text" formControlName="expiryDate" class="form-control" placeholder="dd-mm-yyyy" />
+                      <div *ngIf="hasError('expiryDate', 'required')" class="text-danger small">Expiry date is required</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="checkout-page__input-box mb-3">
+                      <input type="text" formControlName="cvv" class="form-control" placeholder="CVV*" />
+                      <div *ngIf="hasError('cvv', 'required')" class="text-danger small">CVV is required</div>
+                      <div *ngIf="hasError('cvv', 'minlength')" class="text-danger small">CVV too short</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checkout-page__check-box">
+                  <input type="checkbox" formControlName="saveCard" id="saveCard" />
+                  <label for="saveCard">Save Card Details<span></span></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-right d-flex justify-content-end">
+              <button type="submit" class="alefox-btn">
+                <span class="alefox-btn__item"></span>
+                <span class="alefox-btn__item"></span>
+                <span class="alefox-btn__item"></span>
+                <span class="alefox-btn__item"></span>
+                Place your Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<!-- Checkout End -->

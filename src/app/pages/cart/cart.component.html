@@ -1,0 +1,113 @@
+     <section class="page-header">
+        <div class="page-header__shape-left"></div>
+        <div class="page-header__shape-right"></div>
+        <div class="page-header__bg"></div>
+        <!-- /.page-header__bg -->
+        <div class="container">
+            <h2 class="page-header__title bw-split-in-down">Cart</h2>
+            <ul class="alefox-breadcrumb list-unstyled">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>Cart</span></li> <br>
+            </ul><!-- /.thm-breadcrumb list-unstyled -->
+            <br>
+
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
+
+
+    <!-- Cart Start -->
+
+        <section class="cart-page" *ngIf="cartItems.length >= 1">
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table cart-page__table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of cartItems; let i = index">
+                                <td>
+                                    <div class="cart-page__table__meta">
+                                        <div class="cart-page__table__meta-img">
+                                            <img [src]="item?.product?.images[0]?.url" alt="Mazra">
+                                        </div>
+                                        <h3 class="cart-page__table__meta-title"><a>{{item?.product?.name}}</a>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td>${{item?.product?.discountedPrice}}</td>
+                                <td>
+                                <div class="product-details__quantity">
+                                    <!-- <h3 class="product-details__quantity__title">Quantity</h3> -->
+                                    <div class="quantity-box">
+                                        <button type="button" class="sub" (click)="decrease(item?.product?._id , i)" ><i class="icofont-thin-down"></i></button>
+                                          <input
+                                          type="number"
+                                          [value]="item?.quantity"
+                                          (input)="onInputChange($event, i , item?.product._id)"
+                                          class="custom-input"
+                                          min="1"
+                                          max="99"
+                                        />
+                                        <button type="button" class="add" (click)="increase(item?.product?._id , i)"><i class="icofont-thin-up"></i></button>
+                                    </div>
+                                </div>
+                                </td>
+                                <td>${{item?.product?.discountedPrice * item?.quantity}}</td>
+                                <td>
+                                    <a (click)="removeItem(item?.product?._id , i)" class="cursor-pointer table cart-page__table__remove"><span class="icofont-close-line"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div  class="col-xl-8 col-lg-7">
+                        <form action="#" class="cart-page__coupone-form">
+                            <!-- <input type="text" placeholder="Enter coupon code" class="cart-cupon__input"> -->
+                            <!-- <button type="submit" class="alefox-btn">
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                Apply coupon
+                            </button> -->
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-lg-5">
+                        <ul class="cart-page__cart-total list-unstyled">
+                            <li><span>Subtotal</span><span class="cart-page__cart-total-amount">${{alldetails?.total}}</span></li>
+                            <!-- <li><span>Shipping cost</span><span class="cart-page__cart-total-amount">$0.00 </span></li> -->
+                            <li><span>Total</span><span class="cart-page__cart-total-amount">${{alldetails?.total}}</span></li>
+                        </ul>
+                        <div class="cart-page__buttons">
+                            <!-- <a href="cart.html" class="alefox-btn">
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                Update
+                            </a> -->
+                            <a href="/checkout" class="alefox-btn">
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                <span class="alefox-btn__item"></span>
+                                Checkout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="d-flex align-items-center justify-content-center container" *ngIf="cartItems.length == 0">
+            <img src="../../../assets/images/products/no-product.png" class="img-fluid" alt="">
+        </div>
+        <!-- Cart End -->

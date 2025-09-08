@@ -1,0 +1,83 @@
+<section class="page-header">
+    <div class="page-header__shape-left"></div>
+    <div class="page-header__shape-right"></div>
+    <div class="page-header__bg"></div>
+    <!-- /.page-header__bg -->
+    <div class="container">
+        <h2 class="page-header__title bw-split-in-down">Products</h2>
+        <ul class="alefox-breadcrumb list-unstyled">
+            <li><a routerLink="/home">Home</a></li>
+            <li><span>products</span></li> <br>
+        </ul><!-- /.thm-breadcrumb list-unstyled -->
+        <br>
+
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<section class="product-one">
+    <div class="container">
+        <div class="sec-title text-center">
+            <h6 class="sec-title__tagline bw-split-in-right"><span class="sec-title__tagline__left-leaf"
+                    style="background-image: url(assets/images/shapes/leaf.png);"></span>Recently Added<span
+                    class="sec-title__tagline__right-leaf"
+                    style="background-image: url(assets/images/shapes/leaf.png);"></span></h6>
+            <!-- /.sec-title__tagline -->
+            <h3 class="sec-title__title bw-split-in-left">Our Products</h3>
+            <!-- /.sec-title__title -->
+        </div>
+        <!-- /.sec-title -->
+        <div class="">
+            <div class="row gutter-y-30">
+                <!-- If products has data, show product cards -->
+                <ng-container *ngIf="products.length > 0; else noProducts">
+                    <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let product of products; let i = index">
+                        <div class="product__item wow fadeInUp" [attr.data-wow-duration]="'1500ms'"
+                            [attr.data-wow-delay]="(i * 50) + 'ms'">
+                            <div class="product__item__img">
+                                <img [src]="product.images[0].url" [alt]="product.name">
+                                <div class="product__item__flash" *ngIf="product?.offer">
+                                    <span class="product__item__flash__off">{{ product?.offer }}</span>
+                                </div>
+                                <div class="product__item__btn">
+                                    <a (click)="addToCart(product._id)"><i class="icon-shopping-cart"></i></a>
+                                    <a (click)="addToWishlist(product._id)"><i class="far fa-heart"></i></a>
+                                    <a [routerLink]="['/product-detail', product?.slug]"><i class="fas fa-eye"></i></a>
+                                </div>
+                            </div>
+                            <div class="product__item__content">
+                                <h4 class="product__item__title">
+                                    <a>{{ product?.name }}</a>
+                                </h4>
+                                <div class="product__item__price">₹ {{ product?.price | number:'1.2-2' }}</div>
+                                <div class="product__item__ratings">
+                                    <span class="icofont-star"></span><span class="icofont-star"></span>
+                                    <span class="icofont-star"></span><span class="icofont-star"></span>
+                                    <span class="icofont-star"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="product__item w-100 mt-3">
+                            <div class="add-button h-100 d-flex justify-content-center align-items-center">
+                                <div class="product__item__content w-100">
+                                    <h4 class="product__item__title mb-0">
+                                        <i class="fa  fa-plus" (click)="addProductForm()"></i>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- Show this if products array is empty -->
+                <ng-template #noProducts>
+                    <div class="col-12 text-center py-5">
+                        <p style="font-size: 18px; color: #999;">No Products Available in this Category</p>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</section>

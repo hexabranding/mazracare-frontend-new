@@ -1,0 +1,57 @@
+<section class="page-header">
+  <div class="container">
+    <h2 class="page-header__title">Reset Password</h2>
+    <ul class="alefox-breadcrumb list-unstyled">
+      <li><a routerLink="/">Home</a></li>
+      <li><span> Email Verification</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="login-page">
+  <div class="container">
+    <div class="login-page__wrap">
+      <h3 class="login-page__wrap__title">Reset Your Password:</h3>
+      <form class="login-page__form" [formGroup]="emailVerifyForm" (ngSubmit)="onSubmit()">
+
+        <!-- Email -->
+        <div class="login-page__form-input-box">
+          <input type="email" placeholder="Enter your email *" formControlName="email">
+          <div *ngIf="emailVerifyForm.get('email')?.invalid && emailVerifyForm.get('email')?.touched">
+            <small class="text-danger" *ngIf="emailVerifyForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small class="text-danger" *ngIf="emailVerifyForm.get('email')?.errors?.['email']">Invalid email.</small>
+          </div>
+        </div>
+
+        <!-- OTP -->
+        <div class="login-page__form-input-box otp-input-group d-flex">
+          <!-- <label class="mb-2 d-block">Enter OTP:</label> -->
+          <div class="d-flex gap-2 justify-content-between">
+          <input
+            *ngFor="let ctrl of otpControls; let i = index"
+            class="otp-input"
+            type="number"
+            id="otp{{ i }}"
+            name="otp{{ i }}"
+            maxlength="1"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            autocomplete="one-time-code"
+            [formControlName]="'otp' + i"
+            (input)="onOtpInput($event, i)"
+            (keydown)="onOtpKeyDown($event, i)"
+            [attr.data-index]="i"
+          />
+          </div>
+        </div>
+        <button type="submit" class="alefox-btn">
+            <span class="alefox-btn__item"></span>
+            <span class="alefox-btn__item"></span>
+            <span class="alefox-btn__item"></span>
+            <span class="alefox-btn__item"></span>
+            Verify
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

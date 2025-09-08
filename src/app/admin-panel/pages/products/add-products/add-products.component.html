@@ -1,0 +1,112 @@
+<div class="container mb-5">
+  <h2 class="mb-4">{{isEdit ? 'Update Product' : 'Add Product' }}</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <!-- Product Name -->
+    <div class="mb-4 row">
+      <label for="name" class="col-sm-2 col-form-label">Product Name *</label>
+      <div class="col-sm-10">
+        <input type="text" id="name" class="form-control" formControlName="name" />
+        <div class="text-danger" *ngIf="f['name'].touched && f['name'].invalid">Product name is required</div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-4 row">
+      <label for="description" class="col-sm-2 col-form-label">Description *</label>
+      <div class="col-sm-10">
+        <textarea id="description" class="form-control" rows="3" formControlName="description"></textarea>
+        <div class="text-danger" *ngIf="f['description'].touched && f['description'].invalid">Description is required
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-4 row">
+      <label class="col-sm-2 col-form-label">Points</label>
+      <div class="col-sm-10">
+        <div formArrayName="points" class="d-flex flex-column w-100">
+          <div *ngFor="let point of points.controls; let i = index" class="mb-2 d-flex align-items-center">
+            <input type="text" [formControlName]="i" class="form-control me-2" [placeholder]="'Enter point ' + (i + 1)" />
+            <button type="button" class="btn btn-danger" (click)="deleteItem(i)" *ngIf="points.length > 1">Delete</button>
+          </div>
+          <button type="button" class="btn btn-success mt-3 w-auto" (click)="addItem()">Add</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Price & Discount -->
+    <div class="mb-4 row">
+      <label for="service" class="col-sm-2 col-form-label">Service *</label>
+      <div class="col-sm-4">
+        <select class="form-control" formControlName="service" id="service" (change)="onServiceChange($event)">
+          @for (item of services; track $index) {
+          <option [value]="item._id">{{item.name}}</option>
+          }
+        </select>
+        <!-- <input type="number" id="price" class="form-control" formControlName="price" /> -->
+        <div class="text-danger" *ngIf="f['service'].touched && f['service'].invalid">Service is required</div>
+      </div>
+
+      <label for="category" class="col-sm-2 col-form-label">Category</label>
+      <div class="col-sm-4">
+        <select [disabled]="f['service'].valid" class="form-control" formControlName="category" id="category">
+          @for (item of categorys; track $index) {
+          <option [value]="item._id">{{item.name}}</option>
+          }
+        </select>
+        <div class="text-danger" *ngIf="f['category'].touched && f['category'].invalid">Category is required</div>
+      </div>
+    </div>
+
+    <div class="mb-4 row">
+      <label for="price" class="col-sm-2 col-form-label">Price *</label>
+      <div class="col-sm-2">
+        <input type="number" id="price" class="form-control" formControlName="price" />
+        <div class="text-danger" *ngIf="f['price'].touched && f['price'].invalid">Valid price is required</div>
+      </div>
+
+      <label for="stock" class="col-sm-2 col-form-label">Stock</label>
+      <div class="col-sm-2">
+        <input type="number" id="stock" class="form-control" formControlName="stock" />
+      </div>
+
+      <label for="discountPercent" class="col-sm-2 col-form-label">Discount (%)</label>
+      <div class="col-sm-2">
+        <input type="number" id="discountPercent" class="form-control" formControlName="discountPercent" />
+      </div>
+    </div>
+
+    <!-- Images -->
+    <div class="mb-4 row">
+      <label class="col-sm-2 col-form-label">Product Images *</label>
+      <div class="col-sm-10">
+        <input type="file" class="form-control" (change)="onFileChange($event)" multiple accept="image/*" />
+        <!-- <small class="form-text text-muted">
+          {{ previewImages.length }} file{{ previewImages.length !== 1 ? 's' : '' }} selected
+        </small> -->
+        <div class="form-text">Upload up to 5 images</div>
+        <div class="text-danger" *ngIf="imageLimitExceeded">You can upload a maximum of 5 images.</div>
+        <div class="mt-3 d-flex flex-wrap gap-2">
+         <div *ngFor="let img of previewImages; let i = index" class="position-relative">
+          <img [src]="img?.url ? img?.url : img " class="img-thumbnail" width="100" />
+
+          <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage(i)">
+            <i class="fas fa-times"></i>
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row">
+      <div class="offset-sm-2 col-sm-10 text-end">
+        <button type="submit" class="btn btn-success" [disabled]="productForm.invalid || imageLimitExceeded">
+          {{isEdit ? 'Update Product' : 'Add Product'}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

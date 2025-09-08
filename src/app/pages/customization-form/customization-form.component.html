@@ -1,0 +1,499 @@
+<section class="page-header">
+    <div class="page-header__shape-left"></div>
+    <div class="page-header__shape-right"></div>
+    <div class="page-header__bg"></div>
+    <!-- /.page-header__bg -->
+    <div class="container">
+        <h2 class="page-header__title bw-split-in-down">Commercial Customization</h2>
+        <ul class="alefox-breadcrumb list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><span>Commercial Customization</span></li> <br>
+        </ul><!-- /.thm-breadcrumb list-unstyled -->
+        <br>
+        <ul class="subpoints">
+            <h5>
+                <li>Commercial Customization
+                    Learning.
+                </li>
+                <li>Promotes Health, Sustainability, and
+                    Community Empowerment.
+                </li>
+            </h5>
+        </ul>
+
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<!-- Service Start -->
+<section class="service-two">
+    <div class="container">
+        <h3 class="service-details__heading">Educate, Feed, and Empower Communities Through Farming.</h3>
+        <!-- /.service-details__heading -->
+        <p class="service-details__text">
+            Educate students in future-ready farming and sustainability.</p>
+        <!-- /.service-details__text -->
+    </div>
+</section>
+<!-- Service End -->
+
+<!-- CUSTOMIZATAION FORM -->
+
+<section class="pt-5">
+    <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()" class="agri-form p-3 p-md-4">
+        <div class="container">
+            <!-- CONTACT BLOCK -->
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="fullName">Full Name</label>
+                    <input id="fullName" formControlName="fullName" type="text" class="form-control"
+                        placeholder="Your full name" />
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="company">Company / Organization (if any)</label>
+                    <input id="company" formControlName="company" type="text" class="form-control"
+                        placeholder="Company or Organization" />
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input id="email" formControlName="email" type="email" class="form-control"
+                        placeholder="name@domain.com" />
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input id="phone" formControlName="phone" type="tel" class="form-control"
+                        placeholder="+971 5X XXXX XXX" />
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="location">Location (Emirates)</label>
+                    <select id="location" formControlName="location" class="form-select">
+                        <option value="">Select Emirates</option>
+                        <option *ngFor="let emirate of emirates" [value]="emirate">{{ emirate }}</option>
+                    </select>
+                </div>
+
+
+                <div class="col-12 col-md-12">
+                    <hr class="my-4" />
+
+                    <!-- CROPS / SPECIES SELECTION -->
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">Preferred Crops / Species</label>
+
+                            <div class="accordion" id="cropAccordion">
+
+                                <!-- Leafy Greens -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="leafyGreensHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#leafyGreens"
+                                            aria-expanded="false" aria-controls="leafyGreens">
+                                            Leafy Greens
+                                        </button>
+                                    </h2>
+                                    <div id="leafyGreens" class="accordion-collapse collapse"
+                                        aria-labelledby="leafyGreensHeading" data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.leafyGreens">
+                                                <input class="form-check-input" type="checkbox" [id]="'leafy-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'leafy-'+item">{{ item }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Herbs -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="herbsHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#herbs" aria-expanded="false"
+                                            aria-controls="herbs">
+                                            Herbs
+                                        </button>
+                                    </h2>
+                                    <div id="herbs" class="accordion-collapse collapse" aria-labelledby="herbsHeading"
+                                        data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.herbs">
+                                                <input class="form-check-input" type="checkbox" [id]="'herb-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'herb-'+item">{{ item }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fruiting Vegetables -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="vegHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#vegetables" aria-expanded="false"
+                                            aria-controls="vegetables">
+                                            Fruiting Vegetables
+                                        </button>
+                                    </h2>
+                                    <div id="vegetables" class="accordion-collapse collapse"
+                                        aria-labelledby="vegHeading" data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.fruitingVegetables">
+                                                <input class="form-check-input" type="checkbox" [id]="'veg-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'veg-'+item">{{ item }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Flowers -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flowersHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flowers" aria-expanded="false"
+                                            aria-controls="flowers">
+                                            Flowers
+                                        </button>
+                                    </h2>
+                                    <div id="flowers" class="accordion-collapse collapse"
+                                        aria-labelledby="flowersHeading" data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.flowers">
+                                                <input class="form-check-input" type="checkbox" [id]="'flower-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'flower-'+item">{{ item
+                                                    }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fruits -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="fruitsHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#fruits" aria-expanded="false"
+                                            aria-controls="fruits">
+                                            Fruits
+                                        </button>
+                                    </h2>
+                                    <div id="fruits" class="accordion-collapse collapse" aria-labelledby="fruitsHeading"
+                                        data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.fruits">
+                                                <input class="form-check-input" type="checkbox" [id]="'fruit-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'fruit-'+item">{{ item }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Microgreens -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="microHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#microgreens"
+                                            aria-expanded="false" aria-controls="microgreens">
+                                            Microgreens & Exotic Greens
+                                        </button>
+                                    </h2>
+                                    <div id="microgreens" class="accordion-collapse collapse"
+                                        aria-labelledby="microHeading" data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.microgreens">
+                                                <input class="form-check-input" type="checkbox" [id]="'micro-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'micro-'+item">{{ item }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Aquaponics -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="aquaHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#aquaponics" aria-expanded="false"
+                                            aria-controls="aquaponics">
+                                            Aquaponics with Fish
+                                        </button>
+                                    </h2>
+                                    <div id="aquaponics" class="accordion-collapse collapse"
+                                        aria-labelledby="aquaHeading" data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body d-flex flex-wrap gap-3">
+                                            <div class="form-check" *ngFor="let item of crops.aquaponics">
+                                                <input class="form-check-input" type="checkbox" [id]="'aqua-'+item"
+                                                    [value]="item" (change)="toggleCrop($event)" />
+                                                <label class="form-check-label" [for]="'aqua-'+item">{{ item }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Other -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="otherHeading">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#other" aria-expanded="false"
+                                            aria-controls="other">
+                                            Other / Custom
+                                        </button>
+                                    </h2>
+                                    <div id="other" class="accordion-collapse collapse" aria-labelledby="otherHeading"
+                                        data-bs-parent="#cropAccordion">
+                                        <div class="accordion-body">
+                                            <input type="text" class="form-control" formControlName="customCrop"
+                                                placeholder="Specify custom crop/fish" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <hr class="my-4" />
+
+
+            <!-- SITE DETAILS -->
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label">Type of Space</label>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div *ngFor="let t of spaceTypes" class="form-check">
+                            <input class="form-check-input" type="radio" [id]="t.key" formControlName="spaceType"
+                                [value]="t.key" />
+                            <label class="form-check-label" [for]="t.key">{{ t.label }}</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="siteArea">Site Area</label>
+                    <select id="siteArea" formControlName="siteArea" class="form-select">
+                        <option value="">Select area range</option>
+                        <option value="100">Less than 100 sqft</option>
+                        <option value="100-300">100–300 sqft</option>
+                        <option value="300-1000">300–1000 sqft</option>
+                        <option value="1000-5000">1000–5000 sqft</option>
+                        <option value=">5000">More than 5000 sqft</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <input *ngIf="enquiryForm.get('siteArea')?.value === 'custom'" formControlName="siteAreaCustom"
+                        class="form-control mt-2" placeholder="Enter custom area (e.g. 120 sqm)" />
+                </div>
+
+
+                <div class="col-12">
+                    <label class="form-label">Site Photos (optional)</label>
+                    <input type="file" (change)="onFilesSelected($event)" class="form-control" multiple />
+                    <small class="form-text text-muted">You can upload multiple images (jpg, png). Max 10MB
+                        each.</small>
+                </div>
+            </div>
+
+
+            <hr class="my-4" />
+
+
+            <!-- PURPOSE -->
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">Purpose of Farming</label>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div *ngFor="let p of purposeOptions" class="form-check">
+                            <input class="form-check-input" type="checkbox" [id]="'purpose-'+p.key" [value]="p.key"
+                                (change)="togglePurpose($event)" />
+                            <label class="form-check-label" [for]="'purpose-'+p.key">{{ p.label }}</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="purpose-other"
+                                (change)="togglePurpose($event)" />
+                            <label class="form-check-label" for="purpose-other">Other</label>
+                            <input *ngIf="otherPurposeChecked" formControlName="purposeOther" class="form-control mt-2"
+                                placeholder="Specify other purpose" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="my-4" />
+
+            <!-- TECHNOLOGY, UTILITIES, GREENHOUSE -->
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Preferred Farming Technology</label>
+                    <select class="form-select" formControlName="technology">
+                        <option value="">Select</option>
+                        <option *ngFor="let tech of technologies" [value]="tech.key">{{ tech.label }}</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Water Source Available?</label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="waterYes" formControlName="waterAvailable"
+                                value="yes" />
+                            <label class="form-check-label" for="waterYes">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="waterNo" formControlName="waterAvailable"
+                                value="no" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Electricity Available?</label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="elecYes"
+                                formControlName="electricityAvailable" value="yes" />
+                            <label class="form-check-label" for="elecYes">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="elecNo"
+                                formControlName="electricityAvailable" value="no" />
+                            <label class="form-check-label" for="elecNo">No</label>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="enquiryForm.get('electricityAvailable')?.value === 'yes'" class="mt-2">
+                        <label class="form-label">Power Backup Needed?</label>
+                        <select formControlName="powerBackup" class="form-select">
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                            <option value="not-sure">Not Sure</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Greenhouse Requirement</label>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div *ngFor="let g of greenhouseOptions" class="form-check">
+                            <input class="form-check-input" type="radio" [id]="g.key"
+                                formControlName="greenhouseRequired" [value]="g.key" />
+                            <label class="form-check-label" [for]="g.key">{{ g.label }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="my-4" />
+
+
+            <!-- BUDGET, TIMELINE, SERVICES -->
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Budget Range (optional)</label>
+                    <select formControlName="budget" class="form-select">
+                        <option value="">Select</option>
+                        <option value="<10000">Below AED 10,000</option>
+                        <option value="10000-25000">AED 10,000 – 25,000</option>
+                        <option value="25000-50000">AED 25,000 – 50,000</option>
+                        <option value="50000-100000">AED 50,000 – 100,000</option>
+                        <option value=">100000">AED 100,000+</option>
+                        <option value="not-sure">Not Sure / Need Consultation</option>
+                    </select>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Timeline</label>
+                    <select formControlName="timeline" class="form-select">
+                        <option value="immediately">Immediately</option>
+                        <option value="1month">Within 1 month</option>
+                        <option value="1-3months">1–3 months</option>
+                        <option value="3-6months">3–6 months</option>
+                        <option value="exploring">Just exploring for now</option>
+                    </select>
+                </div>
+
+
+                <div class="col-12 col-md-4">
+                    <label class="form-label">Additional Services Required</label>
+                    <div class="d-flex flex-column">
+                        <div *ngFor="let s of additionalServices" class="form-check">
+                            <input type="checkbox" class="form-check-input" [id]="'svc-'+s.key"
+                                (change)="toggleService($event)" />
+                            <label class="form-check-label" [for]="'svc-'+s.key">{{ s.label }}</label>
+                        </div>
+                        <input *ngIf="serviceOtherChecked" formControlName="serviceOther" class="form-control mt-2"
+                            placeholder="Specify other service" />
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="my-4" />
+
+            <!-- MESSAGE -->
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label" for="message">Message / Additional Comments</label>
+                    <textarea id="message" formControlName="message" rows="5" class="form-control"
+                        placeholder="Tell us about any custom requirements..."></textarea>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end mt-4">
+                <button type="submit" [disabled]="enquiryForm.invalid" class="btn btn-primary">Submit Enquiry</button>
+            </div>
+        </div>
+    </form>
+</section>
+<!-- CUSTOMIZATAION FORM -->
+
+
+<section class="pt-5" style="margin-bottom: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3 col-sm-12">
+                <img src="assets/images/resources/ins.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-6 col-lg-3 col-sm-12">
+                <img src="assets/images/resources/ins1.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-6 col-lg-3 col-sm-12">
+                <img src="assets/images/resources/ins2.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-6 col-lg-3 col-sm-12">
+                <img src="assets/images/resources/ins3.jpg" class="img-fluid" alt="">
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-sm-12 pt-4">
+                <video autoplay muted loop playsinline style="max-width: 100%; height: auto; ">
+                    <source src="assets/images/video/Students.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+
+                </video>
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-sm-12 pt-4">
+                <video autoplay muted loop playsinline style="max-width: 100%; height: auto; ">
+                    <source src="assets/images/video/demo1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,76 @@
+    <section class="page-header">
+        <div class="page-header__shape-left"></div>
+        <div class="page-header__shape-right"></div>
+        <div class="page-header__bg"></div>
+        <!-- /.page-header__bg -->
+        <div class="container">
+            <h2 class="page-header__title bw-split-in-down">{{serviceDetails?.name}}</h2>
+            <ul class="alefox-breadcrumb list-unstyled">
+                <li><a routerLink="/home">Home</a></li>
+                <li><span>{{serviceDetails?.name}}</span></li>
+            </ul><!-- /.thm-breadcrumb list-unstyled -->
+            <br>
+            <ul class="subpoints">
+                <h5>
+                    <li>{{serviceDetails?.description}}</li>
+                    <!-- <li>Smart automation, low manpower, and consistent yields.
+                    </li> -->
+                </h5>
+            </ul>
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
+    <!-- Service Start -->
+    <section class="service-two">
+        <div class="container">
+            <h3 class="service-details__heading">Turn Real Estate and Retail Spaces into Green Profit Centers.</h3>
+            <!-- /.service-details__heading -->
+            <p class="service-details__text">
+                We design and build hydroponic and aquaponic systems for.</p>
+            <!-- /.service-details__text -->
+            <div class="row gutter-y-30">
+                @for (item of categorys; track $index) {
+                    <div class="col-lg-3 col-md-6" (click)="goToProducts(item?._id)">
+                        <div class="service-two__item wow fadeInUp" data-wow-delay="00ms">
+                            <div class="service-two__item__image">
+                                <img [src]="item?.image?.url ?? 'assets/images/pintrest/off.jpg'" alt="Mazra">
+                            </div>
+                            <div class="mt-0 service-two__item__content">
+                                <h3 class="service-two__item__title">
+                                    <a>{{item?.name}}</a>
+                                </h3><!-- /.service-title -->
+                                <p class="service-two__item__text">
+                                    {{item?.description}} </p>
+                                <!-- /.service-text -->
+                                <!-- <a href="products.html" class="service-two__item__link">
+                                        <i class="icofont-arrow-up"></i>
+                                    </a> -->
+                            </div>
+                        </div><!-- /.service-item -->
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Service End -->
+
+    <section class="pt-5" style="margin-bottom: 40px;">
+      <div class="container">
+        <div class="row">
+          @for (item of serviceDetails?.image; track $index) {
+          <div class="col-md-6 col-lg-3 col-sm-12">
+            <img [src]="item?.url" class="img-fluid" alt="">
+          </div>
+          }
+        </div>
+        <div class="row">
+          @for (item of serviceDetails?.video; track $index) {
+          <div class="col-md-6 col-lg-6 col-sm-12 pt-4">
+            <video autoplay muted loop playsinline style="max-width: 100%; height: auto; ">
+              <source [src]="item?.url" type="video/mp4">
+            </video>
+          </div>
+          }
+        </div>
+
+      </div>
+    </section>

@@ -1,0 +1,18 @@
+textarea.form-control {
+  resize: vertical;
+}
+
+.card-header h4 {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 576px) {
+  .card-header h4 {
+    font-size: 1rem;
+  }
+
+  button.btn {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

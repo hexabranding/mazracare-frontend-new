@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+// @import 'bootstrap/scss/bootstrap';
+// @import "/node_modules/font-awesome/scss/font-awesome";
+// @import 'ngx-toastr/toastr';
+
+// // UTILITIES
+
+// @import "~@ng-select/ng-select/themes/default.theme.css";
+// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// MODULES
+@import "angular-notifier/styles";
+@import "assets/scss/module/alll.css";
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap/scss/bootstrap';
+@import '@angular/cdk/overlay-prebuilt.css';
+
+
+
+// INDEX PAGE LINKS
+@import 'assets/vendors/bootstrap/css/bootstrap.min.css';
+@import 'assets/vendors/bootstrap-select/bootstrap-select.min.css';
+@import 'assets/vendors/animate/animate.min.css';
+@import 'assets/vendors/fontawesome/css/all.min.css';
+@import 'assets/vendors/icofont/icofont.min.css';
+@import 'assets/vendors/jquery-ui/jquery-ui.css';
+@import 'assets/vendors/jarallax/jarallax.css';
+@import 'assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css';
+@import 'assets/vendors/nouislider/nouislider.min.css';
+@import 'assets/vendors/nouislider/nouislider.pips.css';
+@import 'assets/vendors/tiny-slider/tiny-slider.css';
+@import 'assets/vendors/slick/slick.css';
+@import 'assets/vendors/alefox-icons/style.css';
+@import 'assets/vendors/owl-carousel/css/owl.carousel.min.css';
+@import 'assets/vendors/owl-carousel/css/owl.theme.default.min.css';
+// INDEX PAGE LINKS
+@import 'sweetalert2/src/sweetalert2.scss';
+
+.mat-mdc-menu-panel {
+  background-color: #fff;
+  background: #fff !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mat-mdc-menu-item {
+  font-size: 14px !important;
+  color: #333 !important;
+  padding: 10px 16px !important;
+}
+
+.mat-mdc-menu-item:hover {
+  background-color: #f3f3f3 !important;
+}
+
+.mat-mdc-divider {
+  margin: 6px 0 !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+#google_translate_element {
+  z-index: 9999;
+}

@@ -1,0 +1,36 @@
+<!-- <mat-tab-group class="styled-tab-group" animationDuration="300ms">
+  <mat-tab label="Service">
+    <app-service-list></app-service-list>
+  </mat-tab>
+  <mat-tab label="Category">
+    <app-category-list></app-category-list>
+  </mat-tab>
+</mat-tab-group> -->
+
+
+<div class="tab-wrapper">
+  <div class="tab-headers">
+    <div
+      class="tab-button"
+      [class.active]="selectedIndex === 0"
+      (click)="selectTab(0)">
+      Service
+    </div>
+    <div
+      class="tab-button"
+      [class.active]="selectedIndex === 1"
+      (click)="selectTab(1)">
+      Category
+    </div>
+    <div class="tab-indicator" [style.transform]="'translateX(' + selectedIndex * 100 + '%)'"></div>
+  </div>
+
+  <div class="tab-content">
+    <div class="tab-panel" [class.active]="selectedIndex === 0">
+      <app-service-list></app-service-list>
+    </div>
+    <div class="tab-panel" [class.active]="selectedIndex === 1">
+      <app-category-list></app-category-list>
+    </div>
+  </div>
+</div>

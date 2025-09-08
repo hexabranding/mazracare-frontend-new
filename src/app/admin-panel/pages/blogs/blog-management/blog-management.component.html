@@ -1,0 +1,62 @@
+<!-- <div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Blog Management</h2>
+    <button class="btn btn-success" (click)="createBlog()">
+      <i class="fas fa-plus"></i> Create Blog
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Content Excerpt</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let blog of blogs; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <img [src]="blog.image" alt="{{ blog.title }}" width="60" height="40" style="object-fit: cover;">
+          </td>
+          <td>{{ blog.title }}</td>
+          <td>{{ blog.author }}</td>
+          <td>{{ blog.date }}</td>
+          <td>{{ blog.category }}</td>
+
+          <td>
+            {{ blog.content}}
+          </td>
+
+          <td>
+          <div class="d-flex justify-content-between">
+              <button class="btn d-flex align-items-center me-3  btn-sm btn-warning me-2" (click)="editBlog(blog)">
+              <i class="fas fa-edit me-2"></i> Edit
+            </button>
+            <button class="btn d-flex align-items-center me-3  btn-sm btn-danger" (click)="deleteBlog(blog.id)">
+              <i class="fas fa-trash me-2"></i> Delete
+            </button>
+          </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<app-data-table
+ngSkipHydration
+[tableConfig]="tableConfig"
+[tableSettings]="tableSettings"
+[tableData]="tableData"
+[totalCount]="totalCount"
+[isLoading]="isLoading"
+(tableEvent)="tableEvent($event)">
+</app-data-table>

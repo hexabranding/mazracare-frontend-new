@@ -1,0 +1,104 @@
+<section class="page-header">
+    <div class="page-header__shape-left"></div>
+    <div class="page-header__shape-right"></div>
+    <div class="page-header__bg"></div>
+    <!-- /.page-header__bg -->
+    <div class="container">
+        <h2 class="page-header__title bw-split-in-down">Wishlist</h2>
+        <ul class="alefox-breadcrumb list-unstyled">
+            <li><a routerLink="/home">Home</a></li>
+            <li><span>Wishlist</span></li> <br>
+        </ul><!-- /.thm-breadcrumb list-unstyled -->
+        <br>
+
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+  <!-- Cart Start -->
+        <section class="wishlist-page" *ngIf="wishlistItems.length >= 1">
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table wishlist-page__table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Publish Date</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of wishlistItems; let i = index">
+                                <td>
+                                    <div class="wishlist-page__table__meta">
+                                        <div class="wishlist-page__table__meta-img">
+                                            <img [src]="item.images[0].url" alt="Mazra">
+                                        </div>
+                                        <h3 class="wishlist-page__table__meta-title"><a href="product-details.html">{{item.name}}</a>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td class="wishlist-page__table__price ">
+                                  <span class="product-details__price__regular d-flex align-items-center">${{item.discountedPrice}}/
+                                    <span class="product-details__price__offer m-0">${{item.price}}
+                                    </span>
+                                  </span>
+                                </td>
+                                <td>23 Oct 2023</td>
+                                <td class="wishlist-page__table__cart cursor-pointer">
+                                    <a (click)="addToCart(item._id)" class="alefox-btn">
+                                        <span class="alefox-btn__item"></span>
+                                        <span class="alefox-btn__item"></span>
+                                        <span class="alefox-btn__item"></span>
+                                        <span class="alefox-btn__item"></span>
+                                        Add To Cart
+                                    </a>
+                                </td>
+                                <td>
+                                    <a (click)="removeItem(item._id)" class="table wishlist-page__table__remove cursor-pointer"><span class="icofont-close-line"></span></a>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td>
+                                    <div class="wishlist-page__table__meta">
+                                        <div class="wishlist-page__table__meta-img">
+                                            <img src="assets/images/products/cart-1-2.png" alt="Mazra">
+                                        </div>
+                                        <h3 class="wishlist-page__table__meta-title"><a href="product-details.html">Green Lemon</a>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td>$10.99</td>
+                                <td>23 Oct 2023</td>
+                                <td class="wishlist-page__table__cart">
+                                    <a href="cart.html" class="alefox-btn">
+                                        <span class="alefox-btn__item"></span>
+                                        <span class="alefox-btn__item"></span>
+                                        <span class="alefox-btn__item"></span>
+                                        <span class="alefox-btn__item"></span>
+                                        Add To Cart
+                                    </a>
+                                </td>
+                                <td><a href="cart.html" class="table wishlist-page__table__remove"><span class="icofont-close-line"></span></a></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xl-4 col-lg-5 w-100">
+                  <div class="cart-page__buttons">
+                    <a (click)="clearWishlist()" class="alefox-btn cursor-pointer">
+                      <span class="alefox-btn__item"></span>
+                      <span class="alefox-btn__item"></span>
+                      <span class="alefox-btn__item"></span>
+                      <span class="alefox-btn__item"></span>
+                      Clear Wishlist
+                    </a>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="d-flex align-items-center justify-content-center container" *ngIf="wishlistItems.length == 0">
+            <img src="../../../assets/images/products/no-product.png" class="img-fluid" alt="">
+        </div>
+        <!-- Cart End -->
