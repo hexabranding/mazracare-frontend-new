@@ -177,6 +177,14 @@ export const routes: Routes = [
                 loadComponent: () => import('./admin-panel/pages/customer-management/customer-management.component').then(m => m.CustomerManagementComponent),
             },
              {
+                path: 'customization',
+                loadComponent: () => import('./admin-panel/pages/customization/customization.component').then(m => m.CustomizationComponent),
+            },
+             {
+                path: 'contact',
+                loadComponent: () => import('./admin-panel/pages/contact/contact.component').then(m => m.ContactComponent),
+            },
+             {
                 path: 'report-payments',
                 loadComponent: () => import('./admin-panel/pages/report-payments/report-payments.component').then(m => m.ReportPaymentsComponent),
             },
