@@ -74,6 +74,10 @@ export const routes: Routes = [
                 component: CustomizationFormComponent
             },
             {
+                path: 'customize-form/:id',
+                component: CustomizationFormComponent
+            },
+            {
                 path: 'commercial',
                 component: CommercialComponent
             },
@@ -97,7 +101,7 @@ export const routes: Routes = [
                 path: 'terms-conditions',
                 component: TermsConditionsComponent
             },
-           
+
             // etc pages
 
 

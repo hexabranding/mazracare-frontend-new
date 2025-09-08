@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { CustomizationService } from './service/customization.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-customization-form',
@@ -34,12 +37,26 @@ export class CustomizationFormComponent implements OnInit {
   otherSiteChecked = false;
   otherPurposeChecked = false;
   serviceOtherChecked = false;
+  serviceId:string = '';
+  images: File[] = [];
+  previewImages: any[] = [];
+  imageLimitExceeded = false;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private _activatedRoute: ActivatedRoute,
+    private customizationService: CustomizationService
+  ) { }
 
 
   ngOnInit() {
+    this._activatedRoute.params.subscribe((data:any)=>{
+      console.log(data?.id);
+      this.serviceId = data?.id;
+    })
+
+
     this.enquiryForm = this.fb.group({
       fullName: ['', Validators.required],
       company: [''],
@@ -126,14 +143,96 @@ export class CustomizationFormComponent implements OnInit {
 
 
   onFilesSelected(e: any) {
-    const files = e.target.files;
-    this.enquiryForm.get('files')?.setValue(files);
+    // const files = e.target.files;
+    // this.enquiryForm.get('files')?.setValue(files);
+    const input = e.target as HTMLInputElement;
+    const files = input.files ? Array.from(input.files) : [];
+
+    if (files.length > 5) {
+      this.imageLimitExceeded = true;
+      return;
+    }
+
+    this.imageLimitExceeded = false;
+    this.images = files;
+    this.previewImages = [];
+
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result) {
+          this.previewImages.push(reader.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
   }
 
   onSubmit() {
     if (this.enquiryForm.invalid) return;
     // send to API or emit
     console.log(this.enquiryForm.value);
+    const formData = new FormData();
+    formData.append('fullName', this.enquiryForm.value.fullName);
+    formData.append('company', this.enquiryForm.value.company);
+    formData.append('email', this.enquiryForm.value.email);
+    formData.append('phone', this.enquiryForm.value.phone);
+    formData.append('location', this.enquiryForm.value.location);
+    formData.append('siteTypes', JSON.stringify(this.enquiryForm.value.siteTypes));
+    formData.append('siteTypeOther', this.enquiryForm.value.siteTypeOther);
+    formData.append('spaceType', this.enquiryForm.value.spaceType);
+    formData.append('siteArea', this.enquiryForm.value.siteArea);
+    formData.append('siteAreaCustom', this.enquiryForm.value.siteAreaCustom);
+    formData.append('purpose', JSON.stringify(this.enquiryForm.value.purpose));
+    formData.append('purposeOther', this.enquiryForm.value.purposeOther);
+    formData.append('technology', this.enquiryForm.value.technology);
+    formData.append('waterAvailable', this.enquiryForm.value.waterAvailable);
+    formData.append('waterType', this.enquiryForm.value.waterType);
+    formData.append('electricityAvailable', this.enquiryForm.value.electricityAvailable);
+    formData.append('powerBackup', this.enquiryForm.value.powerBackup);
+    formData.append('greenhouseRequired', this.enquiryForm.value.greenhouseRequired);
+    formData.append('budget', this.enquiryForm.value.budget);
+    formData.append('timeline', this.enquiryForm.value.timeline);
+    formData.append('additionalServices', JSON.stringify(this.enquiryForm.value.additionalServices));
+    formData.append('serviceOther', this.enquiryForm.value.serviceOther);
+    formData.append('message', this.enquiryForm.value.message);
+    formData.append('crops', JSON.stringify(this.enquiryForm.value.crops));
+    formData.append('customCrop', this.enquiryForm.value.customCrop);
+    formData.append('serviceId', this.serviceId);
+
+    this.images.forEach((file, index) => {
+      formData.append('files', file, file.name);
+    });
+
+    this.customizationService.submitCustomizationForm(formData).subscribe(
+      (response:any) => {
+        console.log('Form submitted successfully', response);
+        if(response && response.success) {
+        Swal.fire({
+          title: 'Success',
+          text: response?.message,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        }
+        this.enquiryForm.reset();
+        this.previewImages = [];
+        this.images = [];
+        this.otherSiteChecked = false;
+        this.otherPurposeChecked = false;
+        this.serviceOtherChecked = false;
+      },
+      (error) => {
+        console.error('Error submitting form', error);
+        Swal.fire({
+          title: 'Error',
+          text: error?.error.error,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
+
   }
 
 }

@@ -154,7 +154,11 @@ export class HeaderComponent implements OnInit , AfterViewInit  {
     );
   }
 
-  gotoService(id:string){
+  gotoService(id:string , name:string){
+    if (name === 'Residential'){
     this.route.navigateByUrl('service/'+id)
+    }else {
+      this.route.navigateByUrl('customize-form/'+id)
+    }
   }
 }
