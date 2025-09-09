@@ -37,7 +37,7 @@ export class ContactComponent {
           console.log('Form submitted successfully', res);
           Swal.fire({
             title: 'Success',
-            text: res?.message,
+            text: 'Thanks for sharing the details,our team will get in touch with you soon',
             icon: 'success',
             confirmButtonText: 'OK'
           });
