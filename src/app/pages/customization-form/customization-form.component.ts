@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute } from '@angular/router';
 import { CustomizationService } from './service/customization.service';
 import Swal from 'sweetalert2';
+import { ProductServicesService } from '../../admin-panel/pages/service-category/product-services/service/product-services.service';
 
 @Component({
   selector: 'app-customization-form',
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
 export class CustomizationFormComponent implements OnInit {
   enquiryForm!: FormGroup;
   emirates = ['Abu Dhabi', 'Dubai', 'Sharjah', 'Ajman', 'Umm Al Quwain', 'Ras Al Khaimah', 'Fujairah'];
+serviceDetails:any;
 
   spaceTypes = [
     { key: 'indoor', label: 'Indoor' }, { key: 'outdoor', label: 'Outdoor' }, { key: 'terrace', label: 'Terrace' }, { key: 'balcony', label: 'Balcony' }, { key: 'backyard', label: 'Backyard' }, { key: 'frontyard', label: 'Frontyard' }, { key: 'rooftop', label: 'Rooftop' }, { key: 'empty', label: 'Empty Plot / Land' }
@@ -46,7 +48,9 @@ export class CustomizationFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _activatedRoute: ActivatedRoute,
-    private customizationService: CustomizationService
+    private customizationService: CustomizationService,
+    private productService: ProductServicesService,
+
   ) { }
 
 
@@ -54,6 +58,7 @@ export class CustomizationFormComponent implements OnInit {
     this._activatedRoute.params.subscribe((data:any)=>{
       console.log(data?.id);
       this.serviceId = data?.id;
+        this.serviceDetail(data?.id);
     })
 
 
@@ -88,7 +93,13 @@ export class CustomizationFormComponent implements OnInit {
   }
 
 
-
+serviceDetail(id:string){
+    this.productService.getService(id)
+    .subscribe((res:any)=>{
+      console.log(res);
+      this.serviceDetails = res?.data;
+    })
+  }
   crops = {
     leafyGreens: ['Lettuce', 'Butterhead', 'Romaine', 'Iceberg', 'Kale', 'Spinach', 'Arugula', 'Swiss Chard', 'Mustard Greens', 'Pak Choi / Bok Choy', 'Collard Greens', 'Watercress'],
     herbs: ['Basil (Italian, Thai)', 'Mint', 'Coriander / Cilantro', 'Parsley', 'Dill', 'Thyme', 'Rosemary', 'Oregano', 'Chives', 'Sage', 'Lemongrass'],
