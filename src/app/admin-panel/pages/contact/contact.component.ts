@@ -25,7 +25,7 @@ export class ContactComponent {
       title: '#',
       type: 'id',
     },
-    username: {
+    name: {
       title: 'Name',
       type: 'string',
     },

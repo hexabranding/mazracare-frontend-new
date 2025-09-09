@@ -25,7 +25,7 @@ export class CustomizationComponent {
       title: '#',
       type: 'id',
     },
-    username: {
+    fullName: {
       title: 'Name',
       type: 'string',
     },
@@ -33,8 +33,24 @@ export class CustomizationComponent {
       title: 'Email',
       type: 'string',
     },
-    role: {
-      title: 'Role',
+    phone: {
+      title: 'Phone',
+      type: 'string',
+    },
+    technology: {
+      title: 'Technology',
+      type: 'string',
+    },
+    budget: {
+      title: 'Budget',
+      type: 'string',
+    },
+    timeline: {
+      title: 'Timeline',
+      type: 'string',
+    },
+    status: {
+      title: 'Status',
       type: 'string',
     },
     createdAt: {
