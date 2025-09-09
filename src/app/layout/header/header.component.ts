@@ -156,7 +156,7 @@ export class HeaderComponent implements OnInit , AfterViewInit  {
 
   gotoService(id:string , name:string){
     if (name === 'Residential'){
-    this.route.navigateByUrl('service/'+id)
+    this.route.navigateByUrl('products')
     }else {
       this.route.navigateByUrl('customize-form/'+id)
     }

@@ -353,22 +353,22 @@
     </div>
     <!-- /.sec-title -->
     <div class="row gutter-y-30">
-      <div class="col-md-6 col-lg-4 col-xl-3">
+      <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let product of products | slice:0:4 ; let i = index">
         <div class="product__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='100ms'>
           <div class="product__item__img">
-            <img src="assets\images\products\new_1.jpg" alt="mazra">
+            <img [src]="product.images[0].url" alt="mazra">
             <div class="product__item__flash">
-              <span class="product__item__flash__off">20% Off</span>
+              <span class="product__item__flash__off">{{product.discountPercent}}</span>
             </div>
-            <div class="product__item__btn">
+            <!-- <div class="product__item__btn">
               <a routerLink="/checkout"><i class="icon-shopping-cart"></i></a>
-              <!-- <a routerLink="/#"><i class="far fa-heart"></i></a> -->
+              <a routerLink="/#"><i class="far fa-heart"></i></a>
               <a routerLink="/product-details"><i class="fas fa-eye"></i></a>
-            </div>
+            </div> -->
           </div>
           <!-- /.product-image -->
           <div class="product__item__content">
-            <h4 class="product__item__title">L4 D30</h4>
+            <h4 class="product__item__title">{{product.name}}</h4>
             <!-- <p>Perfect for singles or couples </p> -->
             <!-- /.product-title -->
             <!-- <div class="product__item__price">10.00</div> -->
@@ -384,95 +384,6 @@
         <!-- /.product-item -->
       </div>
       <!-- /.col-md-6 col-lg-4 -->
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <div class="product__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='50ms'>
-          <div class="product__item__img">
-            <img src="assets\images\products\new_2.jpg" alt="mazra">
-            <div class="product__item__btn">
-              <a routerLink="/#"><i class="icon-shopping-cart"></i></a>
-              <!-- <a routerLink="/#"><i class="far fa-heart"></i></a> -->
-              <a routerLink="/#"><i class="fas fa-eye"></i></a>
-            </div>
-          </div>
-          <!-- /.product-image -->
-          <div class="product__item__content">
-
-            <h4 class="product__item__title">L4 D31</h4>
-            <!-- <p>For 3–5 member families</p> -->
-            <!-- /.product-title -->
-            <!-- <div class="product__item__price">₹ 11.00</div> -->
-            <!-- /.product-price -->
-            <!-- <div class="product__item__ratings">
-                <span class="icofont-star"></span><span class="icofont-star"></span><span
-                  class="icofont-star"></span><span class="icofont-star"></span><span class="icofont-star"></span>
-              </div> -->
-            <!-- /.product-ratings -->
-          </div>
-          <!-- /.product-content -->
-        </div>
-        <!-- /.product-item -->
-      </div>
-      <!-- /.col-md-6 col-lg-4 -->
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <div class="product__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='100ms'>
-          <div class="product__item__img">
-            <img src="assets\images\products\new_3.jpg" alt="mazra">
-            <div class="product__item__flash">
-              <span class="product__item__flash__off">20% Off</span>
-            </div>
-            <div class="product__item__btn">
-              <a routerLink="/#"><i class="icon-shopping-cart"></i></a>
-              <!-- <a routerLink="/#"><i class="far fa-heart"></i></a> -->
-              <a routerLink="/#"><i class="fas fa-eye"></i></a>
-            </div>
-          </div>
-          <!-- /.product-image -->
-          <div class="product__item__content">
-
-            <h4 class="product__item__title">L4 D32</h4>
-            <!-- <P>Meal prep made easy</P> -->
-            <!-- /.product-title -->
-            <!-- <div class="product__item__price">10.00</div> -->
-            <!-- /.product-price -->
-            <!-- <div class="product__item__ratings">
-                <span class="icofont-star"></span><span class="icofont-star"></span><span
-                  class="icofont-star"></span><span class="icofont-star"></span><span class="icofont-star"></span>
-              </div> -->
-            <!-- /.product-ratings -->
-          </div>
-          <!-- /.product-content -->
-        </div>
-        <!-- /.product-item -->
-      </div>
-      <!-- /.col-md-6 col-lg-4 -->
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <div class="product__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='150ms'>
-          <div class="product__item__img">
-            <img src="assets\images\products\new_4.jpg" alt="mazra">
-            <div class="product__item__btn">
-              <a routerLink="/#"><i class="icon-shopping-cart"></i></a>
-              <!-- <a routerLink="/#"><i class="far fa-heart"></i></a> -->
-              <a routerLink="/#"><i class="fas fa-eye"></i></a>
-            </div>
-          </div>
-          <!-- /.product-image -->
-          <div class="product__item__content">
-
-            <h4 class="product__item__title">L4 D33</h4>
-            <!-- <P>Ideal for parties, bulk users, restaurants</P> -->
-            <!-- /.product-title -->
-            <!-- <div class="product__item__price">₹ 12.00</div> -->
-            <!-- /.product-price -->
-            <!-- <div class="product__item__ratings">
-                <span class="icofont-star"></span><span class="icofont-star"></span><span
-                  class="icofont-star"></span><span class="icofont-star"></span><span class="icofont-star"></span>
-              </div> -->
-            <!-- /.product-ratings -->
-          </div>
-          <!-- /.product-content -->
-        </div>
-        <!-- /.product-item -->
-      </div>
     </div>
   </div>
 </section>

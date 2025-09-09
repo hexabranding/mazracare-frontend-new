@@ -2,26 +2,29 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { BlogService } from '../../admin-panel/pages/blogs/service/blog.service';
 import { NgFor } from '@angular/common';
+import { ProductService } from '../products/service/product.service';
+import { CommonModule } from '@angular/common';
 
 declare var $: any;
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, NgFor,],
+  imports: [RouterModule, NgFor, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
   blogDetails: any[] = []; // Initialize as an empty array
-  constructor(private router: Router, private blogService: BlogService) { }
+  products: any[] = [];
+  constructor(private router: Router, private blogService: BlogService , private productService: ProductService) { }
   @ViewChild('mainCarousel') mainCarousel!: ElementRef;
   @ViewChild('thumbCarousel') thumbCarousel!: ElementRef;
   @ViewChild('projectCarousel') projectCarousel!: ElementRef;
   @ViewChild('blogCarousel') blogCarousel!: ElementRef;
 
 
-  
+
   projectSlides = [
     {
       title: 'Residential',
@@ -74,6 +77,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // Any initialization logic can go here
     this.loadBlogs();
+    this.getProductlist();
 
 
   }
@@ -198,6 +202,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
       error: (error) => {
         console.error('Error loading blogs:', error);
       }
+    });
+  }
+
+
+  getProductlist() {
+    this.productService.productlist().subscribe((res: any) => {
+      console.log(res);
+      this.products = res.data;
+    }, error => {
+      console.error('Error fetching product list:', error);
     });
   }
 

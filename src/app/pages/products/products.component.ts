@@ -27,17 +27,17 @@ export class ProductsComponent implements OnInit {
     private wishlistService: WishlistService,
     private _activatedRoute: ActivatedRoute,
     private categoryService: ProductCategoryService,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this._activatedRoute.params.subscribe((data: any) => {
-      if (data?.id)
-        this.getCategoryById(data?.id);
-    })
+    // this._activatedRoute.params.subscribe((data: any) => {
+    //   if (data?.id)
+    //     this.getCategoryById(data?.id);
+    // })
 
 
-    // this.getProductlist();
+    this.getProductlist();
   }
 
   getCategoryById(id: string) {

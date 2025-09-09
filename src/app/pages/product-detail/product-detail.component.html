@@ -144,8 +144,8 @@
                 <div class="product-details__content">
                     <h3 class="product-details__title">{{product?.name}}</h3><!-- /.product-title -->
                     <div class="product-details__price">
-                        <span class="product-details__price__regular">${{product?.discountedPrice}}</span>
-                        <span class="product-details__price__offer">${{product?.price}}</span>
+                        <span class="product-details__price__regular">AED{{product?.discountedPrice}}</span>
+                        <span class="product-details__price__offer">AED{{product?.price}}</span>
                         <span class="product-details__price__stock" *ngIf="product?.stock >= 1; else outOfStock"> In
                             stock</span>
                         <ng-template #outOfStock>

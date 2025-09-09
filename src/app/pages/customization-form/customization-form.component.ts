@@ -198,13 +198,15 @@ export class CustomizationFormComponent implements OnInit {
     formData.append('message', this.enquiryForm.value.message);
     formData.append('crops', JSON.stringify(this.enquiryForm.value.crops));
     formData.append('customCrop', this.enquiryForm.value.customCrop);
-    formData.append('serviceId', this.serviceId);
+    // formData.append('serviceId', this.serviceId);
 
     this.images.forEach((file, index) => {
       formData.append('files', file, file.name);
     });
 
-    this.customizationService.submitCustomizationForm(formData).subscribe(
+
+
+    this.customizationService.submitCustomizationForm(this.enquiryForm.value).subscribe(
       (response:any) => {
         console.log('Form submitted successfully', response);
         if(response && response.success) {
