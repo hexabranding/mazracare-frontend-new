@@ -32,4 +32,8 @@ export class ProductService {
     updateProduct(id: string, data: any): Observable<any> {
       return this.http.put( this.$baseUrl + "/products/" + id, data);
     }
+
+    addProductCustomize(data: any): Observable<any> {
+      return this.http.post( this.$baseUrl + "/product-details-customisation/add", data)
+    }
 }

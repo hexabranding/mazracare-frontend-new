@@ -12,6 +12,9 @@ export class ProductDetailsService {
 
   productDetails(id: string) {
     return this.http.get( this.$baseUrl + `/products/${id}`);
+  }
 
+  addProductDetailCustomize(data: any) {
+    return this.http.post( this.$baseUrl + "/customization/add", data)
   }
 }

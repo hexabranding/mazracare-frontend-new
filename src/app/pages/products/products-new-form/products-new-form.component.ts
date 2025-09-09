@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ProductService } from '../service/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products-new-form',
@@ -12,7 +14,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ProductsNewFormComponent implements OnInit {
   enquiryForm!: FormGroup;
-  constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<ProductsNewFormComponent>) { }
+  constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<ProductsNewFormComponent> , private _productService:ProductService) { }
 
   ngOnInit() {
     this.enquiryForm = this.fb.group({
@@ -22,7 +24,7 @@ export class ProductsNewFormComponent implements OnInit {
       typeOfSpace: [''],  // Indoor / Outdoor etc.
       siteArea: [''],     // Site Area selection
       customSiteArea: [''], // Only if user picks "Custom"
-      sitePhotos: [null], // File upload,
+      // sitePhotos: [null], // File upload,
       width: [null, [Validators.required, Validators.min(1)]],
       height: [null, [Validators.required, Validators.min(1)]],
     });
@@ -52,23 +54,45 @@ crops = {
     }
   }
 
-  onFileSelected(event: any) {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      this.enquiryForm.patchValue({ sitePhotos: files });
-    }
-  }
+  // onFileSelected(event: any) {
+  //   const files = event.target.files;
+  //   if (files && files.length > 0) {
+  //     this.enquiryForm.patchValue({ sitePhotos: files });
+  //   }
+  // }
 
 
   onSubmit() {
+    console.log(this.enquiryForm.invalid , this.enquiryForm.value);
     if (this.enquiryForm.invalid) return;
     // send to API or emit
-    console.log(this.enquiryForm.value);
+    this.dialogRef.close(); // Close the dialog after submission
+    this._productService.addProductCustomize(this.enquiryForm.value).subscribe((res:any)=>{
+      console.log(res);
+      if(res && res.success){
+        Swal.fire({
+          title: 'Success',
+          text: res.message || 'Your customization request has been submitted successfully.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+    }, error => {
+      console.error('Error submitting customization request:', error);
+      Swal.fire({
+        title: 'Error',
+        text: error?.error?.message || 'Failed to submit your customization request. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    });
   }
+
+
 onCloseDialog(): void {
     // 👉 Add any custom logic before closing
     console.log("Dialog close button clicked!");
-    
+
     this.dialogRef.close(); // ✅ This will actually close the dialog
   }
 
