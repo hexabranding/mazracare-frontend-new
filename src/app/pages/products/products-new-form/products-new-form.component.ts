@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-products-new-form',
@@ -11,7 +12,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class ProductsNewFormComponent implements OnInit {
   enquiryForm!: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private dialogRef: MatDialogRef<ProductsNewFormComponent>) { }
 
   ngOnInit() {
     this.enquiryForm = this.fb.group({
@@ -64,6 +65,11 @@ crops = {
     // send to API or emit
     console.log(this.enquiryForm.value);
   }
-  onClose() { }
+onCloseDialog(): void {
+    // 👉 Add any custom logic before closing
+    console.log("Dialog close button clicked!");
+    
+    this.dialogRef.close(); // ✅ This will actually close the dialog
+  }
 
 }

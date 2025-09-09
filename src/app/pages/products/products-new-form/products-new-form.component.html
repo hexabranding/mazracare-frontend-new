@@ -1,213 +1,220 @@
 <div>
-    <h4 class="p-4"> New product detail form</h4>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="p-4"> New product detail form</h4>
+        <button (click)="onCloseDialog()" class="btn btn-danger" class="me-3">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
     <hr class="p-0 m-0" />
     <!-- CROPS / SPECIES SELECTION -->
     <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()" class="agri-form p-3 pt-0 p-md-4">
         <div class="container">
 
             <h6 class="mb-3">We are glad to know you are interested in customising our product.
-Let us know where you want to set up be it in the Kitchen, Balcony,Open Terrace , Backyard or where ever you want.We are here to help you.</h6>
+                Let us know where you want to set up be it in the Kitchen, Balcony,Open Terrace , Backyard or where ever
+                you want.We are here to help you.</h6>
             <!-- TYPE OF SPACE -->
             <div class="scrollbar">
                 <div class="mb-3">
-                <label class="form-label">Type of Space:</label>
-                <div class="d-flex flex-wrap gap-3">
-                    <div
-                        *ngFor="let space of ['Indoor','Outdoor','Terrace','Balcony','Backyard','Frontyard','Rooftop','Empty Plot / Land']">
-                        <input type="radio" [value]="space" formControlName="typeOfSpace" [id]="space"
-                            class="form-check-input" />
-                        <label [for]="space" class="form-check-label ms-1">{{ space }}</label>
+                    <label class="form-label">Type of Space:</label>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div
+                            *ngFor="let space of ['Indoor','Outdoor','Terrace','Balcony','Backyard','Frontyard','Rooftop','Empty Plot / Land']">
+                            <input type="radio" [value]="space" formControlName="typeOfSpace" [id]="space"
+                                class="form-check-input" />
+                            <label [for]="space" class="form-check-label ms-1">{{ space }}</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- SITE AREA -->
-            <div class="mb-3">
-                <label class="form-label">Site Area (in sq ft or sqm):</label>
-                <div class="d-flex flex-wrap gap-3">
-                    <div
-                        *ngFor="let area of ['Less than 100 sqft','100–300 sqft','300–1000 sqft','1000–5000 sqft','More than 5000 sqft','Custom']">
-                        <input type="radio" [value]="area" formControlName="siteArea" [id]="area"
-                            class="form-check-input" (change)="onSiteAreaChange(area)" />
-                        <label [for]="area" class="form-check-label ms-1">{{ area }}</label>
+                <!-- SITE AREA -->
+                <div class="mb-3">
+                    <label class="form-label">Site Area (in sq ft or sqm):</label>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div
+                            *ngFor="let area of ['Less than 100 sqft','100–300 sqft','300–1000 sqft','1000–5000 sqft','More than 5000 sqft','Custom']">
+                            <input type="radio" [value]="area" formControlName="siteArea" [id]="area"
+                                class="form-check-input" (change)="onSiteAreaChange(area)" />
+                            <label [for]="area" class="form-check-label ms-1">{{ area }}</label>
+                        </div>
+                    </div>
+
+                    <!-- Show custom field if 'Custom' selected -->
+                    <div class="mt-2" *ngIf="enquiryForm.get('siteArea')?.value === 'Custom'">
+                        <input type="text" class="form-control" placeholder="Enter custom site area"
+                            formControlName="customSiteArea" />
                     </div>
                 </div>
+                <label class="form-label">Preferred Crops / Species</label>
+                <div class="accordion" id="cropAccordion">
 
-                <!-- Show custom field if 'Custom' selected -->
-                <div class="mt-2" *ngIf="enquiryForm.get('siteArea')?.value === 'Custom'">
-                    <input type="text" class="form-control" placeholder="Enter custom site area"
-                        formControlName="customSiteArea" />
-                </div>
-            </div>
-            <label class="form-label">Preferred Crops / Species</label>
-            <div class="accordion" id="cropAccordion">
+                    <!-- Leafy Greens -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="leafyGreensHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#leafyGreens" aria-expanded="false" aria-controls="leafyGreens">
+                                Leafy Greens
+                            </button>
+                        </h2>
+                        <div id="leafyGreens" class="accordion-collapse collapse" aria-labelledby="leafyGreensHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.leafyGreens">
+                                    <input class="form-check-input" type="checkbox" [id]="'leafy-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'leafy-'+item">{{ item }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Leafy Greens -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="leafyGreensHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#leafyGreens" aria-expanded="false" aria-controls="leafyGreens">
-                            Leafy Greens
-                        </button>
-                    </h2>
-                    <div id="leafyGreens" class="accordion-collapse collapse" aria-labelledby="leafyGreensHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.leafyGreens">
-                                <input class="form-check-input" type="checkbox" [id]="'leafy-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'leafy-'+item">{{ item }}</label>
+                    <!-- Herbs -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="herbsHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#herbs" aria-expanded="false" aria-controls="herbs">
+                                Herbs
+                            </button>
+                        </h2>
+                        <div id="herbs" class="accordion-collapse collapse" aria-labelledby="herbsHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.herbs">
+                                    <input class="form-check-input" type="checkbox" [id]="'herb-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'herb-'+item">{{ item }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fruiting Vegetables -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="vegHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#vegetables" aria-expanded="false" aria-controls="vegetables">
+                                Fruiting Vegetables
+                            </button>
+                        </h2>
+                        <div id="vegetables" class="accordion-collapse collapse" aria-labelledby="vegHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.fruitingVegetables">
+                                    <input class="form-check-input" type="checkbox" [id]="'veg-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'veg-'+item">{{ item }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flowers -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flowersHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flowers" aria-expanded="false" aria-controls="flowers">
+                                Flowers
+                            </button>
+                        </h2>
+                        <div id="flowers" class="accordion-collapse collapse" aria-labelledby="flowersHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.flowers">
+                                    <input class="form-check-input" type="checkbox" [id]="'flower-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'flower-'+item">{{ item
+                                        }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fruits -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="fruitsHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#fruits" aria-expanded="false" aria-controls="fruits">
+                                Fruits
+                            </button>
+                        </h2>
+                        <div id="fruits" class="accordion-collapse collapse" aria-labelledby="fruitsHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.fruits">
+                                    <input class="form-check-input" type="checkbox" [id]="'fruit-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'fruit-'+item">{{ item }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Microgreens -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="microHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#microgreens" aria-expanded="false" aria-controls="microgreens">
+                                Microgreens & Exotic Greens
+                            </button>
+                        </h2>
+                        <div id="microgreens" class="accordion-collapse collapse" aria-labelledby="microHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.microgreens">
+                                    <input class="form-check-input" type="checkbox" [id]="'micro-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'micro-'+item">{{ item }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aquaponics -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="aquaHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#aquaponics" aria-expanded="false" aria-controls="aquaponics">
+                                Aquaponics with Fish
+                            </button>
+                        </h2>
+                        <div id="aquaponics" class="accordion-collapse collapse" aria-labelledby="aquaHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body d-flex flex-wrap gap-3">
+                                <div class="form-check" *ngFor="let item of crops.aquaponics">
+                                    <input class="form-check-input" type="checkbox" [id]="'aqua-'+item" [value]="item"
+                                        (change)="toggleCrop($event)" />
+                                    <label class="form-check-label" [for]="'aqua-'+item">{{ item }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="otherHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#other" aria-expanded="false" aria-controls="other">
+                                Other / Custom
+                            </button>
+                        </h2>
+                        <div id="other" class="accordion-collapse collapse" aria-labelledby="otherHeading"
+                            data-bs-parent="#cropAccordion">
+                            <div class="accordion-body">
+                                <input type="text" class="form-control" formControlName="customCrop"
+                                    placeholder="Specify custom crop/fish" />
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Herbs -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="herbsHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#herbs" aria-expanded="false" aria-controls="herbs">
-                            Herbs
-                        </button>
-                    </h2>
-                    <div id="herbs" class="accordion-collapse collapse" aria-labelledby="herbsHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.herbs">
-                                <input class="form-check-input" type="checkbox" [id]="'herb-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'herb-'+item">{{ item }}</label>
-                            </div>
-                        </div>
+                <label class="form-label pt-2 pb-2">Customize Size</label>
+                <div class="row g-2 mb-3">
+                    <div class="col">
+                        <input type="number" class="form-control" placeholder="Width (cm)" formControlName="width" />
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" placeholder="Height (cm)" formControlName="height" />
                     </div>
                 </div>
-
-                <!-- Fruiting Vegetables -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="vegHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#vegetables" aria-expanded="false" aria-controls="vegetables">
-                            Fruiting Vegetables
-                        </button>
-                    </h2>
-                    <div id="vegetables" class="accordion-collapse collapse" aria-labelledby="vegHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.fruitingVegetables">
-                                <input class="form-check-input" type="checkbox" [id]="'veg-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'veg-'+item">{{ item }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Flowers -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flowersHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flowers" aria-expanded="false" aria-controls="flowers">
-                            Flowers
-                        </button>
-                    </h2>
-                    <div id="flowers" class="accordion-collapse collapse" aria-labelledby="flowersHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.flowers">
-                                <input class="form-check-input" type="checkbox" [id]="'flower-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'flower-'+item">{{ item
-                                    }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fruits -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="fruitsHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#fruits" aria-expanded="false" aria-controls="fruits">
-                            Fruits
-                        </button>
-                    </h2>
-                    <div id="fruits" class="accordion-collapse collapse" aria-labelledby="fruitsHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.fruits">
-                                <input class="form-check-input" type="checkbox" [id]="'fruit-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'fruit-'+item">{{ item }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Microgreens -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="microHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#microgreens" aria-expanded="false" aria-controls="microgreens">
-                            Microgreens & Exotic Greens
-                        </button>
-                    </h2>
-                    <div id="microgreens" class="accordion-collapse collapse" aria-labelledby="microHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.microgreens">
-                                <input class="form-check-input" type="checkbox" [id]="'micro-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'micro-'+item">{{ item }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Aquaponics -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="aquaHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#aquaponics" aria-expanded="false" aria-controls="aquaponics">
-                            Aquaponics with Fish
-                        </button>
-                    </h2>
-                    <div id="aquaponics" class="accordion-collapse collapse" aria-labelledby="aquaHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body d-flex flex-wrap gap-3">
-                            <div class="form-check" *ngFor="let item of crops.aquaponics">
-                                <input class="form-check-input" type="checkbox" [id]="'aqua-'+item" [value]="item"
-                                    (change)="toggleCrop($event)" />
-                                <label class="form-check-label" [for]="'aqua-'+item">{{ item }}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Other -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="otherHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#other" aria-expanded="false" aria-controls="other">
-                            Other / Custom
-                        </button>
-                    </h2>
-                    <div id="other" class="accordion-collapse collapse" aria-labelledby="otherHeading"
-                        data-bs-parent="#cropAccordion">
-                        <div class="accordion-body">
-                            <input type="text" class="form-control" formControlName="customCrop"
-                                placeholder="Specify custom crop/fish" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <label class="form-label pt-2 pb-2">Customize Size</label>
-            <div class="row g-2 mb-3">
-                <div class="col">
-                    <input type="number" class="form-control" placeholder="Width (cm)" formControlName="width" />
-                </div>
-                <div class="col">
-                    <input type="number" class="form-control" placeholder="Height (cm)" formControlName="height" />
-                </div>
-            </div>
             </div>
 
             <div class="d-flex justify-content-end gap-2 mt-4">

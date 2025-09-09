@@ -14890,7 +14890,7 @@ body.megamenu-popup-active .mobile-nav__content {
 .service-two {
     padding: 120px 0;
     position: relative;
-    background-color: var(--alefox-gray, #f6f4ec);
+    background-color: var(--alefox-gray, #ecf6ee);
 }
 
 @media (max-width: 767px) {
