@@ -14027,11 +14027,13 @@ body.megamenu-popup-active .mobile-nav__content {
 .about-one__content__text {
     margin: 0 0 18px;
     text-align: justify;
+     font-size: 18px;
 }
 
 @media (min-width: 1200px) {
     .about-one__content__text {
         padding-right: 50px;
+       
     }
 }
 

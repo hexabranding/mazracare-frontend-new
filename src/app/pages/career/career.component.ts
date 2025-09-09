@@ -6,55 +6,27 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-career',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule , CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './career.component.html',
   styleUrl: './career.component.scss'
 })
-export class CareerComponent implements OnInit{
- applicationForm!: FormGroup;
+export class CareerComponent implements OnInit {
+  applicationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.applicationForm = this.fb.group({
       fullName: ['', Validators.required],
-      dob: ['', Validators.required],
-      nationality: ['', Validators.required],
-      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       email: ['', [Validators.required, Validators.email]],
-      currentCity: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       position: ['', Validators.required],
-      education: ['', Validators.required],
-      experience: ['', Validators.required],
-      expDetails: [''],
+      experience: ['', [Validators.min(0)]],
       skills: [''],
-      workOutdoor: ['', Validators.required],
-      physicallyFit: ['', Validators.required],
-      drivingLicense: ['', Validators.required],
-      languages: [[], Validators.required],
-      joinWhen: ['', Validators.required],
-      relocate: ['', Validators.required],
-      accommodation: ['', Validators.required],
-      shifts: ['', Validators.required],
-      salary: ['', [Validators.min(0)]],
-      emergencyName: ['', Validators.required],
-      emergencyPhone: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
-      enjoyFarming: ['', Validators.required],
-      dedication: [''],
-      questions: [''],
-      jobRole: [''],
-      ugPercentage: ['', [Validators.min(0), Validators.max(100)]],
-      vacationYears: ['', Validators.min(0)],
-      settleFamily: ['', Validators.required],
-      familyMembers: ['', Validators.min(0)],
-      familyIncome: ['', Validators.min(0)],
-      familyAgri: ['', Validators.required],
-      whyAgri: [''],
-      sustainableLiving: [''],
-      workYears: ['', Validators.min(0)],
-      stayYears: ['', Validators.min(0)],
+      message: [''],   // ✅ custom message field
       cv: [null]
     });
+
 
     // Enable expDetails only if experience is "Yes"
     this.applicationForm.get('experience')?.valueChanges.subscribe(value => {
@@ -64,7 +36,7 @@ export class CareerComponent implements OnInit{
       } else {
         expDetails?.clearValidators();
       }
-      expDetails?.updateValueAndValidity();
+    expDetails?.updateValueAndValidity();
     });
   }
 
