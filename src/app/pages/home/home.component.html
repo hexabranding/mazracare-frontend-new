@@ -473,11 +473,11 @@
         <div class="alefox-stretch-element-inside-column">
           <div class="why-choose-one__image wow slideInLeft">
             <img src="../assets/images/resources/core-tech.png" class="img-fluid w-100" alt="mazra">
-            <div class="why-choose-one__video">
+            <!-- <div class="why-choose-one__video">
               <a routerLink="/https://www.youtube.com/watch?v=VDH9aBrbAo0&feature=youtu.be" class="video-popup">
                 <i class="icofont-ui-play"></i>
               </a>
-            </div>
+            </div> -->
           </div>
           <!-- /.why-choose-one__image -->
         </div>
@@ -543,7 +543,8 @@
   <!-- /.container -->
 </section>
 <!-- /.why-choose-one -->
-<section class="blog-one">
+<section class="blog-one" *ngIf="blogDetails.length">
+
   <div class="container">
     <div class="sec-title text-center">
       <h6 class="sec-title__tagline bw-split-in-right"><span class="sec-title__tagline__left-leaf"
