@@ -85,7 +85,6 @@ tableConfig = {
     }
     this.categoryService.getCategoryList(params ?? defparams).subscribe(
       (response:any) => {
-        console.log(response);
         this.tableData = response?.data;
         this.totalCount = response?.total;
         this.isLoading = false;

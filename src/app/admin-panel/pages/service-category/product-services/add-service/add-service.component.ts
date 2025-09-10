@@ -194,7 +194,7 @@ serviceForm!: FormGroup;
     formData.append('subdescription', this.serviceForm.value.subdescription);
     formData.append('subHeading', this.serviceForm.value.subhead);
     // formData.append('category', this.serviceForm.value.category);
-
+    console.log(formData,'formDataformDataformData')
     this.images.forEach((file, index) => {
       formData.append(`image`, file);
     });

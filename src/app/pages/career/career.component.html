@@ -246,17 +246,17 @@
   <!-- Personal Info -->
   <div class="row g-3">
     <div class="col-md-6">
-      <label>Full Name</label>
+      <label>Full Name  <span style="color: red;">*</span></label>
       <input type="text" class="form-control" formControlName="fullName">
       <div *ngIf="applicationForm.get('fullName')?.invalid && applicationForm.get('fullName')?.touched" class="text-danger">Required</div>
     </div>
     <div class="col-md-6">
-      <label>Email</label>
+      <label>Email <span style="color: red;">*</span></label>
       <input type="email" class="form-control" formControlName="email">
       <div *ngIf="applicationForm.get('email')?.invalid && applicationForm.get('email')?.touched" class="text-danger">Valid email required</div>
     </div>
     <div class="col-md-6">
-      <label>Mobile</label>
+      <label>Mobile <span style="color: red;">*</span></label>
       <input type="tel" class="form-control" formControlName="mobile">
       <div *ngIf="applicationForm.get('mobile')?.invalid && applicationForm.get('mobile')?.touched" class="text-danger">Valid number required</div>
     </div>
@@ -265,7 +265,7 @@
   <!-- Job Info -->
   <div class="row g-3 mt-3">
     <div class="col-md-6">
-      <label>Position Applying For</label>
+      <label>Position Applying For <span style="color: red;">*</span></label>
       <select class="form-select" formControlName="position">
         <option value="">Choose...</option>
         <option>Farm Operations</option>
