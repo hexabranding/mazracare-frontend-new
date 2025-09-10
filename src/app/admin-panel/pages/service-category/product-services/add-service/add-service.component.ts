@@ -239,9 +239,5 @@ serviceForm!: FormGroup;
         });
       }
     });
-
-
-    // TODO: Call service to POST formData
-    console.log('Submitting form...', formData);
   }
 }

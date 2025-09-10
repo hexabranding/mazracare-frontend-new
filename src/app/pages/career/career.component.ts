@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CareerService } from './service/career.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-career',
@@ -13,7 +15,7 @@ import { RouterModule } from '@angular/router';
 export class CareerComponent implements OnInit {
   applicationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder , private _careerService: CareerService) { }
 
   ngOnInit(): void {
     this.applicationForm = this.fb.group({
@@ -48,7 +50,25 @@ export class CareerComponent implements OnInit {
   onSubmit() {
     if (this.applicationForm.valid) {
       console.log('Form Submitted:', this.applicationForm.value);
-      alert('Application submitted successfully!');
+      const formData = new FormData();
+      this._careerService.AddCareer(this.applicationForm.value).subscribe({
+        next:(res:any)=>{
+          Swal.fire({
+            icon: 'success',
+            title: res?.message || 'Application Submitted',
+            text: 'Your application has been submitted successfully!'
+          });
+          this.applicationForm.reset();
+        },
+        error:(err)=>{
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err?.error?.message || 'There was an error submitting your application. Please try again later.'
+          });
+        }
+      })
+
     } else {
       this.applicationForm.markAllAsTouched();
     }
