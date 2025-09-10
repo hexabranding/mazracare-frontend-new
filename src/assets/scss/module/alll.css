@@ -11854,6 +11854,8 @@ body.megamenu-popup-active .mobile-nav__content {
     border-top: 1px solid RGBA(var(--alefox-white-rgb, 255, 255, 255), 0.1);
 }
 
+
+
 .mobile-nav__content .main-menu__list ul li>a {
     padding-left: 1em;
 }
@@ -11968,6 +11970,59 @@ body.megamenu-popup-active .mobile-nav__content {
     display: none;
 }
 
+
+
+
+
+/* Default: hide submenus */
+.mobile-nav__content .main-menu__list ul {
+    display: none;
+    border-top: 1px solid rgba(var(--alefox-white-rgb, 255, 255, 255), 0.1);
+    padding-left: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+/* When parent li is open → show submenu */
+.mobile-nav__content .main-menu__list li.open > ul {
+    display: block;
+    max-height: 500px; /* enough space for list */
+    opacity: 1;
+}
+
+/* Parent link (Services) styling */
+.mobile-nav__content .main-menu__list li > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 30px;
+    color: var(--alefox-white, #fff);
+    font-size: 12px;
+    font-family: var(--alefox-font, "Rubik", sans-serif);
+    text-transform: uppercase;
+    font-weight: 500;
+    height: 46px;
+    letter-spacing: var(--alefox-letter-space, 0.1em);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Active dropdown link */
+.mobile-nav__content .main-menu__list li.open > a {
+    color: var(--alefox-base, #44a05b);
+}
+
+/* Arrow icon transition */
+.mobile-nav__content .main-menu__list li > a i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav__content .main-menu__list li.open > a i {
+    transform: rotate(180deg);
+}
 /*--------------------------------------------------------------
 # Search Popup
 --------------------------------------------------------------*/

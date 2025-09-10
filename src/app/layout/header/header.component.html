@@ -226,14 +226,23 @@
                 <li>
                     <a routerLink="/about" routerLinkActive="active">About</a>
                 </li>
-                <li class="dropdown">
-                    <a>Services</a>
-                    <ul>
-                        @for (item of service; track $index) {
-                        <li><a (click)="gotoService(item?._id , item?.name)">{{item?.name}}</a></li>
-                        }
-                    </ul>
-                </li>
+              <li class="dropdown" [class.open]="isServicesOpen">
+  <a (click)="toggleServices()">
+    Services
+    <i class="fa fa-chevron-down"></i>
+  </a>
+
+  <ul>
+    @for (item of service; track $index) {
+      <li>
+        <a (click)="gotoService(item?._id, item?.name)">
+          {{ item?.name }}
+        </a>
+      </li>
+    }
+  </ul>
+</li>
+
                 <li>
                     <a routerLink="/career" routerLinkActive="active">Career</a>
                 </li>

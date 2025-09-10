@@ -64,11 +64,11 @@
               <h2 class="footer-widget__title">Service</h2>
               <!-- /.footer-widget__title -->
               <ul class="list-unstyled footer-widget__links">
-                <li><a routerLink="/institutional">Institutional</a></li>
-                <li><a routerLink="/residential">Residential</a></li>
-                <li><a routerLink="/commercial">Commercial</a></li>
-                <li><a routerLink="/industrial">Industrial</a></li>
-                <li><a routerLink="/policy-guidelines">Policy Guidelines</a></li>
+                  @for (item of service; track $index) {
+                                <li><a (click)="gotoService(item?._id , item?.name)">{{item?.name}}</a></li>
+                                }
+
+                                  <li><a routerLink="/terms-conditions">Terms and Conditions</a></li>
               </ul>
               <!-- /.list-unstyled footer-widget__links -->
             </div>
@@ -83,7 +83,8 @@
                 <li><a routerLink="/career">Career</a></li>
                 <li><a routerLink="/about">About us</a></li>
                 <li><a routerLink="/contact">Contact Us</a></li>
-                <li><a routerLink="/terms-conditions">Terms and Conditions</a></li>
+                   <li><a routerLink="/policy-guidelines">Policy Guidelines</a></li>
+              
               </ul>
               <!-- /.list-unstyled footer-widget__links -->
             </div>
@@ -92,22 +93,20 @@
           <!-- /.col-md-6 -->
           <div class="col-md-6 col-xl-3">
             <div class="footer-widget footer-widget--blog">
-              <h5 class="footer-widget__title">Recent Posts</h5>
+              <h5 class="footer-widget__title">Addres</h5>
               <!-- /.footer-widget__title -->
-              <ul class="list-unstyled footer-widget__post">
+
+               <ul class="list-unstyled footer-widget__info">
                 <li>
-                  <img src="../assets/images/blog/w-1.jpg" alt="mazra">
-                  <span class="footer-widget__post__date">23 jun 2025</span>
-                  <h6 class="footer-widget__post__title"><a href="#">Organic Food for Healty life</a>
-                  </h6>
+                  <span class="footer-widget__info__icon"><i class="icofont-location-pin"></i></span>
+                  Mufateeh Al Makhazan Stores Management,
+                  Building 2, Dubai Investment Park Second.
+                  PO BOX 79998
+                  UAE
+
                 </li>
-                <li>
-                  <img src="../assets/images/blog/w-2.jpg" alt="mazra">
-                  <span class="footer-widget__post__date">23 jun 2025</span>
-                  <h6 class="footer-widget__post__title"><a href="#">Success of Score for Farmer</a>
-                  </h6>
-                </li>
-              </ul>
+                </ul>
+              
             </div>
             <!-- /.footer-widget -->
           </div>

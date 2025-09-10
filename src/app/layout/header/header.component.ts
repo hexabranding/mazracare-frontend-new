@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit , AfterViewInit  {
   email:string = '';
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
+  isServicesOpen = false;
+
   service:any;
   constructor( private route:Router , private CartService: CartService , private authService: LoginService, private translate: TranslateService,
     private productService:ProductServicesService , private loaderService:LoaderService , private wishlistService: WishlistService ) { }
@@ -55,6 +57,10 @@ export class HeaderComponent implements OnInit , AfterViewInit  {
     // });
   }
   this.getServices();
+}
+
+toggleServices() {
+  this.isServicesOpen = !this.isServicesOpen;
 }
 
    ngAfterViewInit(){
