@@ -77,19 +77,17 @@ export class CustomizationComponent {
         limit : 10,
         search : ''
     }
-    // this._customer.customerlist(params ?? defparams).subscribe(
-    //   (response:any) => {
-    //     this.tableData = response?.data;
-    //     this.totalCount = response?.total;
-    //     this.isLoading = false;
-    //   }
-    // );
-    this._customizationService.customizationList(params ?? defparams).subscribe(
-      (response:any) => {
-        this.tableData = response?.data;
-        this.totalCount = response?.total;
+    this._customizationService.customizationList(params ?? defparams).subscribe({
+      next:(res:any)=>{
         this.isLoading = false;
-      });
+        this.tableData = res?.data || [];
+        this.totalCount = res?.total || 0;
+      },
+      error:(err)=>{
+        this.isLoading = false;
+        console.log(err)
+      }
+    });
   }
 
 

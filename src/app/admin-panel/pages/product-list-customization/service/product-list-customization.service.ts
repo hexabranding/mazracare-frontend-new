@@ -6,15 +6,14 @@ import { FunctionService } from '../../../../service/dataService/function.servic
 @Injectable({
   providedIn: 'root'
 })
-export class CustomizationService {
-
+export class ProductListCustomizationService {
 $baseUrl = environment.baseUrl
 
   constructor(private http: HttpClient , private _fun :FunctionService ) { }
 
-  customizationList(params?:any) {
+  proCustomizationList(params?:any) {
       const param = this._fun.objectToQueryParams(params);
-    return this.http.get( this.$baseUrl + "/enquiry/list"+(param ?? ''))
+    return this.http.get( this.$baseUrl + "/product-details-customisation/admin/all"+(param ?? ''))
   }
 
 

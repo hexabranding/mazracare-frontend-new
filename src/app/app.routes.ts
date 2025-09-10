@@ -180,6 +180,10 @@ export const routes: Routes = [
                 path: 'customization',
                 loadComponent: () => import('./admin-panel/pages/customization/customization.component').then(m => m.CustomizationComponent),
             },
+            {
+                path: 'product-customization',
+                loadComponent: () => import('./admin-panel/pages/product-list-customization/product-list-customization.component').then(m => m.ProductListCustomizationComponent),
+            },
              {
                 path: 'contact',
                 loadComponent: () => import('./admin-panel/pages/contact/contact.component').then(m => m.ContactComponent),
