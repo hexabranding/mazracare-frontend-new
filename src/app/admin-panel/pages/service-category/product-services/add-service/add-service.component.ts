@@ -62,7 +62,7 @@ serviceForm!: FormGroup;
         name: data.data?.name,
         description: data.data?.description,
         subdescription: data.data?.subdescription,
-        subhead: data.data?.subhead
+        subhead: data.data?.subHeading
       });
 
       this.previewImages = data.data.image || [];
@@ -192,7 +192,7 @@ serviceForm!: FormGroup;
     formData.append('name', this.serviceForm.value.name);
     formData.append('description', this.serviceForm.value.description);
     formData.append('subdescription', this.serviceForm.value.subdescription);
-    formData.append('subhead', this.serviceForm.value.subhead);
+    formData.append('subHeading', this.serviceForm.value.subhead);
     // formData.append('category', this.serviceForm.value.category);
 
     this.images.forEach((file, index) => {
