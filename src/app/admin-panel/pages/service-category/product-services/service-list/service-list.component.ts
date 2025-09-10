@@ -71,7 +71,6 @@ export class ServiceListComponent {
   }
 
   ngOnInit(): void {
-    console.log('Admin Products Component Initialized');
 
     this.getServices();
   }
@@ -86,14 +85,12 @@ export class ServiceListComponent {
     }
     this.productService.getServiceList(params ?? defparams).subscribe(
       (response:any) => {
-        console.log(response);
         this.tableData = response?.data;
         this.totalCount = response?.data.length || 0 ;
         this.isLoading = false;
       },
       error => {
         // Handle HTTP error
-        console.error('HTTP error while fetching products', error);
       }
     );
   }
