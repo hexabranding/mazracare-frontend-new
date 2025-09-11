@@ -103,9 +103,13 @@
                         <li>
                             <a routerLink="/career" routerLinkActive="active">Career</a>
                         </li>
+                        <!-- <li>
+                            <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
+                        </li> -->
                         <li>
                             <a routerLink="/contact" routerLinkActive="active">Contact</a>
                         </li>
+
                         <!-- <li class="dropdown">
                             <a>Etc pages</a>
                             <ul>
@@ -226,22 +230,22 @@
                 <li>
                     <a routerLink="/about" routerLinkActive="active">About</a>
                 </li>
-              <li class="dropdown" [class.open]="isServicesOpen">
-  <a (click)="toggleServices()">
-    Services
-    <i class="fa fa-chevron-down"></i>
-  </a>
+                <li class="dropdown" [class.open]="isServicesOpen">
+                    <a (click)="toggleServices()">
+                        Services
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
 
-  <ul>
-    @for (item of service; track $index) {
-      <li>
-        <a (click)="gotoService(item?._id, item?.name)">
-          {{ item?.name }}
-        </a>
-      </li>
-    }
-  </ul>
-</li>
+                    <ul>
+                        @for (item of service; track $index) {
+                        <li>
+                            <a (click)="gotoService(item?._id, item?.name)">
+                                {{ item?.name }}
+                            </a>
+                        </li>
+                        }
+                    </ul>
+                </li>
 
                 <li>
                     <a routerLink="/career" routerLinkActive="active">Career</a>
@@ -249,6 +253,9 @@
                 <li>
                     <a routerLink="/contact" routerLinkActive="active">Contact</a>
                 </li>
+                <!-- <li>
+                    <a routerLink="/gallery" routerLinkActive="active">Gallery</a>
+                </li> -->
 
                 <li *ngIf="isAdmin">
                     <a routerLink="/admin-panel" routerLinkActive="active">Admin Panel</a>

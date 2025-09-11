@@ -26,6 +26,7 @@ import { ServicePageComponent } from './pages/service-page/service-page.componen
 import { BlogListComponent } from './admin-panel/pages/blogs/blog-list/blog-list.component';
 import { CustomizationFormComponent } from './pages/customization-form/customization-form.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
 
 export const routes: Routes = [
     {
@@ -133,6 +134,10 @@ export const routes: Routes = [
             {
                 path: 'cart',
                 component: CartComponent
+            },
+            {
+                path: 'gallery',
+                component: GalleryComponent
             },
         {
                 path: 'privacy-policy',

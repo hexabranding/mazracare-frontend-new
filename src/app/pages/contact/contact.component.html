@@ -100,7 +100,7 @@
                             <div class="form-one__group">
                             <div class="form-one__control form-one__control--full">
                               <input type="text" placeholder="Name" formControlName="name">
-                              <small
+                              <small class="text-danger"
                                 *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
                                 Name is required (min 2 chars).
                               </small>
@@ -108,7 +108,7 @@
 
                             <div class="form-one__control form-one__control--full">
                               <input type="email" placeholder="Email" formControlName="email">
-                              <small
+                              <small class="text-danger"
                                 *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
                                 Please enter a valid email.
                               </small>
@@ -120,10 +120,9 @@
 
                             <div class="form-one__control form-one__control--full">
                               <input type="text" placeholder="Phone" formControlName="phone">
-                              <small
-                                *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
-                                Phone must be 10 digits.
-                              </small>
+                              <small class="text-danger"  *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+  Please enter a valid UAE phone number.
+</small>
                             </div>
 
                             <div class="form-one__control form-one__control--full">

@@ -1,0 +1,31 @@
+<section class="page-header">
+    <div class="page-header__shape-left"></div>
+    <div class="page-header__shape-right"></div>
+    <div class="page-header__bg"></div>
+    <!-- /.page-header__bg -->
+    <div class="container">
+        <h2 class="page-header__title bw-split-in-down">Gallery</h2>
+        <ul class="alefox-breadcrumb list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><span>Gallery</span></li>
+        </ul><!-- /.thm-breadcrumb list-unstyled -->
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+ <section class="gallery-one">
+            <div class="container-fluid">
+                <div class="row">
+                    @for (item of gallleryAll; track item) {
+                    <div class="col-md-6 col-lg-3" >
+                        <div class="gallery-one__card">
+                            <img [src]="item?.img" alt="">
+                            <div class="gallery-one__card__hover"></div> 
+                        </div> 
+                    </div> 
+                }
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section><!-- /.gallery-one -->
+
+ 

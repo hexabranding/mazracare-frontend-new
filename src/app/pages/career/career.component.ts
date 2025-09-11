@@ -15,13 +15,19 @@ import Swal from 'sweetalert2';
 export class CareerComponent implements OnInit {
   applicationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder , private _careerService: CareerService) { }
+  constructor(private fb: FormBuilder, private _careerService: CareerService) { }
 
   ngOnInit(): void {
     this.applicationForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
+      mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^(?:\+9715[0-9]{8}|05[0-9]{8})$/)
+        ]
+      ],
       position: ['', Validators.required],
       experience: ['', [Validators.min(0)]],
       skills: [''],
@@ -38,7 +44,7 @@ export class CareerComponent implements OnInit {
       } else {
         expDetails?.clearValidators();
       }
-    expDetails?.updateValueAndValidity();
+      expDetails?.updateValueAndValidity();
     });
   }
 
@@ -52,7 +58,7 @@ export class CareerComponent implements OnInit {
       console.log('Form Submitted:', this.applicationForm.value);
       const formData = new FormData();
       this._careerService.AddCareer(this.applicationForm.value).subscribe({
-        next:(res:any)=>{
+        next: (res: any) => {
           Swal.fire({
             icon: 'success',
             title: res?.message || 'Application Submitted',
@@ -60,7 +66,7 @@ export class CareerComponent implements OnInit {
           });
           this.applicationForm.reset();
         },
-        error:(err)=>{
+        error: (err) => {
           Swal.fire({
             icon: 'error',
             title: 'Error',

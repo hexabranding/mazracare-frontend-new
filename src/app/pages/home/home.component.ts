@@ -28,22 +28,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
   projectSlides = [
     {
       title: 'Residential',
-      link: '/residential',
+      link: '/products',
       img: '../assets/images/pintrest/Image_2.png.jpg'
     },
     {
       title: 'Commercial',
-      link: '/commercial',
+      link: '/customize-form/68bfa743e6bb19a7be5b0dff',
       img: '../assets/images/pintrest/agri2.jpg'
     },
     {
       title: 'Industrial',
-      link: '/industrial',
+      link: '/customize-form/68bfa823e6bb19a7be5b0e14',
       img: '../assets/images/pintrest/indr4.jpg'
     },
     {
       title: 'Institutional',
-      link: '/institutional',
+      link: '/customize-form/68bfae0fe6bb19a7be5b0ec6',
       img: '../assets/images/pintrest/school2.jpg'
     }
   ];

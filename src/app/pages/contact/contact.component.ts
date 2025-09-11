@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [RouterModule , CommonModule , ReactiveFormsModule ],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
@@ -18,14 +18,14 @@ export class ContactComponent {
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       address: [''],
-      phone: ['', [Validators.pattern(/^[0-9]{10}$/)]],
+      mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
     });
   }
 
@@ -33,7 +33,7 @@ export class ContactComponent {
     if (this.contactForm.valid) {
       console.log(this.contactForm.value);
       this.contactService.submitContactForm(this.contactForm.value).subscribe({
-        next: (res:any) => {
+        next: (res: any) => {
           console.log('Form submitted successfully', res);
           Swal.fire({
             title: 'Success',

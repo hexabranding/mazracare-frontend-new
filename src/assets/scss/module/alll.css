@@ -6864,6 +6864,8 @@ body.megamenu-popup-active .mobile-nav__content {
     max-width: 100%;
     transition: transform 500ms ease, opacity 500ms ease;
     opacity: 1;
+    height: 350px;
+    object-fit: cover;
 }
 
 .gallery-one__card__hover {
@@ -6872,7 +6874,7 @@ body.megamenu-popup-active .mobile-nav__content {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(var(--alefox-base-rgb, 68, 160, 91), 0.9);
+    background-color: #44a05b2b;
     display: flex;
     justify-content: center;
     align-items: center;
