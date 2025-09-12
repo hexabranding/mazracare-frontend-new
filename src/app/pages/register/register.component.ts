@@ -54,7 +54,9 @@ constructor(private fb: FormBuilder , private router: Router , private registerS
               icon: 'success',
               confirmButtonText: 'OK'
             });
-            this.router.navigate(['/email-verification']);
+            this.router.navigate(['/email-verification'],
+              { state: { email: this.registerForm.value.email } }
+            );
           }, error => {
             console.log(error);
 

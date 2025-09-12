@@ -20,8 +20,13 @@ export class EmailVerificationComponent {
   const inputs = document.querySelectorAll('.otp-input') as NodeListOf<HTMLInputElement>;
   return inputs[index] ?? null;
 }
+email!: string;
 
-constructor(private emailService: EmailService , private router: Router ) { }
+constructor(private emailService: EmailService , private router: Router ) {
+    const nav = this.router.getCurrentNavigation();
+    this.email = nav?.extras?.state?.['email'] || '';
+    this.emailVerifyForm.get('email')?.setValue(this.email);
+ }
 
   emailVerifyForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -79,7 +84,6 @@ constructor(private emailService: EmailService , private router: Router ) { }
       password: this.emailVerifyForm.get('password')?.value,
       otp: otp
     };
-    console.log('Payload:', payload);
 
     // Here you can handle the form submission, e.g., send data to a server
     // For demonstration, we'll just log the payload

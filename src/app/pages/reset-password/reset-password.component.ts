@@ -21,13 +21,20 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 export class ResetPasswordComponent {
  private fb = inject(FormBuilder);
   // @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+  email!: string;
 
   private getOtpInputElement(index: number): HTMLInputElement | null {
   const inputs = document.querySelectorAll('.otp-input') as NodeListOf<HTMLInputElement>;
   return inputs[index] ?? null;
 }
 
-constructor(private ResetService: ResetPasswordService , private router: Router ) { }
+constructor(private ResetService: ResetPasswordService , private router: Router ) {
+
+    const nav = this.router.getCurrentNavigation();
+    console.log(nav);
+    this.email = nav?.extras?.state?.['email'] || '';
+    this.resetForm.get('email')?.setValue(this.email);
+ }
 
   resetForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],

@@ -136,6 +136,7 @@ toggleServices() {
     localStorage.clear();
     this.loaderService.hide();
     this.CartService.cartItemCount.next(0);
+    this.wishlistService.wishlistCount.next(0);
     this.authService.islogin.next(false);
     this.authService.currentUserSubject.next(null);
     this.username =''

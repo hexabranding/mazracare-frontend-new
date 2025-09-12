@@ -34,7 +34,6 @@ export class ForgetPageComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Submitted:', this.loginForm.value);
       //  You can call your API here to send reset link
       this.ForgetService.forgetPassword(this.loginForm.value).subscribe(
         (res:any) => {
@@ -46,7 +45,9 @@ export class ForgetPageComponent {
             confirmButtonText: 'OK'
           });
 
-          this.router.navigate(['/reset-password'])
+          this.router.navigate(['/reset-password'],
+            { state: { email: this.loginForm.value.email } }
+          )
         },
         (error) => {
           console.error('Error sending reset link', error);

@@ -11,6 +11,6 @@ export class CareerService {
   constructor(private http: HttpClient) { }
 
   AddCareer(data: any) {
-    return this.http.post(this.$baseUrl + "/api/career/admin", data);
+    return this.http.post(this.$baseUrl + "/carrier/add", data);
   }
 }
