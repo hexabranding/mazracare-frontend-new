@@ -23,7 +23,7 @@ import { AdminDashboardComponent } from './admin-panel/pages/admin-dashboard/adm
 import { AuthGuard } from './core/guard/auth.guard';
 import { BlogDetailsComponent } from './pages/blog-details/blog-details.component';
 import { ServicePageComponent } from './pages/service-page/service-page.component';
-import { BlogListComponent } from './admin-panel/pages/blogs/blog-list/blog-list.component';
+import { BlogListComponent } from './pages/blog-list/blog-list.component';
 import { CustomizationFormComponent } from './pages/customization-form/customization-form.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
