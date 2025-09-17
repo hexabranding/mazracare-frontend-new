@@ -239,6 +239,6 @@ export const routes: Routes = [
                 loadComponent: () => import('./admin-panel/pages/blogs/blog-create/blog-create.component').then(m => m.BlogCreateComponent),
             },
 
-        ]
+        ],canMatch:[AuthGuard]
     }
 ];

@@ -24,6 +24,7 @@ export class AddProductsComponent implements OnInit {
   isEdit = false;
   productId: string | null = null;
   productSlug: string | null = null;
+  iscategory: boolean = false;
 
   constructor(private fb: FormBuilder,
     private _productService: ProductService,
@@ -35,10 +36,10 @@ export class AddProductsComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: [null, [Validators.required, Validators.min(0)]],
+      price: [null ],
       stock: [null, [Validators.required, Validators.min(0)]],
       discountPercent: [null],
-      category: ['', Validators.required],
+      category: [''],
       service: ['', Validators.required],
       points: this.fb.array([this.fb.control('')])
     });
@@ -145,9 +146,23 @@ export class AddProductsComponent implements OnInit {
   }
 
   onServiceChange(event: Event) {
+    console.log(event ,'test');
+    console.log((event.target as HTMLSelectElement).value, 'test');
+
     const selectedServiceId = (event.target as HTMLSelectElement).value;
     if (selectedServiceId) {
       this.getCategoryById(selectedServiceId);
+
+    if(selectedServiceId === '68bfaad7e6bb19a7be5b0e3c'){
+      this.iscategory = true
+      this.productForm.get('category')?.setValidators([Validators.required]);
+      this.productForm.get('category')?.updateValueAndValidity();
+    } else {
+      this.iscategory = false
+      this.productForm.get('category')?.clearValidators();
+      this.productForm.get('category')?.updateValueAndValidity();
+    }
+
     } else {
       this.categorys = [];
       this.productForm.get('category')?.setValue('');

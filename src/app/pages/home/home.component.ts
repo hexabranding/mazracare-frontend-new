@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('thumbCarousel') thumbCarousel!: ElementRef;
   @ViewChild('projectCarousel') projectCarousel!: ElementRef;
   @ViewChild('blogCarousel') blogCarousel!: ElementRef;
+  @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
 
 
@@ -82,6 +83,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
+
+    setTimeout(() => {
+      const v = this.video.nativeElement;
+      v.muted = true;
+      v.currentTime = 0; // restart from beginning on refresh
+      v.play().catch(err => console.warn('Autoplay blocked:', err));
+    }, 0);
+
     // jQuery Slick Init
     const $main = $(this.mainCarousel.nativeElement);
     const $thumb = $(this.thumbCarousel.nativeElement);

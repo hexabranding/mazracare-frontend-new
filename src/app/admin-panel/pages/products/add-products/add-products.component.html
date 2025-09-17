@@ -1,5 +1,5 @@
 <div class="container mb-5">
-  <h2 class="mb-4">{{isEdit ? 'Update Product' : 'Add Product' }}</h2>
+  <h2 class="mb-4">{{isEdit ? 'Update Product' : 'Add Product1' }}</h2>
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <!-- Product Name -->
@@ -37,7 +37,7 @@
 
 
     <!-- Price & Discount -->
-    <div class="mb-4 row">
+    <div class="mb-4 row d-flex">
       <label for="service" class="col-sm-2 col-form-label">Service *</label>
       <div class="col-sm-4">
         <select class="form-control" formControlName="service" id="service" (change)="onServiceChange($event)">
@@ -49,25 +49,27 @@
         <div class="text-danger" *ngIf="f['service'].touched && f['service'].invalid">Service is required</div>
       </div>
 
-      <label for="category" class="col-sm-2 col-form-label">Category</label>
-      <div class="col-sm-4">
-        <select [disabled]="f['service'].valid" class="form-control" formControlName="category" id="category">
-          @for (item of categorys; track $index) {
-          <option [value]="item._id">{{item.name}}</option>
-          }
-        </select>
-        <div class="text-danger" *ngIf="f['category'].touched && f['category'].invalid">Category is required</div>
-      </div>
+        @if(iscategory){
+        <label for="category" class="col-sm-2 col-form-label">Category *</label>
+        <div class="col-sm-4">
+          <select [disabled]="f['service'].valid" class="form-control" formControlName="category" id="category">
+            @for (item of categorys; track $index) {
+            <option [value]="item._id">{{item.name}}</option>
+            }
+          </select>
+          <div class="text-danger" *ngIf="f['category'].touched && f['category'].invalid">Category is required</div>
+        </div>
+        }
     </div>
 
     <div class="mb-4 row">
-      <label for="price" class="col-sm-2 col-form-label">Price *</label>
+      <label for="price" class="col-sm-2 col-form-label">Price </label>
       <div class="col-sm-2">
         <input type="number" id="price" class="form-control" formControlName="price" />
         <div class="text-danger" *ngIf="f['price'].touched && f['price'].invalid">Valid price is required</div>
       </div>
 
-      <label for="stock" class="col-sm-2 col-form-label">Stock</label>
+      <label for="stock" class="col-sm-2 col-form-label">Stock *</label>
       <div class="col-sm-2">
         <input type="number" id="stock" class="form-control" formControlName="stock" />
       </div>
@@ -80,7 +82,7 @@
 
     <!-- Images -->
     <div class="mb-4 row">
-      <label class="col-sm-2 col-form-label">Product Images *</label>
+      <label class="col-sm-2 col-form-label">Product Images </label>
       <div class="col-sm-10">
         <input type="file" class="form-control" (change)="onFileChange($event)" multiple accept="image/*" />
         <!-- <small class="form-text text-muted">
