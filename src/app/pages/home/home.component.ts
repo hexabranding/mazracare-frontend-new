@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('projectCarousel') projectCarousel!: ElementRef;
   @ViewChild('blogCarousel') blogCarousel!: ElementRef;
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
+  @ViewChild('video1') video1!: ElementRef<HTMLVideoElement>;
+  @ViewChild('video3') video3!: ElementRef<HTMLVideoElement>;
 
 
 
@@ -89,6 +91,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
       v.muted = true;
       v.currentTime = 0; // restart from beginning on refresh
       v.play().catch(err => console.warn('Autoplay blocked:', err));
+
+      const v1 = this.video1.nativeElement;
+      v1.muted = true;
+      v1.currentTime = 0;
+      v1.play().catch(err => console.warn('Autoplay blocked:', err));
+
+      const v3 = this.video3.nativeElement;
+      v3.muted = true;
+      v3.currentTime = 0;
+      v3.play().catch(err => console.warn('Autoplay blocked:', err));
     }, 0);
 
     // jQuery Slick Init
