@@ -36,7 +36,7 @@ export class AddProductsComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: [null ],
+      price: [''],
       stock: [null, [Validators.required, Validators.min(0)]],
       discountPercent: [null],
       category: [''],
