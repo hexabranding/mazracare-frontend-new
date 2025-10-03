@@ -14,7 +14,7 @@
             <h5>
                 <li>{{serviceDetails?.subdescription}}
                 </li>
-                
+
             </h5>
         </ul>
 
@@ -460,7 +460,7 @@
 </section>
 <!-- CUSTOMIZATAION FORM -->
 
- <section class="pt-5" style="margin-bottom: 40px;">
+ <!-- <section class="pt-5" style="margin-bottom: 40px;">
       <div class="container">
         <div class="row">
           @for (item of serviceDetails?.image; track $index) {
@@ -480,4 +480,32 @@
         </div>
 
       </div>
-    </section>
+    </section> -->
+
+<section class="pt-5 pb-5 bg-light">
+  <div class="container">
+    <!-- Images -->
+    <div class="row g-4">
+      @for (item of serviceDetails?.image; track $index) {
+      <div class="col-md-6 col-lg-3 col-sm-12">
+        <div class="media-card swipe-right">
+          <img [src]="item?.url" class="img-fluid media-img" alt="Service Image">
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Videos -->
+    <div class="row g-4 pt-4">
+      @for (item of serviceDetails?.video; track $index) {
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <div class="media-card swipe-right">
+          <video autoplay muted loop playsinline class="media-video">
+            <source [src]="item?.url" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

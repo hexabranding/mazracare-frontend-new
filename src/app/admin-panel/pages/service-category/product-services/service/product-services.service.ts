@@ -33,4 +33,10 @@ export class ProductServicesService {
     return this.http.put( this.$baseUrl + "/service/service/" + id, data);
   }
 
+  deleteFile(data:any): Observable<any> {
+    console.log(data);
+
+    return this.http.delete( this.$baseUrl + "/service/remove-file",{body: data});
+  }
+
 }

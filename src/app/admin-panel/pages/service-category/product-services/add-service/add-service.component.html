@@ -60,7 +60,7 @@
           <div *ngFor="let img of previewImages; let i = index" class="position-relative">
             <img [src]="img?.url ? img?.url : img " class="img-thumbnail" width="100" />
 
-            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage(i)">
+            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage(i , img?._id )">
               <i class="fas fa-times"></i>
             </button>
           </div>
@@ -79,7 +79,7 @@
           <div *ngFor="let video of previewVideos; let i = index" class="position-relative">
             <video [src]="video?.url ? video?.url : video " controls width="250"></video>
 
-            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeVideo(i)">
+            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeVideo(i , video?._id )">
               <i class="fas fa-times"></i>
             </button>
           </div>

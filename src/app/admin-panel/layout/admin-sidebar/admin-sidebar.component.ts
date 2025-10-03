@@ -25,6 +25,7 @@ export class AdminSidebarComponent {
     { icon: 'fas fa-tools', label: 'Service / Category', route: '/admin-panel/service-category', isOpen: false },
     { icon: 'fas fa-money-bill-wave', label: 'Report / Payments', route: '/admin-panel/report-payments', isOpen: false },
     { icon: 'fa fa-book', label: 'Blog', route: '/admin-panel/blog', isOpen: false },
+    { icon: 'fa-solid fa-image', label: 'Gallery', route: '/admin-panel/gallery', isOpen: false },
   ];
 
   toggleSidebar() {

@@ -176,13 +176,52 @@ serviceForm!: FormGroup;
     });
   }
 
-  removeImage(index: number) {
-  this.previewImages.splice(index, 1);
-  this.images.splice(index, 1);
-}
-  removeVideo(index: number) {
-    this.previewVideos.splice(index ,1)
-    this.videos.splice(index,1)
+  removeImage(index: number, id ? : string) {
+    let data: any ={
+      public_id : id
+    }
+    this.productService.deleteFile(data).subscribe((res: any) => {
+      if(res && res.success) {
+        Swal.fire({
+          title: 'Success',
+          text: res?.message,
+          icon: 'success',
+        });
+      this.previewImages.splice(index, 1);
+      this.images.splice(index, 1);
+      }
+    }, (err: any) => {
+      Swal.fire({
+        title: 'Error',
+        text: err?.error?.message || 'Failed to delete file',
+        icon: 'error',
+      });
+    })
+  }
+
+  removeVideo(index: number , id?:string) {
+
+    let data: any ={
+      public_id : id
+    }
+    this.productService.deleteFile(data).subscribe((res: any) => {
+      console.log(res);
+      if(res && res.success) {
+      this.previewVideos.splice(index ,1)
+      this.videos.splice(index,1)
+      Swal.fire({
+        title: 'Success',
+        text: res?.message,
+        icon: 'success',
+      });
+    }
+    }, (err: any) => {
+      Swal.fire({
+        title: 'Error',
+        text: err?.error?.message || 'Failed to delete file',
+        icon: 'error',
+      });
+    })
   }
 
   onSubmit() {

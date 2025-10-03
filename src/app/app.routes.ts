@@ -238,6 +238,18 @@ export const routes: Routes = [
                 path: 'blogs/blogs-create/:id',
                 loadComponent: () => import('./admin-panel/pages/blogs/blog-create/blog-create.component').then(m => m.BlogCreateComponent),
             },
+            {
+              path: 'gallery',
+              loadComponent: () => import('./admin-panel/pages/gallery/gallery-list/gallery-list.component').then(m => m.GalleryListComponent),
+            },
+            {
+              path: 'gallery/add-gallery',
+              loadComponent: () => import('./admin-panel/pages/gallery/add-gallery/add-gallery.component').then(m => m.AddGalleryComponent),
+            },
+            {
+              path: 'gallery/add-gallery/:id',
+              loadComponent: () => import('./admin-panel/pages/gallery/add-gallery/add-gallery.component').then(m => m.AddGalleryComponent),
+            },
 
         ],canMatch:[AuthGuard]
     }
