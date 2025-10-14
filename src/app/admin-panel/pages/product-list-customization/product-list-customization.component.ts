@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ProductListCustomizationService } from './service/product-list-customization.service';
 import { DataTableComponent } from '../../../core/components/data-table/data-table.component';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DynamicModalComponent } from '../dynamic-modal/dynamic-modal.component';
 
 @Component({
   selector: 'app-product-list-customization',
@@ -17,6 +19,17 @@ export class ProductListCustomizationComponent {
   totalCount!:number;
   tableData:any[]=[];
   isLoading:boolean=false;
+
+  viewData = {
+    crops: [],
+    customCrop: "",
+    typeOfSpace: '',
+    siteArea: '',
+    customSiteArea: null,
+    sitePhotos: [],
+    width: 0,
+    height: 0
+  }
 
   tableSettings = {
   columns: {
@@ -55,10 +68,16 @@ export class ProductListCustomizationComponent {
         return new Date(createdAt).toLocaleDateString();
       }
     },
-  }
+  },
+  actions: {
+  add: false,
+  edit: false,
+  view: true,
+  delete: false,
+},
 }
 
-constructor( private _CustmizeService: ProductListCustomizationService) {}
+constructor( private _CustmizeService: ProductListCustomizationService , private dialog: MatDialog) {}
 
 ngOnInit(): void {
   this.getcustomizationList();
@@ -84,7 +103,8 @@ getcustomizationList(params?:any){
         height: item.height,
         width: item.width,
         typeOfSpace: item.typeOfSpace,
-        createdAt: new Date(item.createdAt).toLocaleDateString()
+        createdAt: new Date(item.createdAt).toLocaleDateString(),
+        _id: item._id // keep the original id for reference
       }));
         this.totalCount = res?.total || 0;
       },
@@ -96,11 +116,55 @@ getcustomizationList(params?:any){
 }
 
 
-tableEvent(env:any){
-  if(env?.type === 'apievent'){
-    this.getcustomizationList(env?.event)
+tableEvent(env: any) {
+  switch (env?.type) {
+    case 'apievent':
+      this.getcustomizationList(env?.event);
+      break;
+    case 'view':
+      this.viewDetails(env?.event._id);
+      break;
+
+    default:
+      break;
   }
 }
 
+viewDetails(event: any) {
+
+  this._CustmizeService.getCustomizationById(event).subscribe({
+    next: (res: any) => {
+
+      if (!res.success) return;
+      this.viewData = {
+        crops: res?.data?.crops || [],
+        customCrop: res?.data?.customCrop || '',
+        typeOfSpace: res?.data?.typeOfSpace || '',
+        siteArea: res?.data?.siteArea || '',
+        customSiteArea: res?.data?.customSiteArea || null,
+        sitePhotos: res?.data?.sitePhotos || [],
+        width: res?.data?.width || 0,
+        height: res?.data?.height || 0
+      }
+      console.log('View Data:', this.viewData);
+
+      const dialogRef = this.dialog.open(DynamicModalComponent, {
+        width: '600px',
+        data: this.viewData
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          console.log('Updated Data:', result);
+        }
+      });
+      // Here, you can open a modal or navigate to a detail page to show the customization details
+    },
+    error: (err) => {
+      console.log('Error fetching customization details:', err);
+    }
+  });
+
 }
 
+}

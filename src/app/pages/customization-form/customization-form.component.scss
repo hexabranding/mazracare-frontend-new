@@ -34,3 +34,24 @@
   0% { transform: translateX(100px); opacity: 0; }
   100% { transform: translateX(0); opacity: 1; }
 }
+
+.school{
+  p{
+    display: flex;
+    font-size: 20px;
+    font-weight: 600;
+    color: #44a05b;
+    padding-bottom: 0px;
+  }
+}
+
+.know{
+  background-color: #44a05b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}

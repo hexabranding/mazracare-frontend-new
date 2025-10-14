@@ -11,9 +11,13 @@ export class OrderService {
 $baseUrl = environment.baseUrl
 
   constructor(private http: HttpClient, private _fun :FunctionService) { }
-  
+
   orderlist(params?:any) {
     const param = this._fun.objectToQueryParams(params);
     return this.http.get( this.$baseUrl + "/order"+(param ?? ''))
+  }
+
+  getOrderById(id:any) {
+    return this.http.get( this.$baseUrl + "/order/single?id="+id)
   }
 }

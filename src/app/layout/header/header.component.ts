@@ -13,10 +13,11 @@ import { LoaderService } from '../../core/services/loader.service';
 import { filter, take } from 'rxjs';
 import { WishlistService } from '../../pages/wishlist/service/wishlist.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule , MatMenuModule , MatMenuModule , MatButtonModule , MatIconModule, MatDividerModule , CommonModule,TranslateModule],
+  imports: [RouterModule , MatMenuModule , MatMenuModule , MatButtonModule , MatIconModule, MatDividerModule , CommonModule,TranslateModule , MatTooltipModule ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -168,4 +169,12 @@ toggleServices() {
       this.route.navigateByUrl('customize-form/'+id)
     }
   }
+
+  downloadPDF() {
+  const link = document.createElement('a');
+  link.href = 'assets/pdf/Magazine.pdf'; // path to your PDF
+  link.download = 'Magazine.pdf'; // name of the downloaded file
+  link.click();
+  }
+
 }

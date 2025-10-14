@@ -23,6 +23,9 @@
 
 <!-- Service Start -->
 <section class="service-two">
+  <div class="school container" *ngIf="serviceDetails?.name === 'Institutional'">
+    <p >{{'“Future Farmers from the school”  '}} &nbsp; <button (click)="downloadPDF()" class="know">Learn more</button></p>
+  </div>
     <div class="container">
         <h3 class="service-details__heading">{{serviceDetails?.subHeading}}</h3>
         <!-- /.service-details__heading -->

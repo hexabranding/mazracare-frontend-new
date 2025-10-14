@@ -248,4 +248,11 @@ serviceDetail(id:string){
 
   }
 
+  downloadPDF() {
+    const link = document.createElement('a');
+    link.href = 'assets/pdf/school.pdf'; // path to your PDF
+    link.download = 'school.pdf'; // name of the downloaded file
+    link.click();
+  }
+
 }

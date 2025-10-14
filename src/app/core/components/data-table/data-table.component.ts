@@ -74,6 +74,13 @@ export class DataTableComponent {
     })
   }
 
+  viewItem(data:any){
+    this.tableEvent?.emit({
+      type: 'view',
+      event: data
+    })
+  }
+
   deleteItem(data:any){
     this.tableEvent?.emit({
       type: 'delete',

@@ -1,0 +1,117 @@
+<!-- <div class="view-grid" *ngIf="data">
+  <ng-container *ngFor="let key of keys">
+    <ng-container *ngIf="!hiddenKeys.includes(key)">
+
+      <div class="full-width" *ngIf="(isArray(data[key]) && arrayIsObject(data[key])) || isObject(data[key])">
+        <div class="section-title">{{ key | titlecase }}</div>
+
+        <div *ngIf="isArray(data[key]) && arrayIsObject(data[key])" class="array-objects">
+          <div class="nested-card" *ngFor="let item of data[key]; let i = index">
+            <div class="nested-header">#{{ i + 1 }}</div>
+            <app-dynamic-view [data]="item" [isNested]="true"></app-dynamic-view>
+          </div>
+        </div>
+
+        <div *ngIf="isObject(data[key])" class="nested-card">
+          <app-dynamic-view [data]="data[key]" [isNested]="true"></app-dynamic-view>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="isArray(data[key]) && !arrayIsObject(data[key])">
+        <label class="form-label">{{ key | titlecase }}</label>
+        <div class="array-list">
+          <div class="array-item" *ngFor="let item of data[key]">
+            <input class="form-control" [value]="item" readonly />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="isLongString(data[key]) && !isArray(data[key]) && !isObject(data[key])">
+        <label class="form-label">{{ key | titlecase }}</label>
+        <textarea class="form-control" rows="3" readonly>{{ data[key] }}</textarea>
+      </div>
+
+
+      <div class="form-group" *ngIf="!isArray(data[key]) && !isObject(data[key]) && !isLongString(data[key])">
+        <label class="form-label">{{ key| titlecase }}</label>
+        <input class="form-control" [value]="data[key] ?? ''" readonly />
+      </div>
+
+    </ng-container>
+  </ng-container>
+</div>
+
+
+ -->
+
+
+ <div class="view-grid" *ngIf="data">
+
+  <!-- Nested objects or array of objects -->
+  <ng-container *ngFor="let key of keys">
+    <ng-container *ngIf="!hiddenKeys.includes(key)">
+
+      <div class="full-width" *ngIf="(isArray(data[key]) && arrayIsObject(data[key])) || isObject(data[key])">
+        <div class="section-title">{{ key | titlecase }}</div>
+
+        <!-- Array of objects -->
+        <div *ngIf="isArray(data[key]) && arrayIsObject(data[key])" class="array-objects">
+          <div class="nested-card" *ngFor="let item of data[key]; let i = index">
+            <div class="nested-header">#{{ i + 1 }}</div>
+            <app-dynamic-view [data]="item" [isNested]="true"></app-dynamic-view>
+          </div>
+        </div>
+
+        <!-- Single object -->
+        <div *ngIf="isObject(data[key])" class="nested-card">
+          <app-dynamic-view [data]="data[key]" [isNested]="true"></app-dynamic-view>
+        </div>
+      </div>
+
+      <!-- Array of primitives -->
+      <div class="form-group" *ngIf="isArray(data[key]) && !arrayIsObject(data[key])">
+        <label class="form-label">{{ key | titlecase }}</label>
+        <div class="array-list">
+          <!-- If array is empty, show one empty input -->
+          <ng-container *ngIf="data[key].length > 0; else emptyArray">
+            <div class="array-item" *ngFor="let item of data[key]">
+              <input class="form-control" [value]="item" readonly />
+            </div>
+          </ng-container>
+          <ng-template #emptyArray>
+            <div class="array-item">
+              <input class="form-control" value="" readonly placeholder="No data" />
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Long string -->
+      <div class="form-group full-width" *ngIf="isLongString(data[key]) && !isArray(data[key]) && !isObject(data[key])">
+        <label class="form-label">{{ key | titlecase }}</label>
+        <textarea class="form-control" rows="3" readonly>{{ data[key] }}</textarea>
+      </div>
+
+    </ng-container>
+  </ng-container>
+
+  <!-- Primitive fields in two columns -->
+  <div class="primitive-grid">
+    <ng-container *ngFor="let key of keys">
+      <ng-container *ngIf="
+        !hiddenKeys.includes(key) &&
+        !isArray(data[key]) &&
+        !isObject(data[key]) &&
+        !isLongString(data[key])
+      ">
+        <div class="form-group">
+          <label class="form-label">{{ key | titlecase }}</label>
+          <input class="form-control" [value]="data[key] ?? ''" readonly />
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+</div>
+
+

@@ -64,7 +64,10 @@
           }
           @if(tableSettings?.actions?.delete) {
           <button (click)="deleteItem(data)" class="btn btn-sm btn-danger">Delete</button>
-          }</div>
+          }
+          @if(tableSettings?.actions?.view) {
+          <button (click)="viewItem(data)" class="btn btn-sm btn-info text-white ms-2">View</button>
+            }</div>
         </td>
         }
       </tr>

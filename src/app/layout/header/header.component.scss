@@ -193,3 +193,45 @@ body {
 .skiptranslate span {
   display:  none !important;
 }
+
+
+
+::ng-deep .custom-tooltip {
+  background-color: white;
+  color: #44a05b;
+  // padding: 8px 12px;
+  border-radius: 6px;
+  width: 100% !important;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.shake {
+  display: inline-block;
+  font-size: 2rem;
+  color: #44a05b !important;
+  animation: treeMove2 4s linear 0s infinite;
+  cursor: pointer;
+}
+
+@keyframes treeMove2 {
+
+    0%,
+    100% {
+        -webkit-transform: rotate(0deg) translateX(0);
+        transform: rotate(0deg) translateX(0);
+    }
+
+    25%,
+    75% {
+        -webkit-transform: rotate(-10deg) translateX(0);
+        transform: rotate(-10deg) translateX(0);
+    }
+
+    50% {
+        -webkit-transform: rotate(10deg) translateX(0);
+        transform: rotate(10deg) translateX(0);
+    }
+}

@@ -125,6 +125,10 @@
                         <li *ngIf="isAdmin">
                             <a routerLink="/admin-panel" routerLinkActive="active">Admin Panel</a>
                         </li>
+                        <li>
+                            <a (click)="downloadPDF()" class="shake"  matTooltipClass="custom-tooltip" #tooltip="matTooltip"
+                            matTooltip="Get your copy of the Mazra Care magazine"  >Magazine</a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.main-header__nav -->

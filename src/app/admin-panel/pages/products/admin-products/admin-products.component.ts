@@ -97,6 +97,8 @@ export class AdminProductsComponent implements OnInit {
 
 
   tableEvent(env:any){
+    console.log(env);
+
     switch (env?.type) {
       case 'apievent':
         this.getProducts(env?.event);

@@ -17,6 +17,10 @@ $baseUrl = environment.baseUrl
     return this.http.get( this.$baseUrl + "/enquiry/list"+(param ?? ''))
   }
 
+  getCustomizationById(id:any) {
+    return this.http.get( this.$baseUrl + "/enquiry/single?id="+id)
+  }
+
 
 
 

@@ -16,6 +16,10 @@ $baseUrl = environment.baseUrl
     return this.http.get( this.$baseUrl + "/product-details-customisation/admin/all"+(param ?? ''))
   }
 
+  getCustomizationById(id:string) {
+    return this.http.get( this.$baseUrl + "/product-details-customisation/my-customisations-single?id="+id)
+  }
+
 
 
 
