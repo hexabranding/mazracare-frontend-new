@@ -5,3 +5,29 @@ a {
 .product__item__content {
     cursor: pointer;
 }
+
+.pagination-wrapper {
+  .pagination {
+    .page-item {
+      .page-link {
+        color: #2a6d2a;
+        border: none;
+        margin: 0 4px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      &.active .page-link {
+        background-color: #2a6d2a;
+        color: #fff;
+      }
+
+      &.disabled .page-link {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+  }
+}

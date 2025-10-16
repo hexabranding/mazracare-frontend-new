@@ -551,48 +551,35 @@
 </section>
 <!-- /.why-choose-one -->
 <section class="blog-one" *ngIf="blogDetails.length">
-
   <div class="container">
     <div class="sec-title text-center">
-      <h6 class="sec-title__tagline bw-split-in-right"><span class="sec-title__tagline__left-leaf"
-          style="background-image: url(assets/images/shapes/leaf.png);"></span>From the Blog<span
-          class="sec-title__tagline__right-leaf" style="background-image: url(assets/images/shapes/leaf.png);"></span>
+      <h6 class="sec-title__tagline bw-split-in-right">
+        <span class="sec-title__tagline__left-leaf" style="background-image: url(assets/images/shapes/leaf.png);"></span>
+        From the Blog
+        <span class="sec-title__tagline__right-leaf" style="background-image: url(assets/images/shapes/leaf.png);"></span>
       </h6>
-      <!-- /.sec-title__tagline -->
       <h3 class="sec-title__title bw-split-in-left">Latest News & Articles</h3>
-      <!-- /.sec-title__title -->
     </div>
-    <!-- /.sec-title -->
-    <!-- slick carousel for blogs -->
-    <div
-      class="row blog-one__carousel alefox-owl__carousel alefox-owl__carousel--with-shadow alefox-owl__carousel--basic-nav owl-carousel owl-theme">
-      <div class="item col-md-4 col-sm-12" *ngFor="let blog of blogDetails; let i = index" [hidden]="i >= 3">
 
-        <div class="blog-card">
-          <div class="blog-card__image">
-            <img [src]="blog.image?.url" class="img-fluid" alt="{{ blog.title || 'Mazra Care Blog' }}" />
-            <img [src]="blog.image?.url" class="img-fluid" alt="{{ blog.title || 'Mazra Care Blog' }}" />
-
-            <!-- <a routerLink="/#" class="blog-card__image__link"> <span class="sr-only"> Cultivating a Greener Future with Mazra Care’s Smart Farming Solutions </span> </a> -->
-          </div>
-
-          <div class="blog-card__content">
-            <ul class="list-unstyled blog-card__meta">
-              <li><i class="icofont-ui-user"></i> {{ blog.author || 'Mazra Care' }}</li>
-            </ul>
-            <h3 class="blog-card__title">
-              <a>{{ blog.title || 'Untitled Blog' }}</a>
-            </h3>
+<owl-carousel-o *ngIf="blogDetails?.length" [options]="blogCarouselOptions">
+  <ng-container *ngFor="let blog of blogDetails">
+    <ng-template carouselSlide>
+      <div class="blog-card">
+        <div class="blog-card__image">
+        <img [src]="blog.image?.url" class="img-fluid" alt="{{ blog.title || 'Mazra Care Blog' }}" />
+        </div>
+        <div class="blog-card__content">
+          <h3>{{ blog.title }}</h3>
+          <!-- <p>{{ blog.content }}</p> -->
             <p class="blog-card__text">
-              {{ blog.content || blog.excerpt || 'Content coming soon...' }}
-            </p>
-          </div>
+            {{ blog.content || blog.excerpt || 'Content coming soon...' }}
+          </p>
         </div>
       </div>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>
 
-    </div>
-
-    <!-- /.container -->
   </div>
 </section>
 <!-- /.blog-one -->

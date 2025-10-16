@@ -71,6 +71,7 @@
                         </div>
                     </div>
                 </ng-container>
+
                 <!-- Show this if products array is empty -->
                 <ng-template #noProducts>
                     <div class="col-12 text-center py-5">
@@ -81,3 +82,21 @@
         </div>
     </div>
 </section>
+<!-- Pagination -->
+<div class="pagination-wrapper text-center mt-4" *ngIf="totalPages > 1">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="onPageChange(currentPage - 1)">Prev</a>
+    </li>
+
+    <li class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1">
+      <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+    </li>
+  </ul>
+</div>

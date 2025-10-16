@@ -21,6 +21,7 @@ export class AdminSidebarComponent {
     { icon: 'fa fa-users', label: 'Customers', route: '/admin-panel/customers', isOpen: false },
     { icon: 'fa fa-users', label: 'Customzation', route: '/admin-panel/customization', isOpen: false },
     { icon: 'fa fa-users', label: 'Product List ', route: '/admin-panel/product-customization', isOpen: false },
+    { icon: 'fa fa-users', label: 'Product Detail List ', route: '/admin-panel/product-detail-customization', isOpen: false },
     { icon: 'fa fa-users', label: 'contact', route: '/admin-panel/contact', isOpen: false },
     { icon: 'fas fa-tools', label: 'Service / Category', route: '/admin-panel/service-category', isOpen: false },
     { icon: 'fas fa-money-bill-wave', label: 'Report / Payments', route: '/admin-panel/report-payments', isOpen: false },

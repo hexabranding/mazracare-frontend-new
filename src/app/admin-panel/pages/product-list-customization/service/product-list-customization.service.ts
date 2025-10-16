@@ -20,6 +20,15 @@ $baseUrl = environment.baseUrl
     return this.http.get( this.$baseUrl + "/product-details-customisation/my-customisations-single?id="+id)
   }
 
+  getProductDetailsList(params?:any) {
+    const param = this._fun.objectToQueryParams(params);
+    return this.http.get( this.$baseUrl + "/customization/admin/all"+(param ?? ''))
+  }
+
+  getProductDetailsById(id:string) {
+    return this.http.get( this.$baseUrl + "/customization/my-customizations-single?id="+id)
+  }
+
 
 
 

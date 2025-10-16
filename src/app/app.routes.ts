@@ -1,3 +1,4 @@
+import { ProductDetailListComponent } from './admin-panel/pages/products/product-detail-list/product-detail-list.component';
 import { AddServiceComponent } from './admin-panel/pages/service-category/product-services/add-service/add-service.component';
 import { Routes } from '@angular/router';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
@@ -193,6 +194,10 @@ export const routes: Routes = [
             {
                 path: 'product-customization',
                 loadComponent: () => import('./admin-panel/pages/product-list-customization/product-list-customization.component').then(m => m.ProductListCustomizationComponent),
+            },
+            {
+                path: 'product-detail-customization',
+                loadComponent: () => import('./admin-panel/pages/products/product-detail-list/product-detail-list.component').then(m => m.ProductDetailListComponent),
             },
              {
                 path: 'contact',

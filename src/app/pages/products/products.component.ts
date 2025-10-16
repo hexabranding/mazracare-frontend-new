@@ -18,6 +18,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProductsComponent implements OnInit {
 
+  currentPage: number = 1;
+  totalPages: number = 1;
+  totalItems: number = 0;
+  limit: number = 8; // how many products per page
+
   products: any[] = [];
 
   constructor(
@@ -37,7 +42,7 @@ export class ProductsComponent implements OnInit {
     // })
 
 
-    this.getProductlist();
+    this.getProductlist(this.currentPage);
   }
 
   getCategoryById(id: string) {
@@ -50,15 +55,30 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  getProductlist() {
-    this.productService.productlist().subscribe((res: any) => {
+  getProductlist(page: number):void {
+    const defparams = {
+        page : page,
+        limit : this.limit,
+        search : ''
+    };
+    this.productService.productlist(defparams).subscribe((res: any) => {
       console.log(res);
       this.products = res.data;
+      this.currentPage = res.page;
+      this.totalPages = res.pages;
+      this.totalItems = res.total;
     }, error => {
       console.error('Error fetching product list:', error);
     });
 
     console.log('Product list fetched:', this.products);
+  }
+
+    onPageChange(page: number): void {
+    if (page > 0 && page <= this.totalPages) {
+      this.getProductlist(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   addToCart(id: string) {

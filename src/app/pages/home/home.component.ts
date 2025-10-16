@@ -4,12 +4,13 @@ import { BlogService } from '../../admin-panel/pages/blogs/service/blog.service'
 import { NgFor } from '@angular/common';
 import { ProductService } from '../products/service/product.service';
 import { CommonModule } from '@angular/common';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 declare var $: any;
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, NgFor, CommonModule],
+  imports: [RouterModule, NgFor, CommonModule , CarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -26,7 +27,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('video1') video1!: ElementRef<HTMLVideoElement>;
   @ViewChild('video3') video3!: ElementRef<HTMLVideoElement>;
 
-
+blogCarouselOptions = {
+  loop: true,
+  margin: 20,
+  autoplay: true,
+  autoplayTimeout: 3000, // 3 seconds
+  autoplayHoverPause: true,
+  dots: true,
+  nav: false,
+  smartSpeed: 800,
+  responsive: {
+    0: {
+      items: 1
+    },
+    768: {
+      items: 2
+    },
+    992: {
+      items: 3
+    }
+  }
+}
 
   projectSlides = [
     {
@@ -171,45 +192,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       ]
     });
 
-    // $(this.blogCarousel.nativeElement).slick({
-    //   slidesToShow: 3,
-    //   slidesToScroll: 1,
-    //   autoplay: true,
-    //   dots: true,
-    //   arrows: true,
-    //   speed: 700,
-    //   draggable: true,
-    //   responsive: [
-    //     {
-    //       breakpoint: 1600,
-    //       settings: {
-    //         slidesToShow: 4,
-    //         slidesToScroll: 1
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 1100,
-    //       settings: {
-    //         slidesToShow: 3,
-    //         slidesToScroll: 1
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 768,
-    //       settings: {
-    //         slidesToShow: 2,
-    //         slidesToScroll: 1
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 480,
-    //       settings: {
-    //         slidesToShow: 1,
-    //         slidesToScroll: 1
-    //       }
-    //     }
-    //   ]
-    // });
   }
 
 
