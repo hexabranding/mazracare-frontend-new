@@ -212,26 +212,26 @@ body {
   display: inline-block;
   font-size: 2rem;
   color: #44a05b !important;
-  animation: treeMove2 4s linear 0s infinite;
+  // animation: treeMove2 4s linear 0s infinite;
   cursor: pointer;
 }
 
-@keyframes treeMove2 {
+// @keyframes treeMove2 {
 
-    0%,
-    100% {
-        -webkit-transform: rotate(0deg) translateX(0);
-        transform: rotate(0deg) translateX(0);
-    }
+//     0%,
+//     100% {
+//         -webkit-transform: rotate(0deg) translateX(0);
+//         transform: rotate(0deg) translateX(0);
+//     }
 
-    25%,
-    75% {
-        -webkit-transform: rotate(-10deg) translateX(0);
-        transform: rotate(-10deg) translateX(0);
-    }
+//     25%,
+//     75% {
+//         -webkit-transform: rotate(-10deg) translateX(0);
+//         transform: rotate(-10deg) translateX(0);
+//     }
 
-    50% {
-        -webkit-transform: rotate(10deg) translateX(0);
-        transform: rotate(10deg) translateX(0);
-    }
-}
+//     50% {
+//         -webkit-transform: rotate(10deg) translateX(0);
+//         transform: rotate(10deg) translateX(0);
+//     }
+// }

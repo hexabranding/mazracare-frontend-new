@@ -166,7 +166,7 @@
           class="sec-title__tagline__right-leaf" style="background-image: url(assets/images/shapes/leaf.png);"></span>
       </h6>
       <!-- /.sec-title__tagline -->
-      <h3 class="sec-title__title bw-split-in-left">Committed to Quality Across Agriculture & Innovation</h3>
+      <h3 class="sec-title__title bw-split-in-left">Nurturing Sustainable Growth Through Quality and Innovation</h3>
     </div>
     <!-- /.sec-title -->
     <div class="row gutter-y-30">
@@ -313,7 +313,7 @@
 <section class="video-one">
   <div class="video-one__bg video-one__video-wrapper">
     <video id="video" #video  autoplay muted loop playsinline class="video-one__video">
-      <source src="assets/images/video/green2.mp4" type="video/mp4" muted>
+      <source src="assets/images/video/GE_farm_house_proposal.mp4" type="video/mp4" muted>
       Your browser does not support the video tag.
     </video>
   </div>
@@ -569,6 +569,9 @@
         <img [src]="blog.image?.url" class="img-fluid" alt="{{ blog.title || 'Mazra Care Blog' }}" />
         </div>
         <div class="blog-card__content">
+          <ul class="list-unstyled blog-card__meta">
+            <li><i class="icofont-ui-user"></i> {{ blog.author || 'Mazra Care' }}</li>
+          </ul>
           <h3>{{ blog.title }}</h3>
           <!-- <p>{{ blog.content }}</p> -->
             <p class="blog-card__text">
