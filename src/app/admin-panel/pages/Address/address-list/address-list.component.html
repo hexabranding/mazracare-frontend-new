@@ -1,0 +1,55 @@
+    <div class="container py-4">
+      <h2 class="mb-4">Your Addresses</h2>
+
+      <div class="row g-4">
+        <!-- Add Address Card (Always First) -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 add-address-card" (click)="openAddAddressModal()">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-plus-lg display-4 text-secondary mb-2"></i>
+              <h4 class="text-secondary fw-bold">Add address</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address Cards Loop -->
+        @for (addr of addresses(); track addr.id) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 address-card" [class.border-secondary]="addr.isDefault">
+
+              <!-- Default Badge -->
+              @if (addr.isDefault) {
+                <div class="card-header bg-transparent border-0 pt-3 pb-0">
+                  <span class="small fw-bold text-secondary">Default </span>
+                </div>
+              }
+
+              <div class="card-body">
+                <!-- Content -->
+                <div class="card-text mb-3">
+                  <div class="fw-bold">{{ addr.firstName + addr.lastName }}</div>
+                  <div>{{ addr.address }}</div>
+                  <div>{{ addr.town | uppercase }}</div>
+                  <div>{{ addr.country }}</div>
+                  <div class="mt-2">Phone number: {{ addr.phone }}</div>
+                  <div>Email: {{ addr.email }}</div>
+                  <!-- <a href="#" class="text-decoration-none text-primary small d-block mt-1">Add delivery instructions</a> -->
+                </div>
+
+                <!-- Actions -->
+                <div class="mt-auto action-links">
+                  <a href="#" (click)="$event.preventDefault()" class="text-decoration-none">Edit</a>
+                  <span class="mx-2 text-secondary">|</span>
+                  <a href="#" (click)="$event.preventDefault(); removeAddress(addr.id)" class="text-decoration-none">Remove</a>
+
+                  @if (!addr.isDefault) {
+                    <span class="mx-2 text-secondary">|</span>
+                    <a href="#" (click)="$event.preventDefault(); setAsDefault(addr.id)" class="text-decoration-none">Set as Default</a>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>

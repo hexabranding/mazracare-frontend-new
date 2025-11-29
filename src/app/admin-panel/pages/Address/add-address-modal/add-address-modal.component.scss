@@ -1,0 +1,19 @@
+.modal.show {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #e77600;
+  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5);
+}
+
+.btn-warning {
+  background-color: #ffd814;
+  border-color: #fcd200;
+}
+
+.btn-warning:hover {
+  background-color: #f7ca00;
+  border-color: #f2c200;
+}

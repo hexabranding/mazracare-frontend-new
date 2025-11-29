@@ -4,6 +4,7 @@ import { OrderService } from './service/order.service';
 import { DataTableComponent } from '../../../core/components/data-table/data-table.component';
 import { DynamicModalComponent } from '../dynamic-modal/dynamic-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-management',
@@ -47,6 +48,12 @@ export class OrderManagementComponent {
       title: 'Payment Method',
       type: 'string',
     },
+    orderStatus: {
+      title: 'Order Status',
+      type: 'select',
+      options: ['Pending', 'Processing', 'preparing' , 'packed', 'Dispatched' , 'Delivered', 'Cancelled']
+    },
+
      createdAt: {
        title: 'Created At',
        type: 'string',
@@ -86,6 +93,7 @@ export class OrderManagementComponent {
           price: item.totalPrice || '-',
           paymentStatus: item.paymentStatus || '-',
           paymentMethod: item.paymentMethod || '-',
+          orderStatus: item.orderStatus || '-',
           id: index + 1, // running index
           _id: item._id // keep the original id for reference
         }));
@@ -102,6 +110,7 @@ export class OrderManagementComponent {
 
 
    tableEvent(env:any){
+    console.log('Event from Data Table:', env);
     switch (env?.type) {
       case 'apievent':
         this.getProducts(env?.event)
@@ -109,10 +118,47 @@ export class OrderManagementComponent {
       case 'view':
         this.viewDetails(env?.event._id);
         break;
+      case 'statusChange':
+        this.changeStatus(env?.event.data, env?.event.newValue);
+        break;
       default:
         break;
     }
    }
+
+    changeStatus(data: any, newStatus: string) {
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to change the status to "${newStatus}"?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, change it!',
+        cancelButtonText: 'No, keep it'
+      }).then((result) => {
+
+        if (!result.isConfirmed) {
+          return; // User cancelled the action
+        } else {
+
+          let status = {
+            status: newStatus,
+            note: ''
+          }
+
+          this._order.updateOrderStatus(data._id, status).subscribe({
+            next: (res: any) => {
+              if (!res.success) return;
+              this.getProducts();
+            },
+            error: (err) => {
+              console.log(err)
+            }
+          })
+        }
+      })
+
+    }
 
   viewDetails(id: string) {
     this._order.getOrderById(id).subscribe({

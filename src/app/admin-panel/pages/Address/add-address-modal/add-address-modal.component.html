@@ -1,0 +1,96 @@
+<div class="modal-backdrop fade show"></div>
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold">Add a new address</h5>
+              <button type="button" class="btn-close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="addressForm" (ngSubmit)="saveAddress()">
+
+                <div class="row g-3 mb-3">
+                  <div class="col-6">
+                    <label class="form-label fw-bold small">First name</label>
+                    <input type="text" class="form-control" formControlName="name"
+                      [class.is-invalid]="isFieldInvalid('name')">
+                  </div>
+
+                  <div class="col-6">
+                    <label class="form-label fw-bold small">Last name</label>
+                    <input type="text" class="form-control" formControlName="lastName"
+                      [class.is-invalid]="isFieldInvalid('lastName')">
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold small">Phone number</label>
+                  <input type="tel" class="form-control" formControlName="phone"
+                    [class.is-invalid]="isFieldInvalid('phone')">
+                    <div *ngIf="isFieldInvalid('phone')" class="invalid-feedback">
+                      Please enter a valid phone number.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold small">Email</label>
+                  <input type="email" class="form-control" formControlName="email"
+                    [class.is-invalid]="isFieldInvalid('email')">
+                  <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+                    Please enter a valid email address.
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold small">Address</label>
+                  <input type="text" class="form-control mb-2" formControlName="street"
+                    placeholder="Street address, P.O. box, company name, c/o"
+                    [class.is-invalid]="isFieldInvalid('street')">
+                </div>
+
+                <div class="row g-3 mb-3">
+                  <div class="col-6">
+                    <label class="form-label fw-bold small">City</label>
+                    <input type="text" class="form-control" formControlName="town"
+                      [class.is-invalid]="isFieldInvalid('town')">
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label fw-bold small">Company</label>
+                    <input type="text" class="form-control" formControlName="company"
+                      [class.is-invalid]="isFieldInvalid('company')">
+                    </div>
+                </div>
+
+                <!-- <div class="row g-3 mb-3"> -->
+                  <!-- <div class="col-6">
+                    <label class="form-label fw-bold small">ZIP Code</label>
+                    <input type="text" class="form-control" formControlName="zip"
+                      [class.is-invalid]="isFieldInvalid('zip')">
+                  </div> -->
+                  <div class="mb-3">
+                    <label class="form-label fw-bold small">Country</label>
+                    <input type="text" class="form-control" formControlName="country"
+                      [class.is-invalid]="isFieldInvalid('country')">
+                    <!-- <select class="form-select" formControlName="country">
+                      <option value="India">India</option>
+                      <option value="USA">USA</option>
+                      <option value="UK">UK</option>
+                    </select> -->
+                  <!-- </div> -->
+                </div>
+
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" formControlName="isDefault" id="defaultCheck">
+                  <label class="form-check-label small" for="defaultCheck">
+                    Make this my default address
+                  </label>
+                </div>
+
+                <div class="modal-footer px-0 pb-0">
+                  <button type="submit" class="btn btn-warning shadow-sm w-100 fw-bold">Use this address</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

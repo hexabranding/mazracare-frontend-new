@@ -133,6 +133,14 @@ toggleServices() {
     this.translate.use(lang);
   }
 
+  goToOrders() {
+    this.route.navigate(['/order/order-tracking']);
+  }
+
+  Address() {
+    this.route.navigate(['/address']);
+  }
+
   logout() {
     localStorage.clear();
     this.loaderService.hide();

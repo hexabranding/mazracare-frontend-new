@@ -1,0 +1,153 @@
+<div class="container-fluid py-5 bg-light min-vh-100 font-sans">
+      <div class="container" style="max-width: 800px;">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 px-1">
+          <h4 class="text-dark fw-bold m-0">Your Orders</h4>
+          <span class="badge bg-secondary rounded-pill">{{ totalOrders }} Orders</span>
+        </div>
+
+        <!-- Loop through Orders List -->
+        <ng-container *ngFor="let order of orders; let idx = index">
+
+          <!-- Removed overflow-hidden to allow tooltip to pop out -->
+          <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+            <!-- Header Section -->
+            <div class="card-header bg-white border-bottom border-light p-4 rounded-top-4">
+              <div class="row g-3 align-items-center">
+
+                <!-- Left: Order Details -->
+                <div class="col-12 col-md-9">
+                  <div class="d-flex flex-wrap gap-4">
+                    <div>
+                      <div class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem; letter-spacing: 0.5px;">Order Placed</div>
+                      <div class="fw-bold text-dark">{{ fmtDate(order.orderedAt) }}</div>
+                    </div>
+                    <div>
+                      <div class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem; letter-spacing: 0.5px;">Total</div>
+                      <div class="fw-bold text-dark">₹ {{ order.totalPrice | number }}</div>
+                    </div>
+                    <div>
+                      <div class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem; letter-spacing: 0.5px;">Ship To</div>
+
+                      <!-- TOOLTIP TRIGGER CONTAINER -->
+                      <div class="position-relative address-tooltip-container">
+                        <div class="fw-bold text-dark text-decoration-underline-dotted" style="cursor: help;">
+                          {{ order.shippingAddress?.fullName || 'Customer' }}
+                        </div>
+
+                        <!-- TOOLTIP CONTENT -->
+                        <div class="address-tooltip shadow p-3 rounded bg-dark text-white">
+                          <div class="fw-bold mb-1">{{ order.shippingAddress?.fullName }}</div>
+                          <div class="small opacity-75">
+                            {{ order.shippingAddress?.addressLine1 }}<br>
+                            <span *ngIf="order.shippingAddress?.addressLine2">{{ order.shippingAddress?.addressLine2 }}<br></span>
+                            {{ order.shippingAddress?.city }}, {{ order.shippingAddress?.state }}<br>
+                            {{ order.shippingAddress?.country }} - {{ order.shippingAddress?.pincode }}
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right: Order ID & Toggle -->
+                <div class="col-12 col-md-3 d-flex justify-content-md-end align-items-center gap-3">
+                  <div class="d-none d-md-block text-muted small text-truncate" style="max-width: 80px;">#{{ order._id }}</div>
+                  <button
+                    class="btn btn-outline-dark rounded-pill px-3 py-1 d-flex align-items-center gap-2 border-opacity-25 shadow-sm"
+                    (click)="toggleOrder(order)"
+                    style="font-size: 0.9rem; font-weight: 600;">
+                    Status
+                    <span class="chevron-icon" [class.open]="order.isOpen"></span>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Product Section (Using first item) -->
+            <div class="card-body bg-light bg-opacity-10 p-4">
+              <div class="d-flex align-items-center gap-3">
+                <!-- Thumbnail -->
+                <div class="bg-white p-2 rounded-3 border d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                </div>
+
+                <!-- Info -->
+                <div class="flex-grow-1">
+                  <!-- Note: API provides Product ID, not Name. Showing ID or generic text -->
+                  <h5 class="mb-1 fw-bold text-dark text-truncate" style="max-width: 300px;">
+                    Product ID: {{ order.orderItems?.[0]?.product }}
+                  </h5>
+                  <p class="text-muted small mb-2">
+                    Qty: {{ order.orderItems?.[0]?.quantity || 1 }}
+                    <span *ngIf="order.orderItems?.length > 1" class="ms-1 badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">
+                      +{{ order.orderItems.length - 1 }} more item(s)
+                    </span>
+                  </p>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary btn-sm rounded-pill px-3 fw-medium shadow-sm" style="font-size: 0.85rem;">Buy it again</button>
+                    <button class="btn btn-light bg-white border btn-sm rounded-pill px-3 fw-medium" style="font-size: 0.85rem;">View item</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Collapse Panel -->
+            <div class="collapse-container border-top" [class.open]="order.isOpen">
+              <div class="p-4 bg-white rounded-bottom-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="fw-bold text-dark">Status:</span>
+                    <span class="badge rounded-pill px-4 py-2 shadow-sm"
+                      [class.bg-success]="order.orderStatus === 'Delivered'"
+                      [class.bg-primary]="order.orderStatus === 'Shipped'"
+                      [class.bg-warning]="order.orderStatus === 'Processing' || order.orderStatus === 'Ordered'"
+                      [class.text-dark]="order.orderStatus === 'Processing' || order.orderStatus === 'Ordered'"
+                      [class.bg-info]="order.orderStatus === 'packed'"
+                      [class.bg-secondary]="order.orderStatus === 'Dispatched'"
+                      [class.bg-danger]="order.orderStatus === 'Cancelled'"
+                      class="bg-opacity-25 border border-opacity-25"
+                      style="font-size: 0.9rem; letter-spacing: 0.3px;">
+                      {{ order.orderStatus }}
+                    </span>
+                  </div>
+                  <small class="text-muted fst-italic">Updated: {{ fmtDateTime(order.updatedAt) }}</small>
+                </div>
+
+                <!-- Vertical Timeline -->
+                <div class="timeline-wrapper">
+                  <ng-container *ngFor="let step of stepKeys; let i = index">
+                    <div class="timeline-item" [ngClass]="getStepClass(order, i)" [style.--delay]="i">
+
+                      <!-- Left: Graphic -->
+                      <div class="timeline-marker">
+                        <div class="dot shadow-sm"></div>
+                        <div *ngIf="i < stepKeys.length - 1" class="line">
+                          <div class="line-progress" [style.height.%]="getConnectorFill(order, i)"></div>
+                        </div>
+                      </div>
+
+                      <!-- Right: Content -->
+                      <div class="timeline-content pb-4 ps-3">
+                        <div class="fw-bold text-dark step-label">{{ step }}</div>
+                        <div *ngIf="getStepClass(order, i) === 'done' || getStepClass(order, i) === 'current'" class="text-muted small mt-1 fade-in">
+                          {{ getStepDate(order, i) }}
+                        </div>
+                      </div>
+
+                    </div>
+                  </ng-container>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </ng-container>
+
+      </div>
+    </div>

@@ -1,15 +1,17 @@
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-data-table',
   standalone: true,
-  imports: [FormsModule , NgIf],
+  imports: [FormsModule , CommonModule],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.scss'
 })
 export class DataTableComponent {
+
+  orderStatuses: string[] = ['Pending', 'Processing', 'Preparing' , 'Packed', 'Dispatched' , 'Delivered', 'Cancelled']
 
   @Input() tableConfig: any;
 
@@ -34,6 +36,8 @@ export class DataTableComponent {
   ngOnChanges(changes: SimpleChanges): void {
 
     const tableKeys = Object.keys(this.tableSettings.columns || {});
+    console.log(tableKeys);
+
     if (tableKeys.length > 0) {
       this.tableKeys = tableKeys;
 
@@ -90,6 +94,36 @@ export class DataTableComponent {
 
   searchItem(){
     this.emitOut();
+  }
+
+
+
+getStatusColor(status: string) {
+  const s = status.toLowerCase();
+  const map: Record<string, string> = {
+    'pending': 'bg-warning-subtle text-warning-emphasis border border-warning-subtle',
+    'processing': 'bg-info-subtle text-info-emphasis border border-info-subtle',
+    'preparing': 'bg-primary-subtle text-primary-emphasis border border-primary-subtle',
+    'packed': 'bg-primary-subtle text-primary-emphasis border border-primary-subtle',
+    'Dispatched': 'bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle',
+    'delivered': 'bg-success-subtle text-success-emphasis border border-success-subtle',
+    'cancelled': 'bg-danger-subtle text-danger-emphasis border border-danger-subtle',
+    // 'returned': 'bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle'
+  };
+
+  return map[s] ?? 'bg-light text-dark border border-light';
+}
+
+  onStatusChange(data:any, item:string, newStatus:string){
+    data[item] = newStatus;
+    this.tableEvent?.emit({
+      type: 'statusChange',
+      event: {
+        data: data,
+        field: item,
+        newValue: newStatus
+      }
+    })
   }
 
   emitOut(){

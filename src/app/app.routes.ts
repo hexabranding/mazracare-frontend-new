@@ -104,6 +104,14 @@ export const routes: Routes = [
                 path: 'terms-conditions',
                 component: TermsConditionsComponent
             },
+            {
+              path: 'order/order-tracking',
+              loadComponent: () => import('./admin-panel/pages/order-management/order-tacking/order-tacking.component').then(m => m.OrderTackingComponent)
+            },
+            {
+              path: 'address',
+              loadComponent: () => import('./admin-panel/pages/Address/address-list/address-list.component').then(m => m.AddressListComponent)
+            },
 
             // etc pages
 
@@ -255,7 +263,7 @@ export const routes: Routes = [
               path: 'gallery/add-gallery/:id',
               loadComponent: () => import('./admin-panel/pages/gallery/add-gallery/add-gallery.component').then(m => m.AddGalleryComponent),
             },
-
-        ],canMatch:[AuthGuard]
+        ],
+        // ],canMatch:[AuthGuard]
     }
 ];

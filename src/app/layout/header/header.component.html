@@ -188,6 +188,16 @@
                         <div style="font-size: 13px; color: gray;">{{ email }}</div>
                     </div>
                     <!-- <mat-divider></mat-divider> -->
+
+                    <button mat-menu-item (click)="goToOrders()">
+                        <!-- <mat-icon>shopping_bag</mat-icon> -->
+                        <span style="font-size: 18px; font-weight: bold;">{{'My Orders'}}</span>
+                    </button>
+                    <button mat-menu-item (click)="Address()">
+                        <!-- <mat-icon>shopping_bag</mat-icon> -->
+                        <span style="font-size: 18px; font-weight: bold;">{{'Address'}}</span>
+                    </button>
+
                     <button mat-menu-item (click)="logout()">
                         <mat-icon>logout</mat-icon>
                         <span style="font-size: 18px;">Logout</span>
