@@ -41,12 +41,15 @@ export class AddressListComponent implements OnInit {
     this.addressService.getAddressList().subscribe({
       next: (addresses:any) => {
         // enum is id buut response is _id
-        addresses.data = addresses.data.map(({_id, ...data}: any):
+        const mappedAddresses = addresses.data.map(({_id, ...data}: any):
         Address => ({
             id: _id,
             ...data
           } as Address));
-        this.addresses.set(addresses.data);
+
+        mappedAddresses.sort((a:any, b:any) => Number(b.isDefault) - Number(a.isDefault));
+
+        this.addresses.set(mappedAddresses);
 
         console.log(this.addresses);
 
