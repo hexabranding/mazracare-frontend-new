@@ -27,7 +27,7 @@ jobs:
         echo "Detected branch: $BRANCH_NAME"
         if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
           # For development deployment
-          SERVER_IP=${{ vars.DEV_SERVER_IP }}        
+          SERVER_IP_VALUE="${{ vars.DEV_SERVER_IP }}"   
           echo "Detected branch: $BRANCH_NAME in if"
         else
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
@@ -37,6 +37,7 @@ jobs:
       run: |
         echo "Branch: $BRANCH_NAME"
         echo "Server IP: $SERVER_IP"
+        echo "Server var IP: ${{ vars.SERVER_IP_VALUE }}"        
         
     # Step 2: Set up SSH
     - name: Set up SSH key
