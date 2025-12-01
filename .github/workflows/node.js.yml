@@ -5,9 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main-test" ]
-  pull_request:
-    branches: [ "main-test" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -21,11 +19,30 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    
+    - name: Prepare Environment File
+      run: |
+        BRANCH_NAME=${{ github.ref_name }}
+        echo "Detected branch: $BRANCH_NAME"
+        
+        if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
+          # For development deployment
+          SSH_PRIVATE_KEY=${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          SERVER_IP=${{ secrets.DEV_SERVER_IP }}
+        else
+          echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
+        fi
+
+    # Step 2: Set up SSH
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+
+    # Step 3: Run SSH commands
+    - name: Run SSH command
+      run: |
+        ssh -o StrictHostKeyChecking=no user@your.server.com "echo 'Hello from GitHub Actions!'"
+    
