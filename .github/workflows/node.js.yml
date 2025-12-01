@@ -27,6 +27,8 @@ jobs:
         echo "Detected branch: $BRANCH_NAME"
         if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
           # For development deployment
+          DEPLOY_SSH_PRIVATE_KEY=${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          SERVER_IP=${{ secrets.DEV_SERVER_IP }}          
           echo "Detected branch: $BRANCH_NAME in if"
         else
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
