@@ -20,18 +20,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Prepare Environment File
-      run: |
-        BRANCH_NAME=${{ github.ref_name }}
-        echo "Detected branch: $BRANCH_NAME"
+    # - name: Prepare Environment File
+    #   run: |
+    #     BRANCH_NAME=${{ github.ref_name }}
+    #     echo "Detected branch: $BRANCH_NAME"
         
-        if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
-          # For development deployment
-          DEPLOY_SSH_PRIVATE_KEY=${{ secrets.DEV_SSH_PRIVATE_KEY }}
-          SERVER_IP=${{ secrets.DEV_SERVER_IP }}
-        else
-          echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
-        fi
+    #     if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
+    #       # For development deployment
+    #       DEPLOY_SSH_PRIVATE_KEY=${{ secrets.DEV_SSH_PRIVATE_KEY }}
+    #       SERVER_IP=${{ secrets.DEV_SERVER_IP }}
+    #     else
+    #       echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
+    #     fi
 
     - name: Print environment variables for debuggings
       run: |
