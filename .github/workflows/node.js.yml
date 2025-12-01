@@ -4,10 +4,6 @@ on:
   push:
     branches: [ "main" ]
 
-# Global variable definition is correct, but we'll re-assign it for simplicity
-# env:
-#   DEPLOY_DEV_SERVER_IP: ${{ vars.DEV_SERVER_IP }} 
-  
 jobs:
   build:
 
@@ -19,48 +15,29 @@ jobs:
     - name: Setting up Env
       # Use the 'env' block to make variables available as shell variables
       env:
-        DEPLOY_DEV_SERVER_IP: ${{ vars.DEV_SERVER_IP }} 
+        DEPLOY_DEV_SERVER_IP: ${{ vars.DEV_SERVER_IP }}
       run: |
-        # 1. Get the current branch name (using the shell variable)
         BRANCH_NAME="${{ github.ref_name }}"
         echo "Branch: $BRANCH_NAME"
         
-        # 2. Conditional Logic: Check the branch name
         if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
           
-          # 3. Assign the variable's value to a shell variable (only lasts for this step)
           SERVER_IP_VALUE="$DEPLOY_DEV_SERVER_IP"
-          
-          # 4. CRITICAL FIX: Write the variable to $GITHUB_ENV to make it persistent 
-          # This variable (SERVER_IP) will be available as ${{ env.SERVER_IP }} 
-          # and as the shell variable $SERVER_IP in ALL subsequent steps.
           echo "SERVER_IP=$SERVER_IP_VALUE" >> $GITHUB_ENV
-          
-          echo "Detected deployment branch. SERVER_IP is set to $SERVER_IP_VALUE."
           
         else
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping IP assignment."
         fi
-        
-    - name: Print environment variables for debugging
-      run: |
-        # $BRANCH_NAME is NOT persistent. We must access the branch again if needed.
-        # However, $SERVER_IP IS persistent and available now.
-        echo "Branch: ${{ github.ref_name }}"
-        echo "Server IP (Persistent): $SERVER_IP"
         
     # Step 2: Set up SSH
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        
-        # FIX: Now access the persistent variable as the shell variable $SERVER_IP
+        chmod 600 ~/.ssh/id_rsa        
         ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
     # Step 3: Run SSH commands
     - name: Run SSH command
       run: |
-        # FIX: Now access the persistent variable as the shell variable $SERVER_IP
         ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "echo 'Hello from GitHub Actions!'"
