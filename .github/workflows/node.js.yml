@@ -20,20 +20,26 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Print environment variables for debuggings
+    # - name: Print environment variables for debuggings
+    #   run: |
+    #     echo "Branch: $BRANCH_NAME"
+    #     BRANCH_NAME=${{ github.ref_name }}
+    #     echo "Detected branch: $BRANCH_NAME"
+    #     if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
+    #       # For development deployment
+    #       DEPLOY_SSH_PRIVATE_KEY="${{ secrets.DEV_SSH_PRIVATE_KEY }}"
+    #       SERVER_IP="${{ secrets.DEV_SERVER_IP }}"          
+    #       echo "Detected branch: $BRANCH_NAME in if"
+    #     else
+    #       echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
+    #     fi        
+
+    - name: Set up environment variable for SSH
       run: |
-        echo "Branch: $BRANCH_NAME"
-        BRANCH_NAME=${{ github.ref_name }}
-        echo "Detected branch: $BRANCH_NAME"
-        if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
-          # For development deployment
-          DEPLOY_SSH_PRIVATE_KEY="${{ secrets.DEV_SSH_PRIVATE_KEY }}"
-          SERVER_IP="${{ secrets.DEV_SERVER_IP }}"          
-          echo "Detected branch: $BRANCH_NAME in if"
-        else
-          echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
-        fi        
-    
+        DEPLOY_SSH_PRIVATE_KEY="${{ secrets.DEV_SSH_PRIVATE_KEY }}"
+        SERVER_IP="${{ secrets.DEV_SERVER_IP }}"          
+        echo "Using SSH key for deployment"
+        
     - name: Print environment variables for debuggings
       run: |
         echo "Branch: $BRANCH_NAME"
@@ -44,7 +50,7 @@ jobs:
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "$DEPLOY_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        echo "${{ secrets.DEV_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
