@@ -50,5 +50,5 @@ jobs:
     # Step 3: Run SSH commands
     - name: Run SSH command
       run: |
-        ssh -o StrictHostKeyChecking=no user@your.server.com "echo 'Hello from GitHub Actions!'"
+        ssh -o StrictHostKeyChecking=no ${{ secrets.DEV_SERVER_IP }} "echo 'Hello from GitHub Actions!'"
     
