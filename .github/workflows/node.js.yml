@@ -27,7 +27,7 @@ jobs:
         echo "Detected branch: $BRANCH_NAME"
         if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
           # For development deployment
-          SERVER_IP="${{ env.DEV_SERVER_IP }}"          
+          SERVER_IP=${{ env.DEV_SERVER_IP }}        
           echo "Detected branch: $BRANCH_NAME in if"
         else
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
@@ -36,7 +36,6 @@ jobs:
     - name: Print environment variables for debuggings
       run: |
         echo "Branch: $BRANCH_NAME"
-        echo "key: $DEPLOY_SSH_PRIVATE_KEY"        
         echo "Server IP: $SERVER_IP"
         
     # Step 2: Set up SSH
@@ -45,7 +44,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.DEV_SERVER_IP }} >> ~/.ssh/known_hosts
 
     # Step 3: Run SSH commands
     - name: Run SSH command
