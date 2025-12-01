@@ -33,7 +33,7 @@ jobs:
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
         fi
 
-    - name: Print environment variables for debugging
+    - name: Print environment variables for debuggings
       run: |
         echo "Branch: $BRANCH_NAME"
         echo "key: $DEPLOY_SSH_PRIVATE_KEY"        
