@@ -47,7 +47,7 @@ jobs:
         # $BRANCH_NAME is NOT persistent. We must access the branch again if needed.
         # However, $SERVER_IP IS persistent and available now.
         echo "Branch: ${{ github.ref_name }}"
-        echo "Server IP (Persistent): **$SERVER_IP**"
+        echo "Server IP (Persistent): $SERVER_IP"
         
     # Step 2: Set up SSH
     - name: Set up SSH key
@@ -57,7 +57,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         
         # FIX: Now access the persistent variable as the shell variable $SERVER_IP
-        ssh-keyscan -H **$SERVER_IP** >> ~/.ssh/known_hosts
+        ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
     # Step 3: Run SSH commands
     - name: Run SSH command
