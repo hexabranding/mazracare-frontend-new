@@ -20,7 +20,7 @@ jobs:
         BRANCH_NAME="${{ github.ref_name }}"
         echo "Branch: $BRANCH_NAME"
         
-        if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
+        if [ "$BRANCH_NAME" == "development" ] || [ "$BRANCH_NAME" == "development-deploy" ]; then
           
           SERVER_IP_VALUE="$DEPLOY_DEV_SERVER_IP"
           echo "SERVER_IP=$SERVER_IP_VALUE" >> $GITHUB_ENV
