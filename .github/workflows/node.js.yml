@@ -20,14 +20,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Print environment variables for debuggings
+    - name: Setting up Env
       run: |
         echo "Branch: $BRANCH_NAME"
         BRANCH_NAME=${{ github.ref_name }}
         echo "Detected branch: $BRANCH_NAME"
         if [ "$BRANCH_NAME" == "main" ] || [ "$BRANCH_NAME" == "main-deploy" ]; then
           # For development deployment
-          SERVER_IP=${{ env.DEV_SERVER_IP }}        
+          SERVER_IP=${{ vars.DEV_SERVER_IP }}        
           echo "Detected branch: $BRANCH_NAME in if"
         else
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping copy."
