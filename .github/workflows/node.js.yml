@@ -63,4 +63,4 @@ jobs:
     - name: Run SSH command
       run: |
         # FIX: Now access the persistent variable as the shell variable $SERVER_IP
-        ssh -o StrictHostKeyChecking=no ubuntu@**$SERVER_IP** "echo 'Hello from GitHub Actions!'"
+        ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "echo 'Hello from GitHub Actions!'"
