@@ -28,5 +28,9 @@ $baseUrl = environment.baseUrl
     return this.http.delete(this.$baseUrl + '/address/'+id)
   }
 
+  getDefaultAddress(){
+    return this.http.get(this.$baseUrl + '/address/default')
+  }
+
 
 }

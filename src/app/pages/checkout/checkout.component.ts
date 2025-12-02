@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { CheckoutService } from './service/checkout.service';
+import { AddressService } from '../../admin-panel/pages/Address/service/address.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,7 +20,11 @@ export class CheckoutComponent implements OnInit {
     quantity: 1
   };
 
-  constructor(private fb: FormBuilder , private checkoutService: CheckoutService, private route:ActivatedRoute) {}
+  // NEW: Variables for Address Change
+  savedAddresses: any[] = [];
+  showAddressModal: boolean = false;
+
+  constructor(private fb: FormBuilder , private checkoutService: CheckoutService, private route:ActivatedRoute , private addressService: AddressService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -32,6 +37,8 @@ export class CheckoutComponent implements OnInit {
       // You can pre-fill the form with query params if needed
     });
 
+    this.getdefaultAddress()
+    this.getAllAddresses(); // NEW: Fetch list on load
   }
 
   initForm(): void {
@@ -58,6 +65,81 @@ export class CheckoutComponent implements OnInit {
       saveCard: [true]
     });
   }
+
+  getdefaultAddress(){
+    this.addressService.getDefaultAddress().subscribe({
+      next: (res:any) => {
+        console.log('Default Address:', res);
+        if(res && res.data){
+          const address = res.data;
+          this.checkoutForm.patchValue({
+            country: address.country || '',
+            firstName: address.firstName || '',
+            lastName: address.lastName || '',
+            company: address.company || '',
+            address: address.address || '',
+            apartment: '',
+            city: address.town || '',
+            state: '',
+            zip: '',
+            email: address.email || '',
+            phone: address.phone || ''
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching default address:', err);
+      }
+    });
+  }
+
+  getAllAddresses() {
+    this.addressService.getAddressList().subscribe({ // Assuming method name is getAddress() or similar
+      next: (res: any) => {
+        // Adjust 'res.data' based on your actual API response structure
+        this.savedAddresses = res.data || [];
+      },
+      error: (err) => console.error('Error fetching address list:', err)
+    });
+  }
+
+  // ... getdefaultAddress() remains the same ...
+
+  // NEW: Toggle Modal Visibility
+  toggleAddressModal() {
+    this.showAddressModal = !this.showAddressModal;
+  }
+
+  // NEW: Handle Address Selection
+  selectAddress(address: any) {
+    this.checkoutForm.patchValue({
+      country: address.country || '',
+      firstName: address.firstName || '',
+      lastName: address.lastName || '',
+      company: address.company || '',
+      address: address.address || '',
+      apartment: '', // If your API has this, map it here
+      city: address.town || '', // Mapping 'town' to 'city' based on your previous code
+      state: address.state || '', // Assuming API returns state
+      zip: address.pincode || '', // Assuming API returns pincode
+      email: address.email || '',
+      phone: address.phone || ''
+    });
+
+    this.showAddressModal = false; // Close modal
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Address Updated',
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
+
+  // ... submitOrder, placeOrderFromCart, placeOrderDirectly, hasError remain the same ...
+
 
   submitOrder(): void {
     if (this.checkoutForm.valid) {

@@ -110,6 +110,7 @@
                       [class.bg-info]="order.orderStatus === 'packed'"
                       [class.bg-secondary]="order.orderStatus === 'Dispatched'"
                       [class.bg-danger]="order.orderStatus === 'Cancelled'"
+                      [class.bg-orange-subtle]="order.orderStatus === 'Preparing'"
                       class="bg-opacity-25 border border-opacity-25"
                       style="font-size: 0.9rem; letter-spacing: 0.3px;">
                       {{ order.orderStatus }}

@@ -1,17 +1,17 @@
 <section class="page-header">
-    <div class="page-header__shape-left"></div>
-    <div class="page-header__shape-right"></div>
-    <div class="page-header__bg"></div>
-    <!-- /.page-header__bg -->
-    <div class="container">
-        <h2 class="page-header__title bw-split-in-down">Checkout </h2>
-        <ul class="alefox-breadcrumb list-unstyled">
-            <li><a routerLink="/checkout">Home</a></li>
-            <li><span>Checkout</span></li> <br>
-        </ul><!-- /.thm-breadcrumb list-unstyled -->
-        <br>
+  <div class="page-header__shape-left"></div>
+  <div class="page-header__shape-right"></div>
+  <div class="page-header__bg"></div>
+  <!-- /.page-header__bg -->
+  <div class="container">
+    <h2 class="page-header__title bw-split-in-down">Checkout </h2>
+    <ul class="alefox-breadcrumb list-unstyled">
+      <li><a routerLink="/checkout">Home</a></li>
+      <li><span>Checkout</span></li> <br>
+    </ul><!-- /.thm-breadcrumb list-unstyled -->
+    <br>
 
-    </div><!-- /.container -->
+  </div><!-- /.container -->
 </section><!-- /.page-header -->
 
 <!-- Checkout Start -->
@@ -21,12 +21,54 @@
       Returning Customer? <a routerLink="/login">Click here to Login</a>
     </div>
 
+    <div class="checkout-page__billing-address">
+
+
+      <div class="checkout-page__form">
+      </div>
+    </div>
+
+    <div class="custom-modal-overlay" *ngIf="showAddressModal">
+      <div class="custom-modal-content">
+        <div class="modal-header">
+          <h4>Select Saved Address</h4>
+          <button type="button" class="close-btn" (click)="toggleAddressModal()">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div *ngIf="savedAddresses.length > 0; else noAddress">
+            <div class="address-card" *ngFor="let addr of savedAddresses" (click)="selectAddress(addr)">
+              <div class="d-flex justify-content-between">
+                <strong>{{ addr.firstName }} {{ addr.lastName }}</strong>
+                <span class="badge bg-secondary">{{ addr.type}}</span>
+              </div>
+              <p class="mb-1">{{ addr.address }}, {{ addr.town }}</p>
+              <p class="mb-0 text-muted small">{{ addr.phone }}</p>
+            </div>
+          </div>
+
+          <ng-template #noAddress>
+            <div class="text-center py-4 text-muted">
+              No saved addresses found.
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
     <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
       <div class="row">
         <!-- Billing Details -->
         <div class="col-xl-6 col-lg-6">
           <div class="checkout-page__billing-address">
-            <h2 class="checkout-page__billing-address__title">Billing details</h2>
+            <!-- <h2 class="checkout-page__billing-address__title">Billing details</h2> -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="checkout-page__billing-address__title mb-0">Billing details</h2>
+              <button type="button" class="btn btn-outline-primary btn-sm" (click)="toggleAddressModal()">
+                <i class="fas fa-map-marker-alt me-1"></i> Change Address
+              </button>
+            </div>
+
             <div class="checkout-page__form">
 
 
@@ -35,7 +77,8 @@
                 <div class="col-xl-6">
                   <div class="checkout-page__input-box mb-3">
                     <input type="text" formControlName="firstName" placeholder="First name" />
-                    <div *ngIf="hasError('firstName', 'required')" class="text-danger small">First name is required</div>
+                    <div *ngIf="hasError('firstName', 'required')" class="text-danger small">First name is required
+                    </div>
                   </div>
                 </div>
                 <div class="col-xl-6">
@@ -143,17 +186,20 @@
                 <input type="radio" checked /> Credit Card
               </h3>
               <p class="checkout-page__payment__desc">
-                Make your payment directly into our bank account. Your order will not be shipped until the funds have cleared in our account.
+                Make your payment directly into our bank account. Your order will not be shipped until the funds have
+                cleared in our account.
               </p>
 
               <div class="checkout-page__form">
                 <div class="checkout-page__input-box mb-3">
                   <input type="text" formControlName="nameOnCard" class="form-control" placeholder="Name On Card*" />
-                  <div *ngIf="hasError('nameOnCard', 'required')" class="text-danger small">Name on card is required</div>
+                  <div *ngIf="hasError('nameOnCard', 'required')" class="text-danger small">Name on card is required
+                  </div>
                 </div>
 
                 <div class="checkout-page__input-box mb-3 d-flex align-items-center">
-                  <input type="text" formControlName="cardNumber" class="form-control me-2" placeholder="Card Numbers*" />
+                  <input type="text" formControlName="cardNumber" class="form-control me-2"
+                    placeholder="Card Numbers*" />
                   <div class="d-flex">
                     <img src="assets/images/others/img-7.png" class="me-2" style="height:24px;" />
                     <img src="assets/images/others/img-8.png" class="me-2" style="height:24px;" />
@@ -162,13 +208,15 @@
                   </div>
                 </div>
                 <div *ngIf="hasError('cardNumber', 'required')" class="text-danger small">Card number is required</div>
-                <div *ngIf="hasError('cardNumber', 'minlength')" class="text-danger small">Card must be at least 16 digits</div>
+                <div *ngIf="hasError('cardNumber', 'minlength')" class="text-danger small">Card must be at least 16
+                  digits</div>
 
                 <div class="row">
                   <div class="col-md-6">
                     <div class="checkout-page__input-box mb-3">
                       <input type="text" formControlName="expiryDate" class="form-control" placeholder="dd-mm-yyyy" />
-                      <div *ngIf="hasError('expiryDate', 'required')" class="text-danger small">Expiry date is required</div>
+                      <div *ngIf="hasError('expiryDate', 'required')" class="text-danger small">Expiry date is required
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
