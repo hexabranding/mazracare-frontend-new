@@ -25,6 +25,7 @@
     "@angular/ssr": "^17.3.17",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
+    "angular-notifier": "^14.0.0",
     "apexcharts": "^5.2.0",
     "bootstrap": "^5.3.7",
     "jquery": "^3.7.1",
