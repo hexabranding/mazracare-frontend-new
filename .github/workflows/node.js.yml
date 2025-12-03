@@ -16,8 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setting up Env
-      # Use the 'env' block to make variables available as shell variables
-      env:
       run: |
         BRANCH_NAME="${{ github.ref_name }}"
         DEPLOY_DEV_SERVER_IP="${{ secrets.DEV_SERVER_IP }}"
