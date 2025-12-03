@@ -30,7 +30,6 @@ jobs:
           echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping IP assignment."
         fi
         
-    # Step 2: Set up SSH
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
@@ -38,7 +37,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa        
         ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
-    # Step 3: Run SSH commands
+    # Step : Run SSH commands
     - name: Run SSH command
       run: |
         ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "echo 'Hello from GitHub Actions!'"
