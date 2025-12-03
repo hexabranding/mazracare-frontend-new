@@ -15,42 +15,32 @@ jobs:
         
     steps:
     - uses: actions/checkout@v4
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install -g npm@latest        
-    - run: npm ci
-    - run: ng build --configuration=development
-    
-    # - name: Setting up Env
-    #   # Use the 'env' block to make variables available as shell variables
-    #   env:
-    #     DEPLOY_DEV_SERVER_IP: ${{ vars.DEV_SERVER_IP }}
-    #   run: |
-    #     BRANCH_NAME="${{ github.ref_name }}"
-    #     echo "Branch: $BRANCH_NAME"
+    - name: Setting up Env
+      # Use the 'env' block to make variables available as shell variables
+      env:
+        DEPLOY_DEV_SERVER_IP: ${{ vars.DEV_SERVER_IP }}
+      run: |
+        BRANCH_NAME="${{ github.ref_name }}"
+        echo "Branch: $BRANCH_NAME"
         
-    #     if [ "$BRANCH_NAME" == "development" ] || [ "$BRANCH_NAME" == "development-deploy" ]; then
+        if [ "$BRANCH_NAME" == "development" ] || [ "$BRANCH_NAME" == "development-deploy" ]; then
           
-    #       SERVER_IP_VALUE="$DEPLOY_DEV_SERVER_IP"
-    #       echo "SERVER_IP=$SERVER_IP_VALUE" >> $GITHUB_ENV
+          SERVER_IP_VALUE="$DEPLOY_DEV_SERVER_IP"
+          echo "SERVER_IP=$SERVER_IP_VALUE" >> $GITHUB_ENV
           
-    #     else
-    #       echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping IP assignment."
-    #     fi
+        else
+          echo "No specific environment file defined for branch '$BRANCH_NAME'. Skipping IP assignment."
+        fi
         
-    # # Step 2: Set up SSH
-    # - name: Set up SSH key
-    #   run: |
-    #     mkdir -p ~/.ssh
-    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-    #     chmod 600 ~/.ssh/id_rsa        
-    #     ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+    # Step 2: Set up SSH
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa        
+        ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
-    # # Step 3: Run SSH commands
-    # - name: Run SSH command
-    #   run: |
-    #     ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "echo 'Hello from GitHub Actions!'"
+    # Step 3: Run SSH commands
+    - name: Run SSH command
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "echo 'Hello from GitHub Actions!'"
