@@ -18,9 +18,9 @@ jobs:
     - name: Setting up Env
       # Use the 'env' block to make variables available as shell variables
       env:
-        DEPLOY_DEV_SERVER_IP: ${{ vars.DEV_SERVER_IP }}
       run: |
         BRANCH_NAME="${{ github.ref_name }}"
+        DEPLOY_DEV_SERVER_IP="${{ secrets.DEV_SERVER_IP }}"
         echo "Branch: $BRANCH_NAME"
         
         if [ "$BRANCH_NAME" == "development" ] || [ "$BRANCH_NAME" == "development-deploy" ]; then
