@@ -6757,7 +6757,7 @@ body.megamenu-popup-active .mobile-nav__content {
     z-index: 1;
 }
 
-.cta-five__image::after {
+/* .cta-five__image::after {
     position: absolute;
     right: -10px;
     top: -10px;
@@ -6767,9 +6767,9 @@ body.megamenu-popup-active .mobile-nav__content {
     border-radius: 0 10px 0 0;
     z-index: -1;
     content: "";
-}
+} */
 
-.cta-five__image::before {
+/* .cta-five__image::before {
     position: absolute;
     left: -10px;
     bottom: -10px;
@@ -6779,7 +6779,7 @@ body.megamenu-popup-active .mobile-nav__content {
     border-radius: 0 0 0 10px;
     z-index: -1;
     content: "";
-}
+} */
 
 .cta-five__image img {
     border-radius: 10px;
